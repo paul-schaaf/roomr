@@ -3,6 +3,7 @@ body {
 }
 
 .form-area {
-  height:300px;
+  height:150px;
   background:navy;
+  box-sizing: border-box;
 }
