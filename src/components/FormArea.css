@@ -3,6 +3,9 @@ body {
 }
 
 .form-area {
+  display:flex;
+  justify-content: center;
+
   height:150px;
   border-bottom: 1px solid navy;
   box-sizing: border-box;
