@@ -1,8 +1,9 @@
 import React from 'react';
+import './FormArea.css';
 
 const FormArea = (props) => {
   return (
-    <div>forms</div>
+    <div className="form-area">forms</div>
   )
 };
 
