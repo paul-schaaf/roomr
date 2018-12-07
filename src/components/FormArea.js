@@ -4,9 +4,9 @@ import Form from './Form';
 
 const FormArea = (props) => {
   return (
-    <React.Fragment>
+    <div className="form-area">
       <Form />
-    </React.Fragment>
+    </div>
   )
 };
 
