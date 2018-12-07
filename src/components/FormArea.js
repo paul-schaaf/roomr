@@ -6,7 +6,7 @@ const FormArea = (props) => {
   return (
     <div className="form-area">
       <Form />
-      <Form />
+      
     </div>
   )
 };
