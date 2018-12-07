@@ -4,6 +4,6 @@ body {
 
 .form-area {
   height:150px;
-  background:navy;
+  border-bottom: 1px solid navy;
   box-sizing: border-box;
 }
