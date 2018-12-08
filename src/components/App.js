@@ -1,11 +1,14 @@
 import React from 'react';
-import FormArea from './FormArea';
+import Form from './Form';
+import './App.css';
 
 class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <FormArea />
+        <div className="form-area">
+          <Form />
+        </div>
       </React.Fragment>
     )
   }
