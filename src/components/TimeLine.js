@@ -38,7 +38,7 @@ const TimeLine = props => {
     "17:00"
   ]
   const renderedTimes = timeArray.map(time => {
-    return <li className="timeline__item">{time}</li>
+    return <li className="timeline__item"><div className="timeline__item--block">{time}</div></li>
   })
   return <ul className="timeline">{renderedTimes}</ul>;
 }

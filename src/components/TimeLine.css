@@ -5,6 +5,13 @@
 }
 
 .timeline__item {
-  display: inline-block;
+  display: inline;
+  
+  white-space: nowrap;
+}
+
+.timeline__item--block {
+  display:inline-block;
   width:50px;
 }
+

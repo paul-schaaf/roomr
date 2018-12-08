@@ -10,3 +10,7 @@ body {
   border-bottom: 1px solid navy;
   box-sizing: border-box;
 }
+
+.info-area{
+  overflow-x:auto;
+}
