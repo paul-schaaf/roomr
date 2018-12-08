@@ -1,7 +1,7 @@
 import React from 'react';
-import './Form.css';
 import InputTimes from './InputTimes';
-
+import DataList from './DataList';
+import './Form.css';
 
 
 class Form extends React.Component {
@@ -22,10 +22,7 @@ class Form extends React.Component {
       <div className="form">
         <form>
           <input autoComplete="off" name="room" list="rooms" onChange={this.onInputChange} value={this.state.room} type="text" placeholder="room (optional)"></input>
-          <datalist id="rooms">
-            <option value="100"></option>
-            <option value="101"></option>
-          </datalist>
+          <DataList data={this.props.data}/>
           <select name="start" onChange={this.onInputChange} value={this.state.start} type="text">
             <InputTimes />
           </select>

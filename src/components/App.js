@@ -29,7 +29,7 @@ class App extends React.Component {
       return (
         <React.Fragment>
           <div className="form-area">
-            <Form />
+            <Form data={this.state.data}/>
           </div>
           <div className="info-area">
               <TimeLine />
