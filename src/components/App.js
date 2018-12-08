@@ -28,7 +28,6 @@ class App extends React.Component {
     } else {
       return (
         <React.Fragment>
-          <div>{this.state.data[0].name}</div>
           <div className="form-area">
             <Form />
           </div>
