@@ -9,7 +9,7 @@ const Room = props => {
   }
   return (
     <div className="room">
-      <div className="room__number-box">100</div>
+      <div className="room__number-box">1000</div>
       <ul className="room__timeblock-list">{renderedTimeBlocks}</ul>
     </div>
   )
