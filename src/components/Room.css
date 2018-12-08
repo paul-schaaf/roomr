@@ -1,8 +1,8 @@
 .room {
   list-style:none;
   padding:0;
-  margin:0;
-  margin-left:75px;
+  margin-top:10px;
+  margin-left:93px;
 }
 
 .room__timeblock {
@@ -14,5 +14,8 @@
 .room__timeblock--block{
   display:inline-block;
   width:50px;
+  height:20px;
+  box-sizing: border-box;
+  border: 1px solid blue;
 }
 
