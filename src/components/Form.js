@@ -5,11 +5,16 @@ import './Form.css';
 
 class Form extends React.Component {
 
-  
+
   render () {
     return (
       <div className="form">
-        <form></form>
+        <form>
+          <input type="text"></input>
+          <input type="text"></input>
+          <input type="text"></input>
+          <input type="submit"></input>
+        </form>
       </div>
     )
   }
