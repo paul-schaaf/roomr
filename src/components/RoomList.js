@@ -3,7 +3,7 @@ import Room from './Room';
 
 const RoomList = ({ data }) => {
   const renderedRooms = data.map((room,index) => {
-    return <Room key={data[index].name} roomData={data[0]}/>
+    return <Room key={data[index].name} roomData={data[index]}/>
   })
   return (
     <React.Fragment>
