@@ -12,17 +12,19 @@ class App extends React.Component {
 
   async componentDidMount() {
     try {
-    const response = await getData();
-    const data = response.data;
-    this.setState({ data: data , status: "successful"});
-    } catch (err) {
-      console.error(err);
+      const response = await getData();
+      this.setState({ data: response , status: "successful"});
+    } catch(err) {
       this.setState({ status: "failed"});
     }
-  }
+  };
+    
+  
   render() {
     if (this.state.status === "pending") {
       return <div>Loading...</div>
+    } else if (this.state.status === "failed") {
+      return <div>There is something wrong with your connection or the server. Please check your connection or try later</div>
     } else {
       return (
         <React.Fragment>
