@@ -25,7 +25,7 @@ class App extends React.Component {
       return <div>Loading...</div>
     } else if (this.state.status === "failed") {
       return <div>There is something wrong with your connection or the server. Please check your connection or try later</div>
-    } else {
+    } else if (this.state.status === "successful" && this.state.data.length > 0){
       return (
         <React.Fragment>
           <div className="form-area">
@@ -40,6 +40,8 @@ class App extends React.Component {
           </div>
         </React.Fragment>
       )
+    } else {
+      return <div>Please add a Room.</div>
     }
   }
 }
