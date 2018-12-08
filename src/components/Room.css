@@ -1,0 +1,18 @@
+.room {
+  list-style:none;
+  padding:0;
+  margin:0;
+  margin-left:75px;
+}
+
+.room__timeblock {
+  display: inline;
+  
+  white-space: nowrap;
+}
+
+.room__timeblock--block{
+  display:inline-block;
+  width:50px;
+}
+
