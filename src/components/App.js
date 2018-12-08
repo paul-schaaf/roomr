@@ -1,6 +1,6 @@
 import React from 'react';
 import Form from './Form';
-import Room from './Room';
+import RoomList from './RoomList';
 import TimeLine from './TimeLine';
 import getData from '../apis/getData';
 import './App.css';
@@ -35,8 +35,8 @@ class App extends React.Component {
           <div className="info-area">
               <TimeLine />
             <div className="room-area">
-              <Room />
-              <Room />
+              <RoomList data={this.state.data}/>
+              
             </div>
           </div>
         </React.Fragment>
