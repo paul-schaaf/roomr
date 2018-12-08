@@ -1,8 +1,18 @@
 import React from 'react';
 import './Form.css';
 
-const Form = props => {
-  return <div className="form"></div>
+
+
+class Form extends React.Component {
+
+  
+  render () {
+    return (
+      <div className="form">
+        <form></form>
+      </div>
+    )
+  }
 }
 
 export default Form;
