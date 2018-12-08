@@ -7,7 +7,6 @@
 
 .room__timeblock {
   display: inline;
-  
   white-space: nowrap;
 }
 
@@ -18,4 +17,3 @@
   box-sizing: border-box;
   border: 1px solid blue;
 }
-
