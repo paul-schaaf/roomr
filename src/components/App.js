@@ -11,9 +11,9 @@ class App extends React.Component {
           <Form />
         </div>
         <div className="info-area">
-          <div className="timeline-area">
+          
             <TimeLine />
-          </div>
+          
           <div className="room-area">
             <Room />
             <Room />
