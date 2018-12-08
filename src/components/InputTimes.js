@@ -38,7 +38,7 @@ const InputTimes = props => {
   ]
   if (!props.start) {
     const renderedTimes = timeArray.map(time => {
-      return <option value={time}>{time}</option>
+      return <option key={`startTime: ${time}`} value={time}>{time}</option>
     })
     renderedTimes.pop();
     return <React.Fragment>{renderedTimes}</React.Fragment>
@@ -46,7 +46,7 @@ const InputTimes = props => {
     const index = timeArray.indexOf(props.start);
     const endTimeArray = timeArray.slice(index+1);
     const renderedTimes = endTimeArray.map(time => {
-      return <option value={time}>{time}</option>
+      return <option key={`endTime: ${time}`}value={time}>{time}</option>
     })
 
     return <React.Fragment>{renderedTimes}</React.Fragment>
