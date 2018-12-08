@@ -6,8 +6,8 @@ import './Form.css';
 class Form extends React.Component {
   state = {
     room: '',
-    start: '',
-    end: ''
+    start: '09:00',
+    end: '09:15'
   };
 
   onInputChange = (event) => {
@@ -21,8 +21,16 @@ class Form extends React.Component {
       <div className="form">
         <form>
           <input name="room" onChange={this.onInputChange} value={this.state.room} type="text" placeholder="room number"></input>
-          <input name="start" onChange={this.onInputChange} value={this.state.start} type="text" placeholder="from"></input>
-          <input name="end" onChange={this.onInputChange} value={this.state.end} type="text" placeholder="to"></input>
+          <select name="start" onChange={this.onInputChange} value={this.state.start} type="text">
+            <option value="09:00">09:00</option>
+            <option value="09:15">09:15</option>
+            <option value="09:30">09:30</option>
+          </select>
+          <select name="end" onChange={this.onInputChange} value={this.state.end} type="text">
+            <option value="09:15">09:15</option>
+            <option value="09:30">09:30</option>
+            <option value="09:45">09:45</option>
+          </select>
           <input type="submit"></input>
         </form>
       </div>
