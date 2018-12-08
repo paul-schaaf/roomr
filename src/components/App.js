@@ -17,6 +17,14 @@ class App extends React.Component {
     } catch(err) {
       this.setState({ status: "failed"});
     }
+    try {
+      setInterval(async () => {
+        const response = await getData();
+        this.setState({ data: response , status: "successful"});
+      }, 10000);
+    } catch(err) {
+      this.setState({ status: "failed"});
+    }
   };
     
   
