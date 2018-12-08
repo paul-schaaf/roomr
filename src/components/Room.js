@@ -4,10 +4,10 @@ const Room = props => {
   return (
     <div className="room">
       <ul>
-        <li>09:00</li>
-        <li>09:15</li>
-        <li>09:30</li>
-        <li>09:45</li>
+        <li>vacant</li>
+        <li>vacant</li>
+        <li>full</li>
+        <li>full</li>
       </ul>
     </div>
   );
