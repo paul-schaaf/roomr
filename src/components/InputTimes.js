@@ -52,8 +52,6 @@ const InputTimes = props => {
     return <React.Fragment>{renderedTimes}</React.Fragment>
   }
 
-  
-  
 }
 
 export default InputTimes;
