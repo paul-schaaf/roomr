@@ -1,0 +1,7 @@
+.timeline {
+  list-style:none;
+}
+
+.timeline__item {
+  display: inline;
+}
