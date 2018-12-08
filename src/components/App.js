@@ -10,12 +10,14 @@ class App extends React.Component {
         <div className="form-area">
           <Form />
         </div>
-        <div className="timeline-area">
-          <TimeLine />
-        </div>
-        <div className="room-area">
-          <Room />
-          <Room />
+        <div className="info-area">
+          <div className="timeline-area">
+            <TimeLine />
+          </div>
+          <div className="room-area">
+            <Room />
+            <Room />
+          </div>
         </div>
       </React.Fragment>
     )
