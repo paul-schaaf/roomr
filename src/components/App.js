@@ -36,8 +36,10 @@ class App extends React.Component {
     } else if (this.state.status === "successful" && this.state.data.length > 0){
       return (
         <React.Fragment>
+          
           <div className="form-area">
             <Form data={this.state.data}/>
+            <div className="test"><p className="text">Find Room</p></div>
           </div>
           <div className="info-area">
               <TimeLine />
