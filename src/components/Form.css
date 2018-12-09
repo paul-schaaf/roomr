@@ -1,5 +1,5 @@
 .form {
   width:500px;
-  background:orange;
-
+  background:#FCF2CB; 
+  z-index: -1;
 }
