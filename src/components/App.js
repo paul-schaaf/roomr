@@ -3,6 +3,7 @@ import Form from './Form';
 import RoomList from './RoomList';
 import TimeLine from './TimeLine';
 import getData from '../apis/getData';
+import ErrorPage from './ErrorPage';
 import './App.css';
 class App extends React.Component {
   state = {
@@ -32,7 +33,7 @@ class App extends React.Component {
     if (this.state.status === "pending") {
       return <div>Loading...</div>
     } else if (this.state.status === "failed") {
-      return <div>There is something wrong with your connection or the server. Please check your connection or try later</div>
+      return <ErrorPage />
     } else if (this.state.status === "successful" && this.state.data.length > 0){
       return (
         <React.Fragment>

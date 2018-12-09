@@ -1,0 +1,22 @@
+.error-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:100vh;
+  width:100%;
+}
+
+.error-box {
+  padding-top:27.5px;
+  padding-left:50px;
+  padding-right:50px;
+  text-align: center;
+  box-sizing: border-box;
+  border:10px solid #1E4363;
+  height:250px;
+  width:325px;
+}
+
+.error-box__heading {
+  font-size:25px;
+}
