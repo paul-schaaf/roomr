@@ -2,7 +2,10 @@ const express = require("express");
 const fs = require("fs");
 const cors = require("cors");
 
+const port = process.env.PORT || 5000;
+
 const app = express();
+
 
 app.use(cors());
 
@@ -31,4 +34,4 @@ app.get('/', async (req, res) => {
 })
 
 
-app.listen(5000);
+app.listen(port);
