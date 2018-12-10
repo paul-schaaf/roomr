@@ -1,4 +1,4 @@
-const user = new Schema ({
+const userSchema = new Schema ({
   email: String,
   rooms: [
     {
