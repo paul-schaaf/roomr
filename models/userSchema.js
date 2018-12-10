@@ -3,6 +3,9 @@ const Schema = mongoose.Schema;
 const room = require('./roomSubSchema');
 
 const userSchema = new Schema ({
-  email: String,
+  email: {
+    type: String,
+    required: true
+  },
   rooms: [room]
 });
