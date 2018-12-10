@@ -12,7 +12,8 @@ const getFileContents = () => new Promise((resolve, reject) => {
 
 
 module.exports = {
-  getAll: async (req, res) => {
+
+  getAllRooms: async (req, res) => {
     try {
       const data = await getFileContents();
       res.writeHead(200, {"Content-Type": "application/json"})
@@ -21,5 +22,9 @@ module.exports = {
       res.writeHead(404);
       res.end(err);
     }
+  },
+
+  createRoom (req, res) {
+    console.log(req.body);
   }
 }
