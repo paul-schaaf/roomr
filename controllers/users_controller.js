@@ -33,5 +33,21 @@ module.exports = {
     } catch(err) {
       res.send(err.message);
     }
+  },
+
+  createRoom: async (req, res) => {
+    const roomProps = req.body;
+    try {
+      const user = await User.findOne({"email":"paulsimonschaaf@gmail.com"});
+      if (user.rooms.every((room) => room.roomName !== `${roomProps.roomName}`)) {
+        user.rooms.push(roomProps);
+      } else {
+        throw new Error(`There already is a room called: ${roomProps.roomName}`);
+      }
+      await user.save();
+
+    } catch(err) {
+      res.send(err.message);
+    }
   }
 }

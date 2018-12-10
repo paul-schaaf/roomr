@@ -4,6 +4,6 @@ module.exports = (app) => {
   
   app.get('/', UsersController.getAllRooms);
 
-  app.post('/api/users/rooms', UsersController.createUser);
+  app.post('/api/users/rooms', UsersController.createRoom);
   
 };
