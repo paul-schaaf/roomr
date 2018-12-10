@@ -328,4 +328,4 @@ const room = new Schema({
 
 });
 
-moedule.exports = room;
+module.exports = room;
