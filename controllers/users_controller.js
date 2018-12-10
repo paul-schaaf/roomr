@@ -1,4 +1,5 @@
 const fs = require("fs");
+const User = require('../models/userSchema');
 
 const getFileContents = () => new Promise((resolve, reject) => {
   let data = '';
@@ -24,8 +25,13 @@ module.exports = {
     }
   },
 
-  createRoom (req, res) {
-    console.log(req.body);
-    res.send("hi there");
+  createUser: async (req, res) => {
+    const userProps = req.body;
+    try {
+      const user = await User.create(userProps);
+      res.send(user);
+    } catch(err) {
+      res.send(err.message);
+    }
   }
 }
