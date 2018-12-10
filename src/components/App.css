@@ -11,7 +11,8 @@ body {
 
 .form-area {
   display:flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   height:150px;
   border-bottom: 1px solid #1E4363;
   box-sizing: border-box;
