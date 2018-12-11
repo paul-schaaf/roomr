@@ -16,9 +16,10 @@ module.exports = {
 
   getAllRooms: async (req, res, next) => {
     try {
-      const data = await getFileContents();
-      res.writeHead(200, {"Content-Type": "application/json"})
-      res.end(data);
+      const user = await User.findOne({"email":"paulsimonschaaf@gmail.com"});
+      const data = user.rooms;
+
+      res.send(data);
     } catch(err) {
       next(err);
     }
@@ -40,6 +41,7 @@ module.exports = {
       const user = await User.findOne({"email":"paulsimonschaaf@gmail.com"});
       if (user.rooms.every((room) => room.roomName !== `${roomProps.roomName}`)) {
         user.rooms.push(roomProps);
+        res.send("added new room");
       } else {
         throw new Error(`There already is a room called: ${roomProps.roomName}`);
       }
