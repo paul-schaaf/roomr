@@ -5,7 +5,7 @@ module.exports = {
   getAllRooms: async (req, res, next) => {
     try {
       const user = await User.findOne({"email":"paulsimonschaaf@gmail.com"});
-      const data = user.rooms;
+      const data = user.rooms.slice();
       for (let i = 0; i < data.length; i++) {
         for(let j = 0; j < data[i].times.length; j++) {
           data[i].times[j].time = data[i].times[j].time.default;
@@ -32,7 +32,7 @@ module.exports = {
     const roomProps = req.body;
     try {
       const user = await User.findOne({"email":"paulsimonschaaf@gmail.com"});
-      const roomDoesNotExist = user.rooms.every((room) => room.roomName !== `${roomProps.roomName}`);
+      const roomDoesNotExist = user.rooms.every((room) => room.roomName !== roomProps.roomName);
       if (roomDoesNotExist) {
         user.rooms.push(roomProps);
         res.send("added new room");
@@ -44,14 +44,34 @@ module.exports = {
     } catch(err) {
       next(err);
     }
-  }
+  },
 
   //TODO: implement deletion function, implement block time function, implement check time function
   //TODO: implement error handling with next and middleware in app.js instead of defining it for each controller function
 
+  deleteRoom: async (req, res, next) => {
+    const roomName = req.params.id;
+    try {
+      const user = await User.findOne({"email":"paulsimonschaaf@gmail.com"});
+      const roomToDeleteArray = user.rooms.filter((room) => room.roomName === roomName);
+      if (roomToDeleteArray.length === 1) {
+        const roomToDelete = roomToDeleteArray[0];
+        const index = user.rooms.indexOf(roomToDelete);
+        user.rooms.splice(index, 1);
+        await user.save();
+        res.send(`Room: ${roomName} successfully deleted`);
+      } else {
+        throw new Error(`There is no room called: ${roomName}`);
+      }
+    } catch(err) {
+      next(err);
+    }
+  }
+  
   /**
   * deleteRoom: async (req, res) => {
   *   const roomProps = req.body;
+  *   
   *   1. find room (roomProps);
   *   1a. throw error if that room doesnt exist
   *   2. delete room that was found in step 1;
