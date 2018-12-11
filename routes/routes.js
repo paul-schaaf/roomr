@@ -15,7 +15,7 @@ module.exports = (app) => {
 
   /**
   * future function to block time in room in app
-  * app.put('/api/users/rooms/times', UsersController.editTime);
+  * app.put('/api/users/rooms/times', UsersController.blockTime);
   **/
   
 };
