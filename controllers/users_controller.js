@@ -1,16 +1,4 @@
-const fs = require("fs");
 const User = require('../models/userSchema');
-
-const getFileContents = () => new Promise((resolve, reject) => {
-  let data = '';
-  const response = fs.createReadStream('./rooms.json');
-  response.on('error', err => reject(err));
-  response.on('data', (chunk) => {
-    data += chunk.toString();
-  });
-  response.on('end', () => resolve(data));
-});
-
 
 module.exports = {
 
