@@ -14,28 +14,27 @@ const getFileContents = () => new Promise((resolve, reject) => {
 
 module.exports = {
 
-  getAllRooms: async (req, res) => {
+  getAllRooms: async (req, res, next) => {
     try {
       const data = await getFileContents();
       res.writeHead(200, {"Content-Type": "application/json"})
       res.end(data);
     } catch(err) {
-      res.writeHead(404);
-      res.end(err);
+      next(err);
     }
   },
 
-  createUser: async (req, res) => {
+  createUser: async (req, res, next) => {
     const userProps = req.body;
     try {
       const user = await User.create(userProps);
       res.send(user);
     } catch(err) {
-      res.send(err.message);
+      next(err);
     }
   },
 
-  createRoom: async (req, res) => {
+  createRoom: async (req, res, next) => {
     const roomProps = req.body;
     try {
       const user = await User.findOne({"email":"paulsimonschaaf@gmail.com"});
@@ -47,7 +46,7 @@ module.exports = {
       await user.save();
 
     } catch(err) {
-      res.send(err.message);
+      next(err);
     }
   }
 

@@ -12,4 +12,8 @@ app.use(cors());
 
 routes(app);
 
+app.use((err, req, res, next) => {
+  res.send(err.message);
+});
+
 app.listen(5000);

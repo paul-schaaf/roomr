@@ -6,7 +6,7 @@ module.exports = (app) => {
 
   app.post('/api/users/rooms', UsersController.createRoom);
 
-  // app.post('/api/users', UsersController.createrUser);
+  app.post('/api/users', UsersController.createUser);
 
   //TODO: implement deletion route, implement block time route, implement check time route
 
