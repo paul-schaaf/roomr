@@ -12,12 +12,9 @@ module.exports = (app) => {
 
   
 
-  //TODO: implement deletion route, implement block time route, implement check time route
+  //TODO: implement block time route, implement check time route
 
-  /**
-  * future function to delete room from app
-  * app.delete('/api/users/rooms', UsersController.deleteRoom);
-  **/
+ 
 
   /**
   * future function to block time in room in app

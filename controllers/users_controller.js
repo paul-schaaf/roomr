@@ -46,8 +46,7 @@ module.exports = {
     }
   },
 
-  //TODO: implement deletion function, implement block time function, implement check time function
-  //TODO: implement error handling with next and middleware in app.js instead of defining it for each controller function
+  //TODO:  implement block time function, implement check time function
 
   deleteRoom: async (req, res, next) => {
     const roomName = req.params.id;
@@ -68,15 +67,7 @@ module.exports = {
     }
   }
   
-  /**
-  * deleteRoom: async (req, res) => {
-  *   const roomProps = req.body;
-  *   
-  *   1. find room (roomProps);
-  *   1a. throw error if that room doesnt exist
-  *   2. delete room that was found in step 1;
-  * }
-  **/
+  
 
   /**
   * blockRoom: async (req, res) => {
