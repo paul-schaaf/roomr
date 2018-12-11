@@ -50,4 +50,37 @@ module.exports = {
       res.send(err.message);
     }
   }
+
+  //TODO: implement deletion function, implement block time function, implement check time function
+
+  /**
+  * deleteRoom: async (req, res) => {
+  *   const roomProps = req.body;
+  *   1. find room (roomProps);
+  *   1a. throw error if that room doesnt exist
+  *   2. delete room that was found in step 1;
+  * }
+  **/
+
+  /**
+  * blockRoom: async (req, res) => {
+  *   const roomProps = req.body;
+  *   1. find room (roomProps);
+  *   1a. throw error if that room doesnt exist
+  *   2. find time (roomProps);
+  *   3. set availability of time to false;
+  *   3a. throw error if availability is already set to false;
+  * }
+  **/
+
+  /**
+  * checkRoom: async (req, res) => {
+  *   const roomProps = req.body;
+  *   1. find room (roomProps);
+  *   1a. throw error if that room doesnt exist
+  *   2. find time (roomProps);
+  *   3. check if time is available
+  *   3a. throw error if it is not available
+  * }
+  **/
 }
