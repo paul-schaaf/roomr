@@ -68,9 +68,9 @@ module.exports = {
   *   const roomProps = req.body;
   *   1. find room (roomProps);
   *   1a. throw error if that room doesnt exist
-  *   2. find time (roomProps);
-  *   3. set availability of time to false;
-  *   3a. throw error if availability is already set to false;
+  *   2. find timespan (roomProps);
+  *   3. set availability of times in timespan to false;
+  *   3a. throw error if any time availability is already set to false;
   * }
   **/
 
@@ -79,9 +79,9 @@ module.exports = {
   *   const roomProps = req.body;
   *   1. find room (roomProps);
   *   1a. throw error if that room doesnt exist         (THIS SHOULD MAYBE BE A FRONT-END FUNCTION);
-  *   2. find time (roomProps);
-  *   3. check if time is available
-  *   3a. throw error if it is not available
+  *   2. find timespan (roomProps);
+  *   3. check if times in timespan are available
+  *   3a. throw error if any time in timespan is not available
   * }
   **/
 }
