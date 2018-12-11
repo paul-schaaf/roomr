@@ -82,6 +82,8 @@ module.exports = {
   *   2. find timespan (roomProps);
   *   3. check if times in timespan are available
   *   3a. throw error if any time in timespan is not available
+  * 
+  *   // IF NO ROOM SPECIFIED, RETURN ALL TIMESPAN AND RESPECTIVE ROOMS THAT MEET REQUIREMENTS //
   * }
   **/
 }
