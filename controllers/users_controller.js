@@ -52,6 +52,7 @@ module.exports = {
   }
 
   //TODO: implement deletion function, implement block time function, implement check time function
+  //TODO: implement error handling with next and middleware in app.js instead of defining it for each controller function
 
   /**
   * deleteRoom: async (req, res) => {
