@@ -77,7 +77,7 @@ module.exports = {
   * checkRoom: async (req, res) => {
   *   const roomProps = req.body;
   *   1. find room (roomProps);
-  *   1a. throw error if that room doesnt exist
+  *   1a. throw error if that room doesnt exist         (THIS SHOULD MAYBE BE A FRONT-END FUNCTION);
   *   2. find time (roomProps);
   *   3. check if time is available
   *   3a. throw error if it is not available
