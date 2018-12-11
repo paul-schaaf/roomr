@@ -18,7 +18,12 @@ module.exports = {
     try {
       const user = await User.findOne({"email":"paulsimonschaaf@gmail.com"});
       const data = user.rooms;
-
+      for (let i = 0; i < data.length; i++) {
+        for(let j = 0; j < data[i].times.length; j++) {
+          data[i].times[j].time = data[i].times[j].time.default;
+          data[i].times[j].availability = data[i].times[j].availability.default;
+        }
+      }
       res.send(data);
     } catch(err) {
       next(err);
