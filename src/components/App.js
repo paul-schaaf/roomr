@@ -2,7 +2,7 @@ import React from 'react';
 import Form from './Form';
 import RoomList from './RoomList';
 import TimeLine from './TimeLine';
-import getData from '../apis/getData';
+import roomrapi from '../apis/roomrapi';
 import ErrorPage from './ErrorPage';
 import './App.css';
 class App extends React.Component {
@@ -13,14 +13,14 @@ class App extends React.Component {
 
   async componentDidMount() {
     try {
-      const response = await getData();
+      const response = await roomrapi.getAllRooms();
       this.setState({ data: response , status: "successful"});
     } catch(err) {
       this.setState({ status: "failed"});
     }
     try {
       setInterval(async () => {
-        const response = await getData();
+        const response = await roomrapi.getAllRooms();
         this.setState({ data: response , status: "successful"});
       }, 10000);
     } catch(err) {
