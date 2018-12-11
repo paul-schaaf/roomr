@@ -35,11 +35,12 @@ module.exports = {
       const roomDoesNotExist = user.rooms.every((room) => room.roomName !== roomProps.roomName);
       if (roomDoesNotExist) {
         user.rooms.push(roomProps);
-        res.send("added new room");
+        await user.save();
+        res.send(`Room: ${roomProps.roomName} successfully added`);
       } else {
         throw new Error(`There already is a room called: ${roomProps.roomName}`);
       }
-      await user.save();
+      
 
     } catch(err) {
       next(err);
