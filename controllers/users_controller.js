@@ -32,7 +32,8 @@ module.exports = {
     const roomProps = req.body;
     try {
       const user = await User.findOne({"email":"paulsimonschaaf@gmail.com"});
-      if (user.rooms.every((room) => room.roomName !== `${roomProps.roomName}`)) {
+      const roomDoesNotExist = user.rooms.every((room) => room.roomName !== `${roomProps.roomName}`);
+      if (roomDoesNotExist) {
         user.rooms.push(roomProps);
         res.send("added new room");
       } else {
