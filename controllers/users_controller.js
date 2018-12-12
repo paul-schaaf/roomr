@@ -59,6 +59,7 @@ module.exports = {
       const user = await User.create(userProps);
       res.send(`Successfully created new user`);
     } catch(err) {
+      err.message = "This user exists already.";
       next(err);
     }
   },
@@ -73,7 +74,7 @@ module.exports = {
         await user.save();
         res.send(`Room: ${roomProps.roomName} successfully added`);
       } else {
-        throw new Error(`There already is a room called: ${roomProps.roomName}`);
+        throw new Error(`There already is a room called: ${roomProps.roomName}.`);
       }
     } catch(err) {
       next(err);
@@ -92,7 +93,7 @@ module.exports = {
         await user.save();
         res.send(`Room: ${roomName} successfully deleted`);
       } else {
-        throw new Error(`There is no room called: ${roomName}`);
+        throw new Error(`There is no room called: ${roomName}.`);
       }
     } catch(err) {
       next(err);
@@ -109,16 +110,16 @@ module.exports = {
         const indexEnd = timeArray.indexOf(roomProps.end);
         for (let i = indexStart; i < indexEnd; i++) {
           if (room.times[i].availability === false) {
-            throw new Error(`This room is already at least partly reserved for the timespan you selected`);
+            throw new Error(`This room is already at least partly reserved for the timespan you selected.`);
           }
         }
         for (let i = indexStart; i < indexEnd; i++) {
           room.times.set(i, {"time":{"default":timeArray[i]}, "availability": "false"});
         }
         await user.save();
-        res.send(`Selected timespan ${roomProps.start}-${roomProps.end} for room ${roomProps.roomName} successfully reserved`);
+        res.send(`Selected timespan ${roomProps.start}-${roomProps.end} for room ${roomProps.roomName} successfully reserved.`);
       } else {
-        throw new Error(`There is no room called ${roomProps.roomName}`);
+        throw new Error(`There is no room called ${roomProps.roomName}.`);
       }
       
     } catch(err) {
@@ -139,10 +140,10 @@ module.exports = {
           room.times.set(i, {"time":{"default":timeArray[i]}, "availability": true});
         }
         await user.save();
-        res.send(`Selected timespan ${roomProps.start}-${roomProps.end} for room ${roomProps.roomName} successfully unblocked`);
+        res.send(`Selected timespan ${roomProps.start}-${roomProps.end} for room ${roomProps.roomName} successfully unblocked.`);
         res.send(room);
       } else {
-        throw new Error(`There is no room called ${roomProps.roomName}`);
+        throw new Error(`There is no room called ${roomProps.roomName}.`);
       }
       
     } catch(err) {
