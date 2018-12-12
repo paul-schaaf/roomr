@@ -75,8 +75,6 @@ module.exports = {
     }
   },
 
-  //TODO:  implement block time function, implement check time function
-
   deleteRoom: async (req, res, next) => {
     const roomName = req.params.id;
     try {
@@ -124,7 +122,7 @@ module.exports = {
     } 
   }
   
-  
+  //TODO: implement unblock function
 
   /**
   * blockRoom: async (req, res) => {
