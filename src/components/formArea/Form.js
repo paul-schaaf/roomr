@@ -19,7 +19,7 @@ class Form extends React.Component {
   onAddRoomSubmit = event => {
     event.preventDefault();
     this.props.onAddRoomSubmit(this.state.roomToAdd);
-    this.setState({"addedRoom":""});
+    this.setState({"roomToAdd":""});
   }
 
 
