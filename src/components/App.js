@@ -5,16 +5,21 @@ import TimeLine from './infoArea/TimeLine';
 import ErrorPage from './errorPages/ErrorPage';
 import roomrapi from '../apis/roomrapi';
 import './App.css';
+import errorHandler from '../errorHandling/axiosErrorHandling';
 
 class App extends React.Component {
   state = {
     status: "pending",
-    data: []
+    data: [],
+    errorInfo: {
+      code:"",
+      message:""
+    }
   };
 
   async componentDidMount() {
-    await roomrapi.setRoomDataInit(this);
-    await roomrapi.setRoomDataLoop(this);
+    await errorHandler(roomrapi.setRoomDataInit, this);
+    errorHandler(roomrapi.setRoomDataLoop, this);
   };
     
   
