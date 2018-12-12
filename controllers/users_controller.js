@@ -1,5 +1,41 @@
 const User = require('../models/userSchema');
 
+const timeArray = [
+  "09:00",
+  "09:15",
+  "09:30",
+  "09:45",
+  "10:00",
+  "10:15",
+  "10:30",
+  "10:45",
+  "11:00",
+  "11:15",
+  "11:30",
+  "11:45",
+  "12:00",
+  "12:15",
+  "12:30",
+  "12:45",
+  "13:00",
+  "13:15",
+  "13:30",
+  "13:45",
+  "14:00",
+  "14:15",
+  "14:30",
+  "14:45",
+  "15:00",
+  "15:15",
+  "15:30",
+  "15:45",
+  "16:00",
+  "16:15",
+  "16:30",
+  "16:45",
+  "17:00"
+]
+
 module.exports = {
 
   getAllRooms: async (req, res, next) => {
@@ -11,12 +47,12 @@ module.exports = {
       * roomSubSchema.js. When i send that data to the client, the client does not need to know about this structure
       * so I just the time value to be the time.default value, saving the client some work
       */
-      for (let i = 0; i < rooms.length; i++) {
+      /*for (let i = 0; i < rooms.length; i++) {
         for(let j = 0; j < rooms[i].times.length; j++) {
           rooms[i].times[j].time = rooms[i].times[j].time.default;
           rooms[i].times[j].availability = rooms[i].times[j].availability.default;
         }
-      }
+      } */
       res.send(rooms);
     } catch(err) {
       next(err);
@@ -75,8 +111,25 @@ module.exports = {
     const roomProps = req.body;
     try {
       const user = await User.findOne({"email":"paulsimonschaaf@gmail.com"});
-      const room = user.rooms.findOne({"roomName": roomProps.roomName});
-      res.send(room);
+      const room = user.rooms.find((room) => room.roomName === roomProps.roomName);
+      if (room) {
+        const indexStart = timeArray.indexOf(roomProps.start);
+        const indexEnd = timeArray.indexOf(roomProps.end);
+        for (let i = indexStart; i < indexEnd; i++) {
+          if (room.times[i].availability === false) {
+            throw new Error(`This room is already at least partly reserved for the timespan you selected`);
+          }
+        }
+        for (let i = indexStart; i < indexEnd; i++) {
+          room.times.set(i, {"time":{"default":timeArray[i]}, "availability": "false"});
+          room.times[i].availability = false;
+        }
+        await user.save();
+        res.send(room);
+      } else {
+        throw new Error(`There is no room called ${roomProps.roomName}`);
+      }
+      
     } catch(err) {
       next(err);
     } 
