@@ -69,6 +69,17 @@ module.exports = {
     } catch(err) {
       next(err);
     }
+  },
+
+  blockRoom: async (req, res, next) => {
+    const roomProps = req.body;
+    try {
+      const user = await User.findOne({"email":"paulsimonschaaf@gmail.com"});
+      const room = user.rooms.findOne({"roomName": roomProps.roomName});
+      res.send(room);
+    } catch(err) {
+      next(err);
+    } 
   }
   
   
