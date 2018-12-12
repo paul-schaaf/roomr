@@ -3,7 +3,7 @@ import Form from './formArea/Form';
 import RoomList from './infoArea/RoomList';
 import TimeLine from './infoArea/TimeLine';
 import ErrorPage from './errorPages/ErrorPage';
-import handleGetResponse from '../responseHandlers/handleGetResponse';
+import roomrapi from '../apis/roomrapi';
 import './App.css';
 
 class App extends React.Component {
@@ -13,7 +13,8 @@ class App extends React.Component {
   };
 
   async componentDidMount() {
-    await handleGetResponse(this);
+    await roomrapi.setRoomDataInit(this);
+    await roomrapi.setRoomDataLoop(this);
   };
     
   
