@@ -57,7 +57,7 @@ module.exports = {
     const userProps = req.body;
     try {
       const user = await User.create(userProps);
-      res.send(user);
+      res.send(`Successfully created new user`);
     } catch(err) {
       next(err);
     }
@@ -116,7 +116,7 @@ module.exports = {
           room.times.set(i, {"time":{"default":timeArray[i]}, "availability": "false"});
         }
         await user.save();
-        res.send(room);
+        res.send(`Selected timespan ${roomProps.start}-${roomProps.end} for room ${roomProps.roomName} successfully reserved`);
       } else {
         throw new Error(`There is no room called ${roomProps.roomName}`);
       }
@@ -136,9 +136,10 @@ module.exports = {
         const indexEnd = timeArray.indexOf(roomProps.end);
         
         for (let i = indexStart; i < indexEnd; i++) {
-          room.times.set(i, {"time":{"default":timeArray[i]}, "availability": "true"});
+          room.times.set(i, {"time":{"default":timeArray[i]}, "availability": true});
         }
         await user.save();
+        res.send(`Selected timespan ${roomProps.start}-${roomProps.end} for room ${roomProps.roomName} successfully unblocked`);
         res.send(room);
       } else {
         throw new Error(`There is no room called ${roomProps.roomName}`);
