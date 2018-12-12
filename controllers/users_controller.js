@@ -150,19 +150,6 @@ module.exports = {
     } 
   }
   
-  //TODO: implement unblock function
-
-  /**
-  * blockRoom: async (req, res) => {
-  *   const roomProps = req.body;
-  *   1. find room (roomProps);
-  *   1a. throw error if that room doesnt exist
-  *   2. find timespan (roomProps);
-  *   3. set availability of times in timespan to false;
-  *   3a. throw error if any time availability is already set to false;
-  * }
-  **/
-
   /**
   * checkRoom: async (req, res) => {
   *   const roomProps = req.body;
