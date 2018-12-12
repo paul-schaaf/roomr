@@ -37,7 +37,6 @@ const timeArray = [
 ]
 
 module.exports = {
-
   getAllRooms: async (req, res, next) => {
     try {
       const user = await User.findOne({"email":"paulsimonschaaf@gmail.com"});
@@ -149,17 +148,4 @@ module.exports = {
       next(err);
     } 
   }
-  
-  /**
-  * checkRoom: async (req, res) => {
-  *   const roomProps = req.body;
-  *   1. find room (roomProps);
-  *   1a. throw error if that room doesnt exist         (THIS SHOULD MAYBE BE A FRONT-END FUNCTION);
-  *   2. find timespan (roomProps);
-  *   3. check if times in timespan are available
-  *   3a. throw error if any time in timespan is not available
-  * 
-  *   // IF NO ROOM SPECIFIED, RETURN ALL TIMESPAN AND RESPECTIVE ROOMS THAT MEET REQUIREMENTS //
-  * }
-  **/
 }
