@@ -5,14 +5,19 @@ module.exports = {
   getAllRooms: async (req, res, next) => {
     try {
       const user = await User.findOne({"email":"paulsimonschaaf@gmail.com"});
-      const data = user.rooms.slice();
-      for (let i = 0; i < data.length; i++) {
-        for(let j = 0; j < data[i].times.length; j++) {
-          data[i].times[j].time = data[i].times[j].time.default;
-          data[i].times[j].availability = data[i].times[j].availability.default;
+      const rooms = user.rooms.slice();
+      /*
+      * mongodb saves time and availability values in their respective default properties that are set in
+      * roomSubSchema.js. When i send that data to the client, the client does not need to know about this structure
+      * so I just the time value to be the time.default value, saving the client some work
+      */
+      for (let i = 0; i < rooms.length; i++) {
+        for(let j = 0; j < rooms[i].times.length; j++) {
+          rooms[i].times[j].time = rooms[i].times[j].time.default;
+          rooms[i].times[j].availability = rooms[i].times[j].availability.default;
         }
       }
-      res.send(data);
+      res.send(rooms);
     } catch(err) {
       next(err);
     }
@@ -40,8 +45,6 @@ module.exports = {
       } else {
         throw new Error(`There already is a room called: ${roomProps.roomName}`);
       }
-      
-
     } catch(err) {
       next(err);
     }
