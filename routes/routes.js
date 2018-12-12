@@ -10,7 +10,9 @@ module.exports = (app) => {
 
   app.post('/api/users', UsersController.createUser);
 
-  app.post('/api/users/rooms/times', UsersController.blockRoom);
+  app.post('/api/users/rooms/times-block', UsersController.blockRoom);
+
+  app.post('/api/users/rooms/times-unblock', UsersController.unblockRoom);
   
 
   //TODO: implement block time route, implement check time route

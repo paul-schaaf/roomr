@@ -41,7 +41,13 @@ module.exports = {
   getAllRooms: async (req, res, next) => {
     try {
       const user = await User.findOne({"email":"paulsimonschaaf@gmail.com"});
-      const rooms = user.rooms.slice();
+      let rooms = user.rooms.slice();
+      //removes default property from availability and just puts it into times[i].availability if not already done
+      for (let i = 0; i < rooms.length; i++) {
+        for(let j = 0; j < rooms[i].times.length; j++) {
+          rooms[i].times[j].availability = rooms[i].times[j].availability.default || rooms[i].times[j].availability;
+        }
+      }
       res.send(rooms);
     } catch(err) {
       next(err);
@@ -109,7 +115,29 @@ module.exports = {
         }
         for (let i = indexStart; i < indexEnd; i++) {
           room.times.set(i, {"time":{"default":timeArray[i]}, "availability": "false"});
-          room.times[i].availability = false;
+        }
+        await user.save();
+        res.send(room);
+      } else {
+        throw new Error(`There is no room called ${roomProps.roomName}`);
+      }
+      
+    } catch(err) {
+      next(err);
+    } 
+  },
+
+  unblockRoom: async (req, res, next) => {
+    const roomProps = req.body;
+    try {
+      const user = await User.findOne({"email":"paulsimonschaaf@gmail.com"});
+      const room = user.rooms.find((room) => room.roomName === roomProps.roomName);
+      if (room) {
+        const indexStart = timeArray.indexOf(roomProps.start);
+        const indexEnd = timeArray.indexOf(roomProps.end);
+        
+        for (let i = indexStart; i < indexEnd; i++) {
+          room.times.set(i, {"time":{"default":timeArray[i]}, "availability": "true"});
         }
         await user.save();
         res.send(room);
