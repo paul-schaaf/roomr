@@ -16,6 +16,11 @@ class Form extends React.Component {
     this.setState({ [event.target.name]: event.target.value})
   }
 
+  onAddRoomSubmit = event => {
+    event.preventDefault();
+    this.props.onAddRoomSubmit(this.state.addedRoom);
+    this.setState({"addedRoom":""});
+  }
 
 
   render () {
@@ -32,8 +37,8 @@ class Form extends React.Component {
             </select>
             <input type="submit" value="find room"></input>
           </form>
-          <form>
-            <input name="addedRoom" value={this.state.addedRoom} onChange={this.onInputChange} type="text" placeholder="room..."></input>
+          <form onSubmit={this.onAddRoomSubmit}>
+            <input autoComplete="off" name="addedRoom" value={this.state.addedRoom} onChange={this.onInputChange} type="text" placeholder="room..."></input>
             <input type="submit" value="add room"></input>
           </form>
         </div>

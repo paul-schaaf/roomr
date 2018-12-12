@@ -1,11 +1,11 @@
-const errorHandler = async (fn, appState) => {
+const errorHandler = async (fn, appState, reqData) => {
   try {
-    await fn(appState);
+    await fn(appState, reqData);
   } catch(err) {
     if(err.response) {
-      console.log(err);
+      appState.setState({"errorMessage":err.response.data});
     } else if (err.request) {
-      appState.setState({ status: "failed"});
+      appState.setState({ getStatus: "failed"});
     }
   }
 };

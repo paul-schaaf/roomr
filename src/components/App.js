@@ -9,12 +9,9 @@ import errorHandler from '../errorHandling/axiosErrorHandling';
 
 class App extends React.Component {
   state = {
-    status: "pending",
+    getStatus: "pending",
     data: [],
-    errorInfo: {
-      code:"",
-      message:""
-    }
+    errorMessage:""
   };
 
   async componentDidMount() {
@@ -22,18 +19,22 @@ class App extends React.Component {
     errorHandler(roomrapi.setRoomDataLoop, this);
   };
     
+  onAddRoomSubmit = async (roomName) => {
+    await errorHandler(roomrapi.addRoom, this, roomName);
+    await errorHandler(roomrapi.setRoomDataInit, this);
+  }
   
   render() {
-    if (this.state.status === "pending") {
+    if (this.state.getStatus === "pending") {
       return <div>Loading...</div>
-    } else if (this.state.status === "failed") {
+    } else if (this.state.getStatus === "failed") {
       return <ErrorPage />
-    } else if (this.state.status === "successful" && this.state.data.length > 0){
+    } else if (this.state.getStatus === "successful" && this.state.data.length > 0){
       return (
         <React.Fragment>
           
           <div className="form-area">
-            <Form data={this.state.data}/>
+            <Form data={this.state.data} onAddRoomSubmit={this.onAddRoomSubmit}/>
             <div className="test"><p className="text">Find Room</p></div>
           </div>
           <div className="info-area">
