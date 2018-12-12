@@ -1,9 +1,9 @@
 import React from 'react';
-import Form from './Form';
-import RoomList from './RoomList';
-import TimeLine from './TimeLine';
+import Form from './formArea/Form';
+import RoomList from './infoArea/RoomList';
+import TimeLine from './infoArea/TimeLine';
 import roomrapi from '../apis/roomrapi';
-import ErrorPage from './ErrorPage';
+import ErrorPage from './errorPages/ErrorPage';
 import './App.css';
 class App extends React.Component {
   state = {
