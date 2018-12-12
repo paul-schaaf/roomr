@@ -2,9 +2,10 @@ import React from 'react';
 import Form from './formArea/Form';
 import RoomList from './infoArea/RoomList';
 import TimeLine from './infoArea/TimeLine';
-import roomrapi from '../apis/roomrapi';
 import ErrorPage from './errorPages/ErrorPage';
+import handleGetResponse from '../responseHandlers/handleGetResponse';
 import './App.css';
+
 class App extends React.Component {
   state = {
     status: "pending",
@@ -12,20 +13,7 @@ class App extends React.Component {
   };
 
   async componentDidMount() {
-    try {
-      const response = await roomrapi.getAllRooms();
-      this.setState({ data: response , status: "successful"});
-    } catch(err) {
-      this.setState({ status: "failed"});
-    }
-    try {
-      setInterval(async () => {
-        const response = await roomrapi.getAllRooms();
-        this.setState({ data: response , status: "successful"});
-      }, 10000);
-    } catch(err) {
-      this.setState({ status: "failed"});
-    }
+    await handleGetResponse(this);
   };
     
   
