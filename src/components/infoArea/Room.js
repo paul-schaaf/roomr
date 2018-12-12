@@ -8,8 +8,8 @@ const Room = ({ roomData }) => {
   }
   
   const renderedTimeBlocks = roomData.times.map(timeSpanObject => {
-    const timespan = Object.keys(timeSpanObject)[0];
-    const availability = Object.values(timeSpanObject)[0];
+    const timespan = timeSpanObject.time.default;
+    const availability = timeSpanObject.availability.toString();
     return (
       <li className="room__timeblock-list__timeblock" key={timespan}>
         <div className={`room__timeblock-list__timeblock--block ${config[availability]}`}></div>
@@ -19,7 +19,7 @@ const Room = ({ roomData }) => {
 
   return (
     <div className="room">
-      <div className="room__number-box">{roomData.name}</div>
+      <div className="room__number-box">{roomData.roomName}</div>
       <ul className="room__timeblock-list">{renderedTimeBlocks}</ul>
     </div>
   )
