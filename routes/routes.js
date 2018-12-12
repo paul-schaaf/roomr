@@ -14,19 +14,4 @@ module.exports = (app) => {
 
   app.post('/api/users/rooms/times-unblock', UsersController.unblockRoom);
   
-
-  //TODO: implement block time route, implement check time route
-
- 
-
-  /**
-  * future function to block time in room in app
-  * app.put('/api/users/rooms/times', UsersController.blockTime);
-  **/
-
-  /**
-  * future function to check time in room in app
-  * app.put('/api/users/rooms/times', UsersController.checkTime);
-  **/
-  
 };
