@@ -15,18 +15,18 @@ class App extends React.Component {
   };
 
   async componentDidMount() {
-    await errorHandler(roomrapi.setRoomDataInit, this);
+    await errorHandler(roomrapi.setRoomDataOnce, this);
     errorHandler(roomrapi.setRoomDataLoop, this);
   };
     
   onAddRoomSubmit = async (roomName) => {
     await errorHandler(roomrapi.addRoom, this, roomName);
-    await errorHandler(roomrapi.setRoomDataInit, this);
+    await errorHandler(roomrapi.setRoomDataOnce, this);
   }
 
   onDeleteRoomSubmit = async (roomName) => {
     await errorHandler(roomrapi.deleteRoom, this, roomName);
-    await errorHandler(roomrapi.setRoomDataInit, this);
+    await errorHandler(roomrapi.setRoomDataOnce, this);
   }
   
   render() {

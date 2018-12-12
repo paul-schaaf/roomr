@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 const roomrapi = {
-  setRoomDataInit: async (appState) => {
+  setRoomDataOnce: async (appState) => {
       const response = await axios.get('http://127.0.0.1:5000/api/users/rooms');
       appState.setState({ data: response.data , getStatus: "successful"});
   },
