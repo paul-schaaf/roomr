@@ -23,6 +23,11 @@ class App extends React.Component {
     await errorHandler(roomrapi.addRoom, this, roomName);
     await errorHandler(roomrapi.setRoomDataInit, this);
   }
+
+  onDeleteRoomSubmit = async (roomName) => {
+    await errorHandler(roomrapi.deleteRoom, this, roomName);
+    await errorHandler(roomrapi.setRoomDataInit, this);
+  }
   
   render() {
     if (this.state.getStatus === "pending") {
@@ -32,9 +37,12 @@ class App extends React.Component {
     } else if (this.state.getStatus === "successful" && this.state.data.length > 0){
       return (
         <React.Fragment>
-          
           <div className="form-area">
-            <Form data={this.state.data} onAddRoomSubmit={this.onAddRoomSubmit}/>
+            <Form 
+              data={this.state.data}
+              onAddRoomSubmit={this.onAddRoomSubmit} 
+              onDeleteRoomSubmit={this.onDeleteRoomSubmit}
+            />
             <div className="test"><p className="text">Find Room</p></div>
           </div>
           <div className="info-area">

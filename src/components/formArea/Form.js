@@ -9,7 +9,8 @@ class Form extends React.Component {
     room: '',
     start: '09:00',
     end: '09:15',
-    roomToAdd: ''
+    roomToAdd: '',
+    roomToDelete: ''
   };
 
   onInputChange = (event) => {
@@ -22,6 +23,11 @@ class Form extends React.Component {
     this.setState({"roomToAdd":""});
   }
 
+  onDeleteRoomSubmit = event => {
+    event.preventDefault();
+    this.props.onDeleteRoomSubmit(this.state.roomToDelete);
+    this.setState({"roomToDelete":""});
+  }
 
   render () {
     return (
@@ -35,11 +41,15 @@ class Form extends React.Component {
             <select name="end" onChange={this.onInputChange} value={this.state.end} type="text">
               <InputTimes start={this.state.start}/>
             </select>
-            <input type="submit" value="find room"></input>
+            <input type="submit" value="reserve room"></input>
           </form>
           <form onSubmit={this.onAddRoomSubmit}>
             <input autoComplete="off" name="roomToAdd" value={this.state.roomToAdd} onChange={this.onInputChange} type="text" placeholder="room..."></input>
             <input type="submit" value="add room"></input>
+          </form>
+          <form onSubmit={this.onDeleteRoomSubmit}>
+            <input autoComplete="off" name="roomToDelete" value={this.state.roomToDelete} onChange={this.onInputChange} type="text" placeholder="room..."></input>
+            <input type="submit" value="delete room"></input>
           </form>
         </div>
     )

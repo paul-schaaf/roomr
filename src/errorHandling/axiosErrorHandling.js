@@ -6,6 +6,8 @@ const errorHandler = async (fn, appState, reqData) => {
       appState.setState({"errorMessage":err.response.data});
     } else if (err.request) {
       appState.setState({ getStatus: "failed"});
+    } else {
+      appState.setState({"errorMessage":err.message});
     }
   }
 };
