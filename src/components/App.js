@@ -1,5 +1,5 @@
 import React from 'react';
-import Form from './formArea/Form';
+import FormList from './formArea/FormList';
 import RoomList from './infoArea/RoomList';
 import TimeLine from './infoArea/TimeLine';
 import ErrorPage from './errorPages/ErrorPage';
@@ -54,7 +54,7 @@ class App extends React.Component {
         <React.Fragment>
           <ErrorMessage errorMessage={this.state.errorMessage} onErrorButtonClick={this.onErrorButtonClick}/>
           <div className="form-area">
-            <Form 
+            <FormList
               data={this.state.data}
               onAddRoomSubmit={this.onAddRoomSubmit} 
               onDeleteRoomSubmit={this.onDeleteRoomSubmit}
@@ -75,7 +75,7 @@ class App extends React.Component {
       return (
         <React.Fragment>
           <div className="form-area">
-            <Form 
+            <FormList
               data={this.state.data}
               onAddRoomSubmit={this.onAddRoomSubmit} 
               onDeleteRoomSubmit={this.onDeleteRoomSubmit}
@@ -95,7 +95,7 @@ class App extends React.Component {
     } else {
       return (
         <div className="form-area">
-          <Form 
+          <FormList
             data={this.state.data}
             onAddRoomSubmit={this.onAddRoomSubmit} 
             onDeleteRoomSubmit={this.onDeleteRoomSubmit}
