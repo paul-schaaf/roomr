@@ -33,7 +33,7 @@ class Form extends React.Component {
     return (
         <div className="forms">
           <form>
-            <input autoComplete="off" name="room" list="rooms" onChange={this.onInputChange} value={this.state.room} type="text" placeholder="room... (optional)"></input>
+            <input autoComplete="off" name="room" list="rooms" onChange={this.onInputChange} value={this.state.room} type="text" placeholder="room..."></input>
             <DataList list="rooms" data={this.props.data}/>
             <select name="start" onChange={this.onInputChange} value={this.state.start} type="text">
               <InputTimes />
