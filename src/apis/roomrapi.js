@@ -28,6 +28,21 @@ const roomrapi = {
     }
     await axios.delete('http://127.0.0.1:5000/api/users/rooms/' + roomName);
     appState.setState({"errorMessage":""});
+  },
+
+  blockRoom: async (appState, reqData) => {
+    const { roomName, start, end } = reqData;
+    console.log(roomName, start, end);
+    console.log(reqData);
+    if (roomName === "") {
+      throw new Error("Please enter a room number before submitting");
+    }
+    await axios.post('http://127.0.0.1:5000/api/users/rooms/times-block', {
+      "roomName": roomName,
+      "start": start,
+      "end": end
+    });
+    appState.setState({"errorMessage":""});
   }
 }
 
