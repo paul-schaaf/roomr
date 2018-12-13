@@ -1,0 +1,43 @@
+form {
+  margin-top:10px;
+}
+
+form select {
+  background:#FCF2CB;
+  color:#1E4363;
+  font-family: 'Roboto Mono', monospace;
+  border:none;
+  font-size:10.5px;
+}
+
+.input-room {
+  border:none;
+  border-bottom:1px solid #1E4363;
+  background:#FCF2CB;
+  margin-right:10px;
+  width:100px;
+  font-family: 'Roboto Mono', monospace;
+  font-size:11px;
+}
+
+.input-room::placeholder {
+  color: #1E4363;
+}
+
+.submit-button {
+margin-left:10px;
+float:right;
+width:100px;
+background: #FCF2CB;
+color: #1E4363;
+border:none;
+font-size:11px;
+font-family: 'Roboto Mono', monospace;
+cursor: pointer;
+padding: 1.5px 5px 1.5px 5px;
+}
+
+.submit-button:hover {
+  /* color:white; */
+  transform:translateX(5px);
+}

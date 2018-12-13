@@ -14,7 +14,8 @@ const roomrapi = {
       }, 10000);
   },
 
-  addRoom: async (appState, roomName) => {
+  addRoom: async (appState, reqData) => {
+    const { roomName } = reqData;
     if (roomName === "") {
       throw new Error("Please enter a room before submitting!");
     }
@@ -22,7 +23,8 @@ const roomrapi = {
     appState.setState({"errorMessage":""});
   },
 
-  deleteRoom: async (appState, roomName) => {
+  deleteRoom: async (appState, reqData) => {
+    const { roomName } = reqData;
     if (roomName === "") {
       throw new Error("Please enter a room before submitting!");
     }

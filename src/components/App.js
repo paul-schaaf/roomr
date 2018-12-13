@@ -20,13 +20,13 @@ class App extends React.Component {
     errorHandler(roomrapi.setRoomDataLoop, this);
   };
     
-  onAddRoomSubmit = async (roomName) => {
-    await errorHandler(roomrapi.addRoom, this, roomName);
+  onAddRoomSubmit = async (reqData) => {
+    await errorHandler(roomrapi.addRoom, this, reqData);
     await errorHandler(roomrapi.setRoomDataOnce, this);
   }
 
-  onDeleteRoomSubmit = async (roomName) => {
-    await errorHandler(roomrapi.deleteRoom, this, roomName);
+  onDeleteRoomSubmit = async (reqData) => {
+    await errorHandler(roomrapi.deleteRoom, this, reqData);
     await errorHandler(roomrapi.setRoomDataOnce, this);
   }
 
