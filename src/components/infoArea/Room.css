@@ -24,8 +24,9 @@
   text-align: center;
   height:50px;
   width:75px;
-  background:#FCF2CB; 
-
+  background:#FCF2CB;
+  white-space: nowrap;
+  overflow-x:scroll;
 }
 
 .green {
