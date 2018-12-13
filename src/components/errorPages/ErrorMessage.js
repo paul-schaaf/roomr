@@ -1,4 +1,5 @@
 import React from 'react';
+import './ErrorMessage.css';
 
 class ErrorMessage extends React.Component {
 
@@ -8,7 +9,7 @@ class ErrorMessage extends React.Component {
 
   render () {
     return (
-      <div>
+      <div className="error-message">
         <p>{this.props.errorMessage}</p>
         <button type="button" onClick={this.onErrorButtonClick}>X</button>
       </div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import InputTimes from './InputTimes';
 import DataList from './DataList';
-import './Form.css';
 
 const timeArray = [
   "09:00",
