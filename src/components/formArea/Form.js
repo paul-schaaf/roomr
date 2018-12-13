@@ -131,7 +131,8 @@ class Form extends React.Component {
             <input type="submit" value="add room"></input>
           </form>
           <form onSubmit={this.onDeleteRoomSubmit}>
-            <input autoComplete="off" name="roomToDelete" value={this.state.roomToDelete} onChange={this.onInputChange} type="text" placeholder="room..."></input>
+            <input autoComplete="off" name="roomToDelete" list="roomDeleteList" value={this.state.roomToDelete} onChange={this.onInputChange} type="text" placeholder="room..."></input>
+            <DataList list="roomDeleteList" data={this.props.data}/>
             <input type="submit" value="delete room"></input>
           </form>
         </div>
