@@ -78,11 +78,26 @@ class Form extends React.Component {
     this.setState({"roomBlock":""});
   }
 
+  onUnblockRoomSubmit = event => {
+    event.preventDefault();
+    this.props.onUnblockRoomSubmit({
+      "roomName": this.state.roomUnblock,
+      "start": this.state.startUnblock,
+      "end": this.state.endUnblock
+    });
+    this.setState({"roomUnblock":""});
+  }
+
   componentDidUpdate (prevProps) {
-    const indexStart = timeArray.indexOf(this.state.startBlock);
-    const indexEnd = timeArray.indexOf(this.state.endBlock);
-    if (indexEnd < indexStart) {
-      this.setState({ "endBlock": timeArray[indexStart + 1]})
+    const indexStartBlock = timeArray.indexOf(this.state.startBlock);
+    const indexEndBlock = timeArray.indexOf(this.state.endBlock);
+    if (indexEndBlock < indexStartBlock) {
+      this.setState({ "endBlock": timeArray[indexStartBlock + 1]})
+    }
+    const indexStartUnblock = timeArray.indexOf(this.state.startUnblock);
+    const indexEndUnblock = timeArray.indexOf(this.state.endUnblock);
+    if (indexEndUnblock < indexStartUnblock) {
+      this.setState({ "endUnblock": timeArray[indexStartUnblock + 1]})
     }
   }
 
@@ -100,7 +115,7 @@ class Form extends React.Component {
             </select>
             <input type="submit" value="reserve room"></input>
           </form>
-          <form>
+          <form onSubmit={this.onUnblockRoomSubmit}>
             <input autoComplete="off" name="roomUnblock" list="roomsUnblock" onChange={this.onInputChange} value={this.state.roomUnblock} type="text" placeholder="room..."></input>
             <DataList list="roomsUnblock" data={this.props.data}/>
             <select name="startUnblock" onChange={this.onInputChange} value={this.state.startUnblock} type="text">

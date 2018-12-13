@@ -33,6 +33,11 @@ class App extends React.Component {
     await errorHandler(roomrapi.blockRoom, this, reqData);
     await errorHandler(roomrapi.setRoomDataOnce, this);
   }
+
+  onUnblockRoomSubmit = async (reqData) => {
+    await errorHandler(roomrapi.unblockRoom, this, reqData);
+    await errorHandler(roomrapi.setRoomDataOnce, this);
+  }
   
   render() {
     if (this.state.getStatus === "pending") {
@@ -48,6 +53,7 @@ class App extends React.Component {
               onAddRoomSubmit={this.onAddRoomSubmit} 
               onDeleteRoomSubmit={this.onDeleteRoomSubmit}
               onBlockRoomSubmit={this.onBlockRoomSubmit}
+              onUnblockRoomSubmit={this.onUnblockRoomSubmit}
             />
             <div className="test"><p className="text">Find Room</p></div>
           </div>

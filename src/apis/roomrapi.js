@@ -32,8 +32,6 @@ const roomrapi = {
 
   blockRoom: async (appState, reqData) => {
     const { roomName, start, end } = reqData;
-    console.log(roomName, start, end);
-    console.log(reqData);
     if (roomName === "") {
       throw new Error("Please enter a room number before submitting");
     }
@@ -43,7 +41,21 @@ const roomrapi = {
       "end": end
     });
     appState.setState({"errorMessage":""});
+  },
+
+  unblockRoom: async (appState, reqData) => {
+    const { roomName, start, end } = reqData;
+    if (roomName === "") {
+      throw new Error("Please enter a room number before submitting");
+    }
+    await axios.post('http://127.0.0.1:5000/api/users/rooms/times-unblock', {
+      "roomName": roomName,
+      "start": start,
+      "end": end
+    });
+    appState.setState({"errorMessage":""});
   }
+
 }
 
 export default roomrapi;
