@@ -3,6 +3,42 @@ import InputTimes from './InputTimes';
 import DataList from './DataList';
 import './Form.css';
 
+const timeArray = [
+  "09:00",
+  "09:15",
+  "09:30",
+  "09:45",
+  "10:00",
+  "10:15",
+  "10:30",
+  "10:45",
+  "11:00",
+  "11:15",
+  "11:30",
+  "11:45",
+  "12:00",
+  "12:15",
+  "12:30",
+  "12:45",
+  "13:00",
+  "13:15",
+  "13:30",
+  "13:45",
+  "14:00",
+  "14:15",
+  "14:30",
+  "14:45",
+  "15:00",
+  "15:15",
+  "15:30",
+  "15:45",
+  "16:00",
+  "16:15",
+  "16:30",
+  "16:45",
+  "17:00"
+]
+
 
 class Form extends React.Component {
   state = {
@@ -32,12 +68,30 @@ class Form extends React.Component {
     this.setState({"roomToDelete":""});
   }
 
+  onBlockRoomSubmit = event => {
+    event.preventDefault();
+    this.props.onBlockRoomSubmit({
+      "roomName": this.state.roomBlock,
+      "start": this.state.startBlock,
+      "end": this.state.endBlock
+    });
+    this.setState({"roomBlock":""});
+  }
+
+  componentDidUpdate (prevProps) {
+    const indexStart = timeArray.indexOf(this.state.startBlock);
+    const indexEnd = timeArray.indexOf(this.state.endBlock);
+    if (indexEnd < indexStart) {
+      this.setState({ "endBlock": timeArray[indexStart + 1]})
+    }
+  }
+
   render () {
     return (
         <div className="forms">
-          <form>
-            <input autoComplete="off" name="roomBlock" list="rooms" onChange={this.onInputChange} value={this.state.roomBlock} type="text" placeholder="room..."></input>
-            <DataList list="rooms" data={this.props.data}/>
+          <form onSubmit={this.onBlockRoomSubmit}>
+            <input autoComplete="off" name="roomBlock" list="roomBlock" onChange={this.onInputChange} value={this.state.roomBlock} type="text" placeholder="room..."></input>
+            <DataList list="roomBlock" data={this.props.data}/>
             <select name="startBlock" onChange={this.onInputChange} value={this.state.startBlock} type="text">
               <InputTimes />
             </select>
@@ -56,7 +110,7 @@ class Form extends React.Component {
               <InputTimes start={this.state.startUnblock}/>
             </select>
             <input type="submit" value="unblock room"></input>
-          </form>
+          </form> 
           <form onSubmit={this.onAddRoomSubmit}>
             <input autoComplete="off" name="roomToAdd" value={this.state.roomToAdd} onChange={this.onInputChange} type="text" placeholder="room..."></input>
             <input type="submit" value="add room"></input>
