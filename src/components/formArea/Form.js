@@ -1,6 +1,7 @@
 import React from 'react';
 import InputTimes from './InputTimes';
 import DataList from './DataList';
+import './Form.css';
 
 const timeArray = [
   "09:00",
@@ -104,7 +105,7 @@ class Form extends React.Component {
     return (
         <div className="forms">
           <form onSubmit={this.onBlockRoomSubmit}>
-            <input autoComplete="off" name="roomBlock" list="roomBlock" onChange={this.onInputChange} value={this.state.roomBlock} type="text" placeholder="room..."></input>
+            <input className="input-room" autoComplete="off" name="roomBlock" list="roomBlock" onChange={this.onInputChange} value={this.state.roomBlock} type="text" placeholder="room..."></input>
             <DataList list="roomBlock" data={this.props.data}/>
             <select name="startBlock" onChange={this.onInputChange} value={this.state.startBlock} type="text">
               <InputTimes />
@@ -112,10 +113,10 @@ class Form extends React.Component {
             <select name="endBlock" onChange={this.onInputChange} value={this.state.endBlock} type="text">
               <InputTimes start={this.state.startBlock}/>
             </select>
-            <input type="submit" value="reserve room"></input>
+            <input className="submit-button" type="submit" value="▹ reserve room"></input>
           </form>
           <form onSubmit={this.onUnblockRoomSubmit}>
-            <input autoComplete="off" name="roomUnblock" list="roomsUnblock" onChange={this.onInputChange} value={this.state.roomUnblock} type="text" placeholder="room..."></input>
+            <input className="input-room" autoComplete="off" name="roomUnblock" list="roomsUnblock" onChange={this.onInputChange} value={this.state.roomUnblock} type="text" placeholder="room..."></input>
             <DataList list="roomsUnblock" data={this.props.data}/>
             <select name="startUnblock" onChange={this.onInputChange} value={this.state.startUnblock} type="text">
               <InputTimes />
@@ -123,16 +124,16 @@ class Form extends React.Component {
             <select name="endUnblock" onChange={this.onInputChange} value={this.state.endUnblock} type="text">
               <InputTimes start={this.state.startUnblock}/>
             </select>
-            <input type="submit" value="unblock room"></input>
+            <input className="submit-button" type="submit" value="▹ unblock room"></input>
           </form> 
           <form onSubmit={this.onAddRoomSubmit}>
-            <input autoComplete="off" name="roomToAdd" value={this.state.roomToAdd} onChange={this.onInputChange} type="text" placeholder="room..."></input>
-            <input type="submit" value="add room"></input>
+            <input className="input-room" autoComplete="off" name="roomToAdd" value={this.state.roomToAdd} onChange={this.onInputChange} type="text" placeholder="room..."></input>
+            <input className="submit-button" type="submit" value="▹ add room"></input>
           </form>
           <form onSubmit={this.onDeleteRoomSubmit}>
-            <input autoComplete="off" name="roomToDelete" list="roomDeleteList" value={this.state.roomToDelete} onChange={this.onInputChange} type="text" placeholder="room..."></input>
+            <input className="input-room" autoComplete="off" name="roomToDelete" list="roomDeleteList" value={this.state.roomToDelete} onChange={this.onInputChange} type="text" placeholder="room..."></input>
             <DataList list="roomDeleteList" data={this.props.data}/>
-            <input type="submit" value="delete room"></input>
+            <input className="submit-button" type="submit" value="▹ delete room"></input>
           </form>
         </div>
     )

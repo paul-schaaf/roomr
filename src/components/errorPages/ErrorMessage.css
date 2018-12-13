@@ -30,3 +30,15 @@ button:hover {
   color:#BC2D19;
   transition: .5s ease;
 }
+
+@media screen and (max-width: 600px) {
+  .error-message{
+    flex-direction: column;
+    height:60px;
+    padding:5px 20px 5px 20px;
+  }
+
+  p{
+    margin-bottom:10px;
+  }
+}
