@@ -23,7 +23,6 @@ const FormList = props =>  {
             buttonValue="▹ add room"
             DataListRequired="false"
             noSelect="true"
-            datalistName="add"
           />
           <Form
             data={props.data}
