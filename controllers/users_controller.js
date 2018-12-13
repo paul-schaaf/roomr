@@ -114,7 +114,7 @@ module.exports = {
           }
         }
         for (let i = indexStart; i < indexEnd; i++) {
-          room.times.set(i, {"time":{"default":timeArray[i]}, "availability": "false"});
+          room.times.set(i, {"time":{"default":timeArray[i]}, "availability": false});
         }
         await user.save();
         res.send(`Selected timespan ${roomProps.start}-${roomProps.end} for room ${roomProps.roomName} successfully reserved.`);
