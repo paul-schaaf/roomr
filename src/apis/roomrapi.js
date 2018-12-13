@@ -16,7 +16,7 @@ const roomrapi = {
 
   addRoom: async (appState, roomName) => {
     if (roomName === "") {
-      throw new Error("Please enter a room number before submitting");
+      throw new Error("Please enter a room before submitting");
     }
     await axios.post('http://127.0.0.1:5000/api/users/rooms', { "roomName": roomName });
     appState.setState({"errorMessage":""});
@@ -24,7 +24,7 @@ const roomrapi = {
 
   deleteRoom: async (appState, roomName) => {
     if (roomName === "") {
-      throw new Error("Please enter a room number before submitting");
+      throw new Error("Please enter a room before submitting");
     }
     await axios.delete('http://127.0.0.1:5000/api/users/rooms/' + roomName);
     appState.setState({"errorMessage":""});
@@ -33,7 +33,7 @@ const roomrapi = {
   blockRoom: async (appState, reqData) => {
     const { roomName, start, end } = reqData;
     if (roomName === "") {
-      throw new Error("Please enter a room number before submitting");
+      throw new Error("Please enter a room before submitting");
     }
     await axios.post('http://127.0.0.1:5000/api/users/rooms/times-block', {
       "roomName": roomName,
@@ -46,7 +46,7 @@ const roomrapi = {
   unblockRoom: async (appState, reqData) => {
     const { roomName, start, end } = reqData;
     if (roomName === "") {
-      throw new Error("Please enter a room number before submitting");
+      throw new Error("Please enter a room before submitting");
     }
     await axios.post('http://127.0.0.1:5000/api/users/rooms/times-unblock', {
       "roomName": roomName,
