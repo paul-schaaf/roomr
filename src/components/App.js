@@ -6,6 +6,7 @@ import ErrorPage from './errorPages/ErrorPage';
 import roomrapi from '../apis/roomrapi';
 import './App.css';
 import errorHandler from '../errorHandling/axiosErrorHandling';
+import ErrorMessage from './errorPages/ErrorMessage';
 
 class App extends React.Component {
   state = {
@@ -38,13 +39,39 @@ class App extends React.Component {
     await errorHandler(roomrapi.unblockRoom, this, reqData);
     await errorHandler(roomrapi.setRoomDataOnce, this);
   }
+
+  onErrorButtonClick = () => {
+    this.setState({ "errorMessage": ''});
+  }
   
   render() {
     if (this.state.getStatus === "pending") {
       return <div>Loading...</div>
     } else if (this.state.getStatus === "failed") {
       return <ErrorPage />
-    } else if (this.state.getStatus === "successful" && this.state.data.length > 0){
+    } else if (this.state.errorMessage !== '') {
+      return (
+        <React.Fragment>
+          <ErrorMessage errorMessage={this.state.errorMessage} onErrorButtonClick={this.onErrorButtonClick}/>
+          <div className="form-area">
+            <Form 
+              data={this.state.data}
+              onAddRoomSubmit={this.onAddRoomSubmit} 
+              onDeleteRoomSubmit={this.onDeleteRoomSubmit}
+              onBlockRoomSubmit={this.onBlockRoomSubmit}
+              onUnblockRoomSubmit={this.onUnblockRoomSubmit}
+            />
+          </div>
+          <div className="info-area">
+              <TimeLine />
+            <div className="room-area">
+              <RoomList data={this.state.data}/>
+              
+            </div>
+          </div>
+        </React.Fragment>
+      )
+    }else if (this.state.getStatus === "successful" && this.state.data.length > 0){
       return (
         <React.Fragment>
           <div className="form-area">
@@ -55,7 +82,6 @@ class App extends React.Component {
               onBlockRoomSubmit={this.onBlockRoomSubmit}
               onUnblockRoomSubmit={this.onUnblockRoomSubmit}
             />
-            <div className="test"><p className="text">Find Room</p></div>
           </div>
           <div className="info-area">
               <TimeLine />
@@ -67,7 +93,17 @@ class App extends React.Component {
         </React.Fragment>
       )
     } else {
-      return <div>Please add a Room.</div>
+      return (
+        <div className="form-area">
+          <Form 
+            data={this.state.data}
+            onAddRoomSubmit={this.onAddRoomSubmit} 
+            onDeleteRoomSubmit={this.onDeleteRoomSubmit}
+            onBlockRoomSubmit={this.onBlockRoomSubmit}
+            onUnblockRoomSubmit={this.onUnblockRoomSubmit}
+          />
+        </div>
+      )
     }
   }
 }
