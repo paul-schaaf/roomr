@@ -50,6 +50,8 @@ class Form extends React.Component {
     this.setState({ [event.target.name]: event.target.value})
   }
 
+
+  //see InputTimes.js for explanation for this function
   componentDidUpdate (prevProps) {
     const indexStart = timeArray.indexOf(this.state.start);
     const indexEnd = timeArray.indexOf(this.state.end);
