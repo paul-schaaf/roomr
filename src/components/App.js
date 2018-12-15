@@ -8,6 +8,20 @@ import ErrorMessage from './errorPages/ErrorMessage';
 
 import './App.css';
 
+/*
+* this component is responsible for rendering the app
+* state.getStatus saves whether the get requests for the data in roomrapi.js were successful. If not App.js
+* renders the ErrorPage.js
+*
+* state.errorMessage saves whether all other requests(post, delete) were successful and renders dynamic error messages
+* depending for example on the server response using ErrorMessage.js
+*
+* state.data holds all data received through the get requests and App.js passes that data down to the individual components
+* in the case where
+*
+* in the case that the get request was successful but the database is empty App.js will only render the FormList component but not
+* the RoomList component
+*/
 class App extends React.Component {
   state = {
     getStatus: "pending",
@@ -71,7 +85,7 @@ class App extends React.Component {
           </div>
         </React.Fragment>
       )
-    }else if (this.state.getStatus === "successful" && this.state.data.length > 0){
+    } else if (this.state.getStatus === "successful" && this.state.data.length > 0){
       return (
         <React.Fragment>
           <div className="form-area">
