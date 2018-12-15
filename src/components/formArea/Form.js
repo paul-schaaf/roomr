@@ -3,6 +3,8 @@ import DataList from './DataList';
 import InputTimes from './InputTimes';
 import './Form.css';
 
+// this component renders forms based on the input given from FormList.js (see there for more info)
+
 const timeArray = [
   "09:00",
   "09:15",
