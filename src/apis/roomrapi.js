@@ -1,6 +1,18 @@
 import axios from 'axios';
 import axiosErrorHandler from '../errorHandling/axiosErrorHandler';
 
+/*
+* defines axios functions that call roomrapi
+* exports roomrapi object that holds functions that are given to the axiosErrorHandler
+* thereby avoiding writing try-catch for each function
+* setRoomDataOnce: makes get request on first load of the app
+* setRoomDataLoop: makes get request every 10 seconds to update client
+* addRoom: adds room
+* deleteRoom: deletes room
+* blockRoom: reserves room
+* unblockRoom: "un"-reserves room
+*/
+
 const setRoomDataOnce = async (appState) => {
   const response = await axios.get('http://127.0.0.1:5000/api/users/rooms');
   appState.setState({ data: response.data , getStatus: "successful"});
