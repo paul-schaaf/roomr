@@ -1,4 +1,4 @@
-const errorHandler = async (fn, appState, reqData) => {
+const axiosErrorHandler = async (fn, appState, reqData) => {
   try {
     await fn(appState, reqData);
   } catch(err) {
@@ -13,4 +13,4 @@ const errorHandler = async (fn, appState, reqData) => {
 };
 
 
-export default errorHandler;
+export default axiosErrorHandler;

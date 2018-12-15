@@ -4,9 +4,9 @@ import RoomList from './infoArea/RoomList';
 import TimeLine from './infoArea/TimeLine';
 import ErrorPage from './errorPages/ErrorPage';
 import roomrapi from '../apis/roomrapi';
-import './App.css';
-import errorHandler from '../errorHandling/axiosErrorHandling';
 import ErrorMessage from './errorPages/ErrorMessage';
+
+import './App.css';
 
 class App extends React.Component {
   state = {
@@ -16,28 +16,28 @@ class App extends React.Component {
   };
 
   async componentDidMount() {
-    await errorHandler(roomrapi.setRoomDataOnce, this);
-    errorHandler(roomrapi.setRoomDataLoop, this);
+    await roomrapi.handledSetRoomDataOnce(this);
+    roomrapi.handledSetRoomDataLoop(this);
   };
     
   onAddRoomSubmit = async (reqData) => {
-    await errorHandler(roomrapi.addRoom, this, reqData);
-    await errorHandler(roomrapi.setRoomDataOnce, this);
+    await roomrapi.handledAddRoom(this, reqData);
+    roomrapi.handledSetRoomDataOnce(this);
   }
 
   onDeleteRoomSubmit = async (reqData) => {
-    await errorHandler(roomrapi.deleteRoom, this, reqData);
-    await errorHandler(roomrapi.setRoomDataOnce, this);
+    await roomrapi.handledDeleteRoom(this, reqData);
+    roomrapi.handledSetRoomDataOnce(this);
   }
 
   onBlockRoomSubmit = async (reqData) => {
-    await errorHandler(roomrapi.blockRoom, this, reqData);
-    await errorHandler(roomrapi.setRoomDataOnce, this);
+    await roomrapi.handledBlockRoom(this, reqData);
+    roomrapi.handledSetRoomDataOnce(this);
   }
 
   onUnblockRoomSubmit = async (reqData) => {
-    await errorHandler(roomrapi.unblockRoom, this, reqData);
-    await errorHandler(roomrapi.setRoomDataOnce, this);
+    await roomrapi.handledUnblockRoom(this, reqData);
+    roomrapi.handledSetRoomDataOnce(this);
   }
 
   onErrorButtonClick = () => {
