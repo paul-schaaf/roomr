@@ -22,7 +22,9 @@ const setRoomDataOnce = async (appState) => {
 
 /*
 * this axios function requires a separate catch because it is inside a setInterval function
-* so the axiosErrorHandler.js handler will not work on it
+* so the axiosErrorHandler.js handler will not work on it. The try block executes setRoomDataLoop 
+* but it does not care about async/await so it will conclude there were no errors because it already
+* finished before the setInterval callback could get back onto the callstack
 */
 const setRoomDataLoop = async (appState) => {
   setInterval(async () => {
