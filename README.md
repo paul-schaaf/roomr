@@ -29,7 +29,7 @@ For the frontend I used Javascript(ES6 and above e.g. async/await), axios, React
 
 ##Comments
 
-Instead of explaining the code in great detail in the readme, I have left comments whenever they were required. The schemata below will provide you with further insight into how the app works.
+Instead of explaining the code in great detail in the readme, I have left comments whenever they were required. The schemata below will provide you with further insight into how the app works under the hood.
 
 ##Bugs
 
