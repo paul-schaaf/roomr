@@ -21,10 +21,11 @@ const setRoomDataOnce = async (appState) => {
 
 
 /*
-* this axios function requires a separate try-catch because it is inside a setInterval function
-* so the axiosErrorHandler.js handler will not work on it. The try block executes setRoomDataLoop 
+* this axios function requires a separate try-catch because the function is inside a setInterval function
+* so the axiosErrorHandler.js handler will not work on it. The try block outside setInterval executes setRoomDataLoop 
 * but it does not care about async/await so it will conclude there were no errors because it already
-* finished before the setInterval callback could get back onto the callstack
+* finished before the setInterval callback could get back onto the callstack. This is why we need a try block INSIDE
+* the set interval function
 */
 const setRoomDataLoop = async (appState) => {
   setInterval(async () => {
