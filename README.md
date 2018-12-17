@@ -25,7 +25,7 @@ I have just learned javascript and made this app for my portfolio because the in
 
 For the backend I used node and express to create the server and mongoDB and mongoose to handle the Database and Database queries. I use mlab to host my MongoDB database.
 
-For the frontend I used Javascript(ES6 and above e.g. async/await), axios, and React(using create-react-app).
+For the frontend I used Javascript(ES6 and above e.g. async/await), axios, React(using create-react-app), Html, and CSS.
 
 ##Comments
 
