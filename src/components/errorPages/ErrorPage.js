@@ -1,6 +1,10 @@
 import React from 'react';
 import './ErrorPage.css';
 
+/*
+* This component renders an error page. More info in App.js
+*/
+
 const ErrorPage = props => {
   return (
     <div className="error-page">

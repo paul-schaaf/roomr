@@ -1,6 +1,9 @@
 import React from 'react';
 import './ErrorMessage.css';
 
+/*
+* this component renders an error message on the top of the screen. more info in App.js
+*/
 class ErrorMessage extends React.Component {
 
   onErrorButtonClick = event => {
