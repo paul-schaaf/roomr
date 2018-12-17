@@ -1,8 +1,9 @@
-import axios from 'axios';
+import axiosRoomrapi from './roomrapiConfig';
 import axiosErrorHandler from '../errorHandling/axiosErrorHandler';
 
 /*
 * defines axios functions that call roomrapi
+* uses baseURL defined in roomrapiConfig.js
 * exports roomrapi object that holds functions that are given to the axiosErrorHandler
 * thereby avoiding writing try-catch for each function
 * setRoomDataOnce: makes get request on first load of the app
@@ -14,13 +15,13 @@ import axiosErrorHandler from '../errorHandling/axiosErrorHandler';
 */
 
 const setRoomDataOnce = async (appState) => {
-  const response = await axios.get('http://127.0.0.1:5000/api/users/rooms');
+  const response = await axiosRoomrapi.get('/api/users/rooms');
   appState.setState({ data: response.data , getStatus: "successful"});
 };
 
 const setRoomDataLoop = async (appState) => {
   setInterval(async () => {
-    const response = await axios.get('http://127.0.0.1:5000/api/users/rooms');
+    const response = await axiosRoomrapi.get('/api/users/rooms');
     appState.setState({ data: response.data , getStatus: "successful"});
   }, 10000);
 };
@@ -30,7 +31,7 @@ const addRoom = async (appState, reqData) => {
   if (roomName === "") {
     throw new Error("Please enter a room before submitting!");
   }
-  await axios.post('http://127.0.0.1:5000/api/users/rooms', { "roomName": roomName });
+  await axiosRoomrapi.post('/api/users/rooms', { "roomName": roomName });
   appState.setState({"errorMessage":""});
 };
 
@@ -39,7 +40,7 @@ const deleteRoom = async (appState, reqData) => {
   if (roomName === "") {
     throw new Error("Please enter a room before submitting!");
   }
-  await axios.delete('http://127.0.0.1:5000/api/users/rooms/' + roomName);
+  await axiosRoomrapi.delete('/api/users/rooms/' + roomName);
   appState.setState({"errorMessage":""});
 };
 
@@ -48,7 +49,7 @@ const blockRoom = async (appState, reqData) => {
   if (roomName === "") {
     throw new Error("Please enter a room before submitting!");
   }
-  await axios.post('http://127.0.0.1:5000/api/users/rooms/times-block', {
+  await axiosRoomrapi.post('/api/users/rooms/times-block', {
     "roomName": roomName,
     "start": start,
     "end": end
@@ -62,7 +63,7 @@ const unblockRoom = async (appState, reqData) => {
   if (roomName === "") {
     throw new Error("Please enter a room before submitting!");
   }
-  await axios.post('http://127.0.0.1:5000/api/users/rooms/times-unblock', {
+  await axiosRoomrapi.post('/api/users/rooms/times-unblock', {
     "roomName": roomName,
     "start": start,
     "end": end
