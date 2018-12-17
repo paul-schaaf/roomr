@@ -19,9 +19,16 @@ const setRoomDataOnce = async (appState) => {
   appState.setState({ data: response.data , getStatus: "successful"});
 };
 
+
+/*
+* this axios function requires a separate catch because it is inside a setInterval function
+* so the axiosErrorHandler.js handler will not work on it
+*/
 const setRoomDataLoop = async (appState) => {
   setInterval(async () => {
-    const response = await axiosRoomrapi.get('/api/users/rooms');
+    const response = await axiosRoomrapi
+      .get('/api/users/rooms')
+      .catch(appState.setState({ getStatus: "failed" }));
     appState.setState({ data: response.data , getStatus: "successful"});
   }, 10000);
 };
