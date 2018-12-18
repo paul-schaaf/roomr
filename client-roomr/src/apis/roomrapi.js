@@ -1,4 +1,4 @@
-import axiosRoomrapi from './roomrapiConfig';
+import axios from 'axios';
 import axiosErrorHandler from '../errorHandling/axiosErrorHandler';
 
 /*
@@ -15,7 +15,7 @@ import axiosErrorHandler from '../errorHandling/axiosErrorHandler';
 */
 
 const setRoomDataOnce = async (appState) => {
-  const response = await axiosRoomrapi.get('/api/users/rooms');
+  const response = await axios.get('/api/users/rooms');
   appState.setState({ data: response.data , getStatus: "successful"});
 };
 
@@ -30,7 +30,7 @@ const setRoomDataOnce = async (appState) => {
 const setRoomDataLoop = async (appState) => {
   setInterval(async () => {
     try {
-      const response = await axiosRoomrapi.get('/api/users/rooms')
+      const response = await axios.get('/api/users/rooms')
       appState.setState({ data: response.data , getStatus: "successful"});
     } catch{
       appState.setState({ getStatus: "failed" })
@@ -43,7 +43,7 @@ const addRoom = async (appState, reqData) => {
   if (roomName === "") {
     throw new Error("Please enter a room before submitting!");
   }
-  await axiosRoomrapi.post('/api/users/rooms', { "roomName": roomName });
+  await axios.post('/api/users/rooms', { "roomName": roomName });
   appState.setState({"errorMessage":""});
 };
 
@@ -52,7 +52,7 @@ const deleteRoom = async (appState, reqData) => {
   if (roomName === "") {
     throw new Error("Please enter a room before submitting!");
   }
-  await axiosRoomrapi.delete('/api/users/rooms/' + roomName);
+  await axios.delete('/api/users/rooms/' + roomName);
   appState.setState({"errorMessage":""});
 };
 
@@ -61,7 +61,7 @@ const blockRoom = async (appState, reqData) => {
   if (roomName === "") {
     throw new Error("Please enter a room before submitting!");
   }
-  await axiosRoomrapi.post('/api/users/rooms/times-block', {
+  await axios.post('/api/users/rooms/times-block', {
     "roomName": roomName,
     "start": start,
     "end": end
@@ -75,7 +75,7 @@ const unblockRoom = async (appState, reqData) => {
   if (roomName === "") {
     throw new Error("Please enter a room before submitting!");
   }
-  await axiosRoomrapi.post('/api/users/rooms/times-unblock', {
+  await axios.post('/api/users/rooms/times-unblock', {
     "roomName": roomName,
     "start": start,
     "end": end
