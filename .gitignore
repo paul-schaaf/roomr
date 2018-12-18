@@ -1,6 +1,9 @@
 # dependencies
 /node_modules
 
+#config
+dev.js
+
 # misc
 .DS_Store
 

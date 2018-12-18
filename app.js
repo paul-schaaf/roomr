@@ -1,3 +1,4 @@
+const keys = require('./config/keys');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -6,7 +7,7 @@ const routes = require('./routes/routes');
 
 const port = process.env.PORT || 5000;
 
-mongoose.connect('mongodb://paul:ha95W4iYzUYVP8b@ds039175.mlab.com:39175/roomr-dev', { useNewUrlParser:true }).catch((err) => console.log(err.message));
+mongoose.connect(keys.mongoURI, { useNewUrlParser:true }).catch((err) => console.log(err.message));
 
 const app = express();
 
