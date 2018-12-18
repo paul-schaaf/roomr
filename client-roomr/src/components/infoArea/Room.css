@@ -1,0 +1,39 @@
+.room__timeblock-list {
+  list-style:none;
+  padding:0;
+  margin-top:10px;
+  margin-left:93px;
+}
+
+.room__timeblock-list__timeblock {
+  display: inline;
+  white-space: nowrap;
+}
+
+.room__timeblock-list__timeblock--block{
+  display:inline-block;
+  width:50px;
+  height:20px;
+  box-sizing: border-box;
+  border-right: 1.5px solid #FCF2CB;
+  
+}
+
+.room__number-box {
+  position: absolute;
+  text-align: center;
+  height:50px;
+  width:75px;
+  background:#FCF2CB;
+  white-space: nowrap;
+  overflow-x:auto;
+}
+
+.green {
+  /* background: #8CB00D; */
+  background: #1E4363;
+}
+
+.red {
+  background: #BC2D19;
+}
