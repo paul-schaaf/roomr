@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 
 const room = new Schema({
   roomName: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   times: {
     type: Array,
@@ -13,325 +14,325 @@ const room = new Schema({
       {
         time: {
           type: String,
-          default: "09:00"
+          default: '09:00',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "09:15"
+          default: '09:15',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "09:30"
+          default: '09:30',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "09:45"
+          default: '09:45',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "10:00"
+          default: '10:00',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "10:15"
+          default: '10:15',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "10:30"
+          default: '10:30',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "10:45"
+          default: '10:45',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "11:00"
+          default: '11:00',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "11:15"
+          default: '11:15',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "11:30"
+          default: '11:30',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "11:45"
+          default: '11:45',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "12:00"
+          default: '12:00',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "12:15"
+          default: '12:15',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "12:30"
+          default: '12:30',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "12:45"
+          default: '12:45',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "13:00"
+          default: '13:00',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "13:15"
+          default: '13:15',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "13:30"
+          default: '13:30',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "13:45"
+          default: '13:45',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "14:00"
+          default: '14:00',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "14:15"
+          default: '14:15',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "14:30"
+          default: '14:30',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "14:45"
+          default: '14:45',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "15:00"
+          default: '15:00',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "15:15"
+          default: '15:15',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "15:30"
+          default: '15:30',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "15:45"
+          default: '15:45',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "16:00"
+          default: '16:00',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "16:15"
+          default: '16:15',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "16:30"
+          default: '16:30',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
+          default: true,
+        },
       },
       {
         time: {
           type: String,
-          default: "16:45"
+          default: '16:45',
         },
-        availability : {
+        availability: {
           type: String,
-          default: true
-        }
-      }
-    ]
-  }
+          default: true,
+        },
+      },
+    ],
+  },
 
 });
 

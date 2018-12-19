@@ -1,14 +1,15 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 const room = require('./roomSubSchema');
 
-const userSchema = new Schema ({
+const userSchema = new Schema({
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
-  rooms: [room]
+  rooms: [room],
 });
 
 const User = mongoose.model('user', userSchema);
