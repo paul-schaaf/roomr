@@ -16,75 +16,78 @@ import axiosErrorHandler from '../errorHandling/axiosErrorHandler';
 
 const setRoomDataOnce = async (appState) => {
   const response = await axios.get('/api/users/rooms');
-  appState.setState({ data: response.data , getStatus: "successful"});
+  appState.setState({ data: response.data, getStatus: 'successful' });
 };
 
 
-/*
-* this axios function requires a separate try-catch because the function is inside a setInterval function
-* so the axiosErrorHandler.js handler will not work on it. The try block outside setInterval executes setRoomDataLoop 
+/**
+* this axios function requires a separate try-catch because
+* the function is inside a setInterval function
+* so the axiosErrorHandler.js handler will not work on it.
+* The try block outside setInterval executes setRoomDataLoop
 * but it does not care about async/await so it will conclude there were no errors because it already
-* finished before the setInterval callback could get back onto the callstack. This is why we need a try block INSIDE
+* finished before the setInterval callback could get back onto the callstack.
+* This is why we need a try block INSIDE
 * the set interval function
 */
 const setRoomDataLoop = async (appState) => {
   setInterval(async () => {
     try {
-      const response = await axios.get('/api/users/rooms')
-      appState.setState({ data: response.data , getStatus: "successful"});
-    } catch{
-      appState.setState({ getStatus: "failed" })
+      const response = await axios.get('/api/users/rooms');
+      appState.setState({ data: response.data, getStatus: 'successful' });
+    } catch (err) {
+      appState.setState({ getStatus: 'failed' });
     }
   }, 10000);
 };
 
 const addRoom = async (appState, reqData) => {
   const { roomName } = reqData;
-  if (roomName === "") {
-    throw new Error("Please enter a room before submitting!");
+  if (roomName === '') {
+    throw new Error('Please enter a room before submitting!');
   }
-  await axios.post('/api/users/rooms', { "roomName": roomName });
-  appState.setState({"errorMessage":""});
+  await axios.post('/api/users/rooms', { roomName });
+  appState.setState({ errorMessage: '' });
 };
 
 const deleteRoom = async (appState, reqData) => {
   const { roomName } = reqData;
-  if (roomName === "") {
-    throw new Error("Please enter a room before submitting!");
+  if (roomName === '') {
+    throw new Error('Please enter a room before submitting!');
   }
-  await axios.delete('/api/users/rooms/' + roomName);
-  appState.setState({"errorMessage":""});
+  await axios.delete(`/api/users/rooms/${roomName}`);
+  appState.setState({ errorMessage: '' });
 };
 
 const blockRoom = async (appState, reqData) => {
   const { roomName, start, end } = reqData;
-  if (roomName === "") {
-    throw new Error("Please enter a room before submitting!");
+  if (roomName === '') {
+    throw new Error('Please enter a room before submitting!');
   }
   await axios.post('/api/users/rooms/times-block', {
-    "roomName": roomName,
-    "start": start,
-    "end": end
+    roomName,
+    start,
+    end,
   });
-  appState.setState({"errorMessage":""});
+  appState.setState({ errorMessage: '' });
 };
 
 
 const unblockRoom = async (appState, reqData) => {
   const { roomName, start, end } = reqData;
-  if (roomName === "") {
-    throw new Error("Please enter a room before submitting!");
+  if (roomName === '') {
+    throw new Error('Please enter a room before submitting!');
   }
   await axios.post('/api/users/rooms/times-unblock', {
-    "roomName": roomName,
-    "start": start,
-    "end": end
+    roomName,
+    start,
+    end,
   });
-  appState.setState({"errorMessage":""});
+  appState.setState({ errorMessage: '' });
 };
 
 const roomrapi = {
-  
+
   handledSetRoomDataOnce: async (appState) => {
     await axiosErrorHandler(setRoomDataOnce, appState);
   },
@@ -107,7 +110,7 @@ const roomrapi = {
 
   handledUnblockRoom: async (appState, reqData) => {
     await axiosErrorHandler(unblockRoom, appState, reqData);
-  }
-}
+  },
+};
 
 export default roomrapi;
