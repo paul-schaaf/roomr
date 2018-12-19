@@ -1,5 +1,5 @@
 const keys = {
-  mongoURI: process.env.MONGO_URI
-}
+  mongoURI: process.env.MONGO_URI,
+};
 
 module.exports = keys;
