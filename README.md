@@ -8,7 +8,6 @@ I have just learned javascript and made this app for my portfolio because the in
 - [How to install](#How-to-install)
 - [Technologies used](#Technologies-used)
 - [Possible Additions](#Possible-Additions)
-- [Other](#Other)
 ### How to install
 You will need node, npm, git, and the heroku cli for this.
 #### Locally
@@ -22,6 +21,7 @@ You will need node, npm, git, and the heroku cli for this.
 2. get mlab account and make a database to get MongoURI - set your mongoURI as MONGO_URI in Heroku config variables for your heroku app
 3. git push heroku master
 ### Technologies used
+I have used the airbnb styleguide for linting this project.
 #### Frontend
 The frontend is built with Html, Css, JS, and React and using the newest JS such as import statements and export default with babel.
 #### Backend
@@ -47,6 +47,3 @@ The backend is built with JS, node, and express. The data is stored in a MongoDB
 - add feature to bulk add rooms
 - better UI/UX. On the browser it looks a little clunky because there is so much space next to the form. On mobile,
 the form at the top is a little difficult to reach and use
-### Other
-- I have mostly used the airbnb style guide, although I had trouble getting ESLint to run sometimes, so I will have to redo the entire linting
-- The code is commented wherever I deemed it necessary
