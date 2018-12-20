@@ -10,6 +10,11 @@ I have just learned javascript and made this app for my portfolio because the in
 - [Possible Additions](#Possible-Additions)
 ### How to install
 You will need node, npm, git, and the heroku cli for this.
+
+*IMPORTANT:* The database schema is configured in a way that supports several users. This is because in the future an authorisation system will sit on top of the app.
+Hence, when fetching rooms or making other requests to change rooms, you are actually finding a User in mongo first and then change the rooms of that user.
+This means that upon first deploying your app, you need to send a post request with an app like postman with the content of ("email": "anemail@aprovider.com") to yourURL/api/users. This will create a user in the database. Then you ALSO need to change the code in users_controller.js to let mongoose find your e-mail address instead of the current used one.
+The lines (PLURAL) you need to change all look like this: const user = await User.findOne({ email: 'paulsimonschaaf@gmail.com' });
 #### Locally
 1. clone the directory
 2. add a dev.js file within the config folder of the server folder with the structure of prod.js - inside, use your own mongoDBURI for the key (get a free one a mlab)
