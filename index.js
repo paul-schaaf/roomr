@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   res.status(400).send(err.message);
 });
 
