@@ -1,10 +1,14 @@
 import React from 'react';
-import BookingPage from './components/BookingPage';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import BookingPage from './components/bookingPage/BookingPage';
 
 class App extends React.Component {
   render () {
     return (
-      <BookingPage />
+      <Router>
+        <Route path="/" exact component={BookingPage} />
+        <BookingPage />
+      </Router>
     );
   }
 }
