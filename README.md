@@ -53,6 +53,6 @@ The backend is built with JS, node, and express. The data is stored in a MongoDB
 - add feature to bulk add rooms
 - better UI/UX. On the browser it looks a little clunky because there is so much space next to the form. On mobile,
 the form at the top is a little difficult to reach and use
-### Authentication System (WIP)
-The authentication system is currently being worked on. It happens on different branches, not to interfere with the working master branch. It uses React router for client side routing and adds a login page, memberonly pages and an admin area. Server side authentication will be done using passport.js, specifically the passport-local strategy.
+### Authentication System
+*WORK IN PROGRESS*: The authentication system is currently being worked on. It happens on different branches, not to interfere with the working master branch. It uses React router for client side routing and adds a login page, memberonly pages and an admin area. Server side authentication will be done using passport.js, specifically the passport-local strategy.
 More will follow...
