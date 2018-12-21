@@ -6,7 +6,7 @@ import ErrorPage from './errorPages/ErrorPage';
 import roomrapi from '../apis/roomrapi';
 import ErrorMessage from './errorPages/ErrorMessage';
 
-import './App.css';
+import './BookingPage.css';
 
 /*
 * this component is responsible for rendering the app
@@ -22,7 +22,7 @@ import './App.css';
 * in the case that the get request was successful but the database is empty App.js will only render the FormList component but not
 * the RoomList component
 */
-class App extends React.Component {
+class BookingPage extends React.Component {
   state = {
     getStatus: "pending",
     data: [],
@@ -122,4 +122,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default BookingPage;
