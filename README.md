@@ -8,7 +8,7 @@ I have just learned javascript and made this app for my portfolio because the in
 - [How to install](#How-to-install)
 - [Technologies used](#Technologies-used)
 - [Possible Additions](#Possible-Additions)
-- [Authentication System(WIP)](#Authentication-System-(WIP))
+- [Authentication System(WIP)](#Authentication-System
 ### How to install
 You will need node, npm, git, and the heroku cli for this.
 
