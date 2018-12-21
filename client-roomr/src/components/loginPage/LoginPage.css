@@ -59,6 +59,11 @@
   color: #1E4363;
 }
 
+.login-box__form-box__input:focus{
+  outline-width:2px;
+  outline-color: white;
+}
+
 .login-submit {
   border:none;
   margin-top:20px;
