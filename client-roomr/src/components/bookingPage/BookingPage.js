@@ -3,7 +3,7 @@ import FormList from './formArea/FormList';
 import RoomList from './infoArea/RoomList';
 import TimeLine from './infoArea/TimeLine';
 import ErrorPage from './errorPages/ErrorPage';
-import roomrapi from '../apis/roomrapi';
+import roomrapi from '../../apis/roomrapi';
 import ErrorMessage from './errorPages/ErrorMessage';
 
 import './BookingPage.css';
