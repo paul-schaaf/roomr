@@ -29,10 +29,7 @@
   align-items: center;
   justify-content: center;
   width:50%; 
-}
-
-.login-box__tabs__create {
-  background: #152F45;
+  cursor: pointer;
 }
 
 .login-box__form-box {
