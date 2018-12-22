@@ -66,15 +66,17 @@ class BookingPage extends React.Component {
       return <div>Loading...</div>
     } 
 
+    //the request failed because the server didnt respond
+    if (this.state.getStatus === "failed" && this.state.errorType === 'serverError') {
+      return <ErrorPage />
+    } 
+    
     //errorPage for unauthorized login
     if(this.state.errorType === 'clientErrorUnauthorized') {
       return <ErrorPage loginMessage={this.state.errorMessage} />
     }
 
-    //the request failed because the server didnt respond
-    if (this.state.getStatus === "failed" && this.state.errorType !== 'clientError') {
-      return <ErrorPage />
-    } 
+    
 
     
     //the user has made some error
