@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import BookingPage from './components/bookingPage/BookingPage';
+import BookingApp from './components/bookingPage/BookingApp';
 import AdminPage from './components/adminPage/AdminPage';
 import LoginPage from './components/loginPage/LoginPage';
 
@@ -9,7 +9,7 @@ class App extends React.Component {
     return (
       <Router>
         <React.Fragment>
-          <Route path="/" exact component={BookingPage} />
+          <Route path="/" exact component={BookingApp} />
           <Route path="/admin" exact component={AdminPage} />
           <Route path="/login" exact component={LoginPage} />
         </React.Fragment>

@@ -6,7 +6,7 @@ import ErrorPage from './errorPages/ErrorPage';
 import roomrapi from '../../apis/roomrapi';
 import ErrorMessage from './errorPages/ErrorMessage';
 
-import './BookingPage.css';
+import './BookingApp.css';
 
 /*
 * this component is responsible for rendering the app
