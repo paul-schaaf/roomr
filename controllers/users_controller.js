@@ -1,4 +1,5 @@
-const User = require('../models/userSchema');
+const mongoose = require('mongoose');
+const User = mongoose.model('users');
 
 const timeArray = [
   '09:00',

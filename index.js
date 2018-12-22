@@ -3,7 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
-const routes = require('./routes/routes');
+require('./models/userSchema');
+const bookingRoutes = require('./routes/bookingRoutes');
 
 
 const port = process.env.PORT || 5000;
@@ -14,7 +15,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
-routes(app);
+bookingRoutes(app);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client-roomr/build'));

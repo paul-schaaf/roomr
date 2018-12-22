@@ -12,6 +12,4 @@ const userSchema = new Schema({
   rooms: [room],
 });
 
-const User = mongoose.model('user', userSchema);
-
-module.exports = User;
+mongoose.model('users', userSchema);
