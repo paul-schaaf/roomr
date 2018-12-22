@@ -30,6 +30,7 @@
   justify-content: center;
   width:50%; 
   cursor: pointer;
+  transition: .3s ease;
 }
 
 .login-box__form-box {
