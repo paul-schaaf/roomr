@@ -10,14 +10,18 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((id, done) => {
   User.findById(id, (err, user) => {
+    console.log(user.id);
     done(null, user);
   })
 });
 
-passport.use(new LocalStrategy(
-  function(username, password, done) {
+passport.use(new LocalStrategy({
+  passReqToCallback:true
+  },
+  function(req, username, password, done) {
     User.findOne({ "email": username }, function (err, user) {
       if (err) return done(err); 
+      if (req.body.entityValue !== "Roomr") return done(null, false);
       if (password !== "hello") return done(null, false);
       if (!user) return done(null, false);
       return done(null, user);
