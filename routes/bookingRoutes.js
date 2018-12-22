@@ -1,6 +1,6 @@
 const UsersController = require('../controllers/users_controller');
 
-module.exports = (app) => {
+module.exports = app => {
   app.delete('/api/users/rooms/:id', UsersController.deleteRoom);
 
   app.get('/api/users/rooms', UsersController.getAllRooms);

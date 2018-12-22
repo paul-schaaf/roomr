@@ -1,4 +1,5 @@
 import React from 'react';
+//import axios from 'axios';
 import './LoginPage.css';
 
 class LoginPage extends React.Component {
@@ -24,6 +25,14 @@ class LoginPage extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
+  /*onFormSubmit = async event => {
+    event.preventDefault();
+    await axios.post('/login', {
+      username: this.state.emailValue,
+      password: this.state.passwordValue
+    })
+  } */
+
   render () {
     return (
       <div className="login-page">
@@ -33,7 +42,7 @@ class LoginPage extends React.Component {
             <div style={{ background: this.state.createColor }} onClick={this.onCreateTab} >Create</div>
           </div>
           <div className="login-box__form-box">
-            <form>
+            <form >
               <input
                 name="entityValue"
                 onChange={this.onInputChange}

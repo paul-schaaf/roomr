@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const keys = require('./config/keys');
 require('./models/userSchema');
 const bookingRoutes = require('./routes/bookingRoutes');
+// const authRoutes = require('./routes/authRoutes');
 
 
 const port = process.env.PORT || 5000;
@@ -15,6 +16,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
+// authRoutes(app);
 bookingRoutes(app);
 
 if (process.env.NODE_ENV === 'production') {
