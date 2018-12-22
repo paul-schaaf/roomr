@@ -43,7 +43,10 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use((err, req, res, next) => {
-  res.status(400).send(err.message);
+  res.status(400).send({
+    message: err.message,
+    type: res.locals.type
+  });
 });
 
 app.listen(port);

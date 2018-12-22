@@ -24,9 +24,10 @@ import './BookingApp.css';
 */
 class BookingPage extends React.Component {
   state = {
-    getStatus: "pending",
+    getStatus: 'pending',
     data: [],
-    errorMessage:""
+    errorMessage:'',
+    errorType:''
   };
 
   async componentDidMount() {
@@ -55,15 +56,27 @@ class BookingPage extends React.Component {
   }
 
   onErrorButtonClick = () => {
-    this.setState({ "errorMessage": ''});
+    this.setState({ errorMessage: '', errorType: '' });
   }
   
-  render() {
-    if (this.state.getStatus === "pending") {
+  render() { //app is awaiting server response
+    if (this.state.getStatus === "pending" && this.state.errorType === '') {
       return <div>Loading...</div>
-    } else if (this.state.getStatus === "failed") {
+    } 
+
+    //errorPage for unauthorized login
+    if(this.state.errorType === 'clientErrorUnauthorized') {
+      return <ErrorPage loginMessage={this.state.errorMessage} />
+    }
+
+    //the request failed because the server didnt respond
+    if (this.state.getStatus === "failed" && this.state.errorType !== 'clientError') {
       return <ErrorPage />
-    } else if (this.state.errorMessage !== '') {
+    } 
+
+    
+    //the user has made some error
+    if (this.state.errorType === 'clientError') {
       return (
         <React.Fragment>
           <ErrorMessage errorMessage={this.state.errorMessage} onErrorButtonClick={this.onErrorButtonClick}/>
@@ -85,7 +98,10 @@ class BookingPage extends React.Component {
           </div>
         </React.Fragment>
       )
-    } else if (this.state.getStatus === "successful" && this.state.data.length > 0){
+    } 
+
+    //request was successful and there is data in the database
+    if (this.state.getStatus === "successful" && this.state.data.length > 0){
       return (
         <React.Fragment>
           <div className="form-area">
@@ -106,19 +122,19 @@ class BookingPage extends React.Component {
           </div>
         </React.Fragment>
       )
-    } else {
-      return (
-        <div className="form-area">
-          <FormList
-            data={this.state.data}
-            onAddRoomSubmit={this.onAddRoomSubmit} 
-            onDeleteRoomSubmit={this.onDeleteRoomSubmit}
-            onBlockRoomSubmit={this.onBlockRoomSubmit}
-            onUnblockRoomSubmit={this.onUnblockRoomSubmit}
-          />
-        </div>
-      )
-    }
+    } 
+    //request successful but database still empty
+    return (
+      <div className="form-area">
+        <FormList
+          data={this.state.data}
+          onAddRoomSubmit={this.onAddRoomSubmit} 
+          onDeleteRoomSubmit={this.onDeleteRoomSubmit}
+          onBlockRoomSubmit={this.onBlockRoomSubmit}
+          onUnblockRoomSubmit={this.onUnblockRoomSubmit}
+        />
+      </div>
+    )
   }
 }
 

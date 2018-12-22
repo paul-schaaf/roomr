@@ -62,6 +62,7 @@ module.exports = {
       await User.create(userProps);
       res.send('Successfully created new user');
     } catch (err) {
+      res.locals.type = 'clientError'
       err.message = 'This user exists already.';
       next(err);
     }
@@ -77,6 +78,7 @@ module.exports = {
         await user.save();
         res.send(`Room: ${roomProps.roomName} successfully added`);
       } else {
+        res.locals.type = 'clientError';
         throw new Error(`There already is a room called: ${roomProps.roomName}.`);
       }
     } catch (err) {
@@ -96,6 +98,7 @@ module.exports = {
         await user.save();
         res.send(`Room: ${roomName} successfully deleted`);
       } else {
+        res.locals.type = 'clientError';
         throw new Error(`There is no room called: ${roomName}.`);
       }
     } catch (err) {
@@ -113,6 +116,7 @@ module.exports = {
         const indexEnd = timeArray.indexOf(roomProps.end);
         for (let i = indexStart; i < indexEnd; i += 1) {
           if (room.times[i].availability === false) {
+            res.locals.type = 'clientError';
             throw new Error('This room is already at least partly reserved for the timespan you selected.');
           }
         }
@@ -122,6 +126,7 @@ module.exports = {
         await user.save();
         res.send(`Selected timespan ${roomProps.start}-${roomProps.end} for room ${roomProps.roomName} successfully reserved.`);
       } else {
+        res.locals.type = 'clientError';
         throw new Error(`There is no room called ${roomProps.roomName}.`);
       }
     } catch (err) {
@@ -145,6 +150,7 @@ module.exports = {
         res.send(`Selected timespan ${roomProps.start}-${roomProps.end} for room ${roomProps.roomName} successfully unblocked.`);
         res.send(room);
       } else {
+        res.locals.type = 'clientError';
         throw new Error(`There is no room called ${roomProps.roomName}.`);
       }
     } catch (err) {
