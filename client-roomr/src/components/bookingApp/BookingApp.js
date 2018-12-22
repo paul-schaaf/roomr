@@ -8,10 +8,12 @@ import ErrorMessage from './errorPages/ErrorMessage';
 
 import './BookingApp.css';
 
-/*
+/**
 * this component is responsible for rendering the app
 * state.getStatus saves whether the get requests for the data in roomrapi.js were successful. If not App.js
 * renders the ErrorPage.js
+*
+* state.errorType shows the type of error in a shorter format
 *
 * state.errorMessage saves whether all other requests(post, delete) were successful and renders dynamic error messages
 * depending for example on the server response using ErrorMessage.js
