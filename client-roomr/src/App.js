@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import BookingApp from './components/bookingPage/BookingApp';
+import BookingApp from './components/bookingApp/BookingApp';
 import AdminPage from './components/adminPage/AdminPage';
 import LoginPage from './components/loginPage/LoginPage';
 
