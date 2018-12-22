@@ -2,10 +2,13 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cookieSession = require('cookie-session');
+const passport = require('passport');
 const keys = require('./config/keys');
 require('./models/userSchema');
+require('./services/passport');
 const bookingRoutes = require('./routes/bookingRoutes');
-// const authRoutes = require('./routes/authRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 
 const port = process.env.PORT || 5000;
@@ -14,9 +17,21 @@ mongoose.connect(keys.mongoURI, { useNewUrlParser: true }).catch();
 
 const app = express();
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// authRoutes(app);
+app.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: ['jsgfsdjgsgaasogrgvertiwognwkegew']
+  })
+)
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+authRoutes(app);
 bookingRoutes(app);
 
 if (process.env.NODE_ENV === 'production') {
