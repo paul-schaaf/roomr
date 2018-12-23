@@ -85,7 +85,7 @@ module.exports = {
         await user.save();
       }
       await entity.save();
-      
+      res.redirect('../../login');
     } catch(err) {
       res.locals.type = 'clientError'
       err.message = `There already is an entity called ${entityProps.entity}`;
