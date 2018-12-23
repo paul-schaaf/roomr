@@ -33,7 +33,7 @@ class LoginPage extends React.Component {
             <div style={{ background: this.state.createColor }} onClick={this.onCreateTab} >Create</div>
           </div>
           <div className="login-box__form-box">
-            <form action="/api/login" method="POST">
+            <form action={`/api/${this.state.tab}`} method="POST">
               <input
                 name="entityValue"
                 onChange={this.onInputChange}
