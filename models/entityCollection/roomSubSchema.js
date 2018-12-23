@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const room = new Schema({
+const roomSchema = new Schema({
   roomName: {
     type: String,
-    required: true,
-    unique: true,
+    required: true
   },
+  entity: String,
   times: {
     type: Array,
     default: [
@@ -336,4 +336,4 @@ const room = new Schema({
 
 });
 
-module.exports = room;
+module.exports = roomSchema;

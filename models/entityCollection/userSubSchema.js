@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
-const room = require('./roomSubSchema');
 
-const userSchema = new Schema({
+const userSubSchema = new Schema({
   email: {
     type: String,
     required: true,
@@ -13,7 +12,14 @@ const userSchema = new Schema({
     type: Boolean,
     default: false
   },
-  rooms: [room],
+  entity: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  }
 });
 
-mongoose.model('users', userSchema);
+module.exports = userSubSchema;
