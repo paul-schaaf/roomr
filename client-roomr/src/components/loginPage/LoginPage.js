@@ -7,7 +7,7 @@ class LoginPage extends React.Component {
     loginColor: '#1E4363',
     createColor: '#152F45',
     submitValue: 'login',
-    entityValue: '',
+    entity: '',
     email: '',
     password: ''
   };
@@ -24,6 +24,10 @@ class LoginPage extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
+  getFormAction = () => {
+    return (this.state.tab === 'login') ? '/api/login' : '/api/entities';
+  }
+
   render () {
     return (
       <div className="login-page">
@@ -33,9 +37,11 @@ class LoginPage extends React.Component {
             <div style={{ background: this.state.createColor }} onClick={this.onCreateTab} >Create</div>
           </div>
           <div className="login-box__form-box">
-            <form action={`/api/${this.state.tab}`} method="POST">
+            <form
+            action={this.getFormAction()}
+            method="POST">
               <input
-                name="entityValue"
+                name="entity"
                 onChange={this.onInputChange}
                 className="login-box__form-box__input"
                 type="text"
