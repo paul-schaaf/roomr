@@ -8,7 +8,7 @@ class LoginPage extends React.Component {
     createColor: '#152F45',
     submitValue: 'login',
     entityValue: '',
-    username: '',
+    email: '',
     password: ''
   };
 
@@ -42,7 +42,7 @@ class LoginPage extends React.Component {
                 placeholder="entity...">
               </input>
               <input
-                name="username"
+                name="email"
                 onChange={this.onInputChange}
                 className="login-box__form-box__input"
                 type="text"
