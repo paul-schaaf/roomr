@@ -17,14 +17,15 @@ passport.deserializeUser((id, done) => {
 passport.use(new LocalStrategy({
   passReqToCallback:true
   },
-  function(req, username, password, done) {
-    User.findOne({ "email": username }, function (err, user) {
-      if (err) return done(err); 
+  async (req, username, password, done) => {
+    try {
+      const user = await User.findOne({ "email": username });
       if (req.body.entityValue !== "Roomr") return done(null, false);
       if (password !== "hello") return done(null, false);
       if (!user) return done(null, false);
       return done(null, user);
-      }
-    )
+    } catch(err) {
+      return done(err); 
+    }
   }
 ));
