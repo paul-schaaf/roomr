@@ -5,8 +5,7 @@ const { Schema } = mongoose;
 const userSubSchema = new Schema({
   email: {
     type: String,
-    required: true,
-    unique: true,
+    required: true
   },
   isAdmin: {
     type: Boolean,
