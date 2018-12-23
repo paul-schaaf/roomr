@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Entity = mongoose.model('entities');
 const User = mongoose.model('users');
 
 const timeArray = [
@@ -38,10 +39,12 @@ const timeArray = [
 ];
 
 module.exports = {
+  //expects params with object {entity}
   getAllRooms: async (req, res, next) => {
+    const entityName = req.params.entity;
     try {
-      const user = await User.findOne({ email: 'paulsimonschaaf@gmail.com' });
-      const rooms = user.rooms.slice();
+      const entity = await Entity.findOne({ name: entityName });
+      const rooms = entity.rooms.slice();
       // removes default property and just puts it into times[i].availability if not already done
       for (let i = 0; i < rooms.length; i += 1) {
         for (let j = 0; j < rooms[i].times.length; j += 1) {
@@ -55,27 +58,85 @@ module.exports = {
       next(err);
     }
   },
-
-  createUser: async (req, res, next) => {
-    const userProps = req.body;
+  //expects json with {name, email, and password}
+  createEntity: async (req, res, next) => {
+    const entityProps = req.body;
     try {
-      await User.create(userProps);
-      res.send('Successfully created new user');
-    } catch (err) {
+      const previousEntity = await Entity.findOne({ name: entityProps.entity });
+      if(previousEntity) {
+        throw new Error();
+      }
+      await Entity.create({ name: entityProps.entity });
+      const entity = await Entity.findOne({ name: entityProps.entity });
+      await entity.users.push({
+        email: entityProps.email,
+        password: entityProps.password,
+        entity: entityProps.entity,
+        isAdmin: true
+      });
+      const user = await User.findOne({ email: entityProps.email });
+      if(user) {
+        await user.entities.push({ name: entityProps.entity, isAdmin: true });
+        await user.save();
+      } else {
+        await User.create({ email: entityProps.email });
+        const user = await User.findOne({ email: entityProps.email });
+        await user.entities.push({ name: entityProps.entity, isAdmin: true });
+        await user.save();
+      }
+      await entity.save();
+      res.send('Successfully created new entity');
+    } catch(err) {
       res.locals.type = 'clientError'
-      err.message = 'This user exists already.';
+      err.message = `There already is an entity called ${entityProps.entity}`;
       next(err);
     }
   },
-
+  //expects json with {entity, email, and password}
+  createUser: async (req, res, next) => {
+    const userProps = req.body;
+    try {
+      const entity = await Entity.findOne({ name: userProps.entity });
+      if (!entity) {
+        res.locals.type = 'clientError';
+        throw new Error(`There is no entity called:${userProps.entity}`);
+      }
+      const userDoesNotExist = entity.users.every(user => user.email !== userProps.email);
+      if (userDoesNotExist) {
+        await entity.users.push(userProps);
+        const user = await User.findOne({ email: userProps.email });
+        if(user) {
+          await user.entities.push({ name: userProps.entity });
+          await user.save();
+        } else {
+          await User.create({ email: userProps.email });
+          const user = await User.findOne({ email: userProps.email });
+          await user.entities.push({ name: userProps.entity });
+          await user.save();
+        }
+        await entity.save();
+        res.send(`User: ${userProps.email} successfully added`);
+      } else {
+        res.locals.type = 'clientError';
+        throw new Error(`There already is a user called: ${userProps.email}.`);
+      }
+    } catch (err) {
+      next(err);
+    }
+  },
+  // expects json with {roomName and entity}
   createRoom: async (req, res, next) => {
     const roomProps = req.body;
     try {
-      const user = await User.findOne({ email: 'paulsimonschaaf@gmail.com' });
-      const roomDoesNotExist = user.rooms.every(room => room.roomName !== roomProps.roomName);
+      const entity = await Entity.findOne({ name: roomProps.entity });
+      if (!entity) {
+        res.locals.type = 'clientError';
+        throw new Error(`There is no entity called:${roomProps.entity}`);
+      }
+      const roomDoesNotExist = entity.rooms.every(room => room.roomName !== roomProps.roomName);
       if (roomDoesNotExist) {
-        user.rooms.push(roomProps);
-        await user.save();
+        entity.rooms.push(roomProps);
+        await entity.save();
         res.send(`Room: ${roomProps.roomName} successfully added`);
       } else {
         res.locals.type = 'clientError';
@@ -86,31 +147,39 @@ module.exports = {
     }
   },
 
+  //expects params with {entity and roomName}
   deleteRoom: async (req, res, next) => {
-    const roomName = req.params.id;
+    const roomProps = req.params;
     try {
-      const user = await User.findOne({ email: 'paulsimonschaaf@gmail.com' });
-      const roomToDeleteArray = user.rooms.filter(room => room.roomName === roomName);
-      if (roomToDeleteArray.length === 1) {
-        const roomToDelete = roomToDeleteArray[0];
-        const index = user.rooms.indexOf(roomToDelete);
-        user.rooms.splice(index, 1);
-        await user.save();
-        res.send(`Room: ${roomName} successfully deleted`);
+      const entity = await Entity.findOne({ name: roomProps.entity});
+      if (!entity) {
+        res.locals.type = 'clientError';
+        throw new Error(`There is no entity called:${roomProps.entity}`);
+      }
+      const room = entity.rooms.find(roomObject => roomObject.roomName === roomProps.roomName);
+      if (room) {
+        const index = entity.rooms.indexOf(room);
+        entity.rooms.splice(index, 1);
+        await entity.save();
+        res.send(`Room: ${roomProps.roomName} successfully deleted`);
       } else {
         res.locals.type = 'clientError';
-        throw new Error(`There is no room called: ${roomName}.`);
+        throw new Error(`There is no room called: ${roomProps.roomName}.`);
       }
     } catch (err) {
       next(err);
     }
   },
-
+  //expects json with {entity, roomName, start, end}
   blockRoom: async (req, res, next) => {
     const roomProps = req.body;
     try {
-      const user = await User.findOne({ email: 'paulsimonschaaf@gmail.com' });
-      const room = user.rooms.find(roomObject => roomObject.roomName === roomProps.roomName);
+      const entity = await Entity.findOne({ name: roomProps.entity });
+      if (!entity) {
+        res.locals.type = 'clientError';
+        throw new Error(`There is no entity called:${roomProps.entity}`);
+      }
+      const room = entity.rooms.find(roomObject => roomObject.roomName === roomProps.roomName);
       if (room) {
         const indexStart = timeArray.indexOf(roomProps.start);
         const indexEnd = timeArray.indexOf(roomProps.end);
@@ -123,7 +192,7 @@ module.exports = {
         for (let i = indexStart; i < indexEnd; i += 1) {
           room.times.set(i, { time: { default: timeArray[i] }, availability: false });
         }
-        await user.save();
+        await entity.save();
         res.send(`Selected timespan ${roomProps.start}-${roomProps.end} for room ${roomProps.roomName} successfully reserved.`);
       } else {
         res.locals.type = 'clientError';
@@ -134,11 +203,12 @@ module.exports = {
     }
   },
 
+  //expects json with {entity, roomName, start, end}
   unblockRoom: async (req, res, next) => {
     const roomProps = req.body;
     try {
-      const user = await User.findOne({ email: 'paulsimonschaaf@gmail.com' });
-      const room = user.rooms.find(roomObject => roomObject.roomName === roomProps.roomName);
+      const entity = await Entity.findOne({ name: roomProps.entity });
+      const room = entity.rooms.find(roomObject => roomObject.roomName === roomProps.roomName);
       if (room) {
         const indexStart = timeArray.indexOf(roomProps.start);
         const indexEnd = timeArray.indexOf(roomProps.end);
@@ -146,9 +216,8 @@ module.exports = {
         for (let i = indexStart; i < indexEnd; i += 1) {
           room.times.set(i, { time: { default: timeArray[i] }, availability: true });
         }
-        await user.save();
+        await entity.save();
         res.send(`Selected timespan ${roomProps.start}-${roomProps.end} for room ${roomProps.roomName} successfully unblocked.`);
-        res.send(room);
       } else {
         res.locals.type = 'clientError';
         throw new Error(`There is no room called ${roomProps.roomName}.`);
