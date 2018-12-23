@@ -8,7 +8,7 @@ module.exports = app => {
     passport.authenticate('local', { failureRedirect: '/login' }),
       async (req, res) => {
         const user = await User.findOne({ email: req.body.email });
-        user.activeEntity = req.body.entityValue;
+        user.activeEntity = req.body.entity;
         await user.save();
         res.redirect('/');
       }
