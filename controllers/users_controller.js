@@ -39,7 +39,7 @@ const timeArray = [
 ];
 
 module.exports = {
-  //expects json  with  {activeEntity}
+  //uses req.user.activeEntity 
   getAllRooms: async (req, res, next) => {
     const entityName = req.user.activeEntity;
     try {
@@ -124,7 +124,7 @@ module.exports = {
       next(err);
     }
   },
-  // expects json with {roomName and entity}
+  // expects json with {roomName}, uses req.user.activeEntity for {entity}
   createRoom: async (req, res, next) => {
     const entityName = req.user.activeEntity;
     const roomProps = req.body;
@@ -148,7 +148,7 @@ module.exports = {
     }
   },
 
-  //expects params with {entity and roomName}
+  //expects params with {roomName}, uses req.user.activeEntity for {entity}
   deleteRoom: async (req, res, next) => {
     const entityName = req.user.activeEntity;
     const roomProps = req.params;
@@ -172,7 +172,7 @@ module.exports = {
       next(err);
     }
   },
-  //expects json with {entity, roomName, start, end}
+  //expects json with {roomName, start, end}, uses req.user.activeEntity for {entity}
   blockRoom: async (req, res, next) => {
     const entityName = req.user.activeEntity;
     const roomProps = req.body;
@@ -206,7 +206,7 @@ module.exports = {
     }
   },
 
-  //expects json with {entity, roomName, start, end}
+  //expects json with {roomName, start, end}, uses req.user.activeEntity for {entity}
   unblockRoom: async (req, res, next) => {
     const entityName = req.user.activeEntity;
     const roomProps = req.body;
