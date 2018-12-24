@@ -25,7 +25,10 @@ passport.use(new LocalStrategy({
       if (!entity) return done(null, false);
       const userExists = entity.users.find((user) => user.email === username && user.password === password);
       if (!userExists) return done(null, false);
-      const user = await User.findOne({ email: username });
+      let user = await User.findOne({ email: username });
+      user.activeEntity = req.body.entity;
+      await user.save();
+      user = await User.findOne({ email: username });
       return done(null, user);
     } catch(err) {
       return done(err); 

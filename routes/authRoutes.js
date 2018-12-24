@@ -6,10 +6,7 @@ const User = mongoose.model('users');
 module.exports = app => {
   app.post('/api/login',
     passport.authenticate('local', { failureRedirect: '/login' }),
-      async (req, res) => {
-        const user = await User.findOne({ email: req.body.email });
-        user.activeEntity = req.body.entity;
-        await user.save();
+      (req, res) => {
         res.redirect('/');
       }
   );
