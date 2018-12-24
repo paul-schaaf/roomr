@@ -58,7 +58,7 @@ module.exports = {
       next(err);
     }
   },
-  //expects json with {name, email, and password}
+  //expects json with {entity, email, and password}
   createEntity: async (req, res, next) => {
     const entityProps = req.body;
     try {
