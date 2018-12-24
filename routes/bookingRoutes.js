@@ -1,18 +1,18 @@
-const UsersController = require('../controllers/users_controller');
+const entitiesController = require('../controllers/entities_controller');
 const requireLogin = require('../middlewares/requireLogin');
 
 module.exports = app => {
-  app.delete('/api/entities/rooms/:roomName', requireLogin, UsersController.deleteRoom);
+  app.delete('/api/entities/rooms/:roomName', requireLogin, entitiesController.deleteRoom);
 
-  app.get('/api/entities/rooms', requireLogin, UsersController.getAllRooms);
+  app.get('/api/entities/rooms', requireLogin, entitiesController.getAllRooms);
 
-  app.post('/api/entities', UsersController.createEntity);
+  app.post('/api/entities', entitiesController.createEntity);
 
-  app.post('/api/entities/rooms', requireLogin, UsersController.createRoom);
+  app.post('/api/entities/rooms', requireLogin, entitiesController.createRoom);
 
-  app.post('/api/entities/users', requireLogin, UsersController.createUser);
+  app.post('/api/entities/users', requireLogin, entitiesController.createUser);
 
-  app.post('/api/entities/rooms/times-block', requireLogin, UsersController.blockRoom);
+  app.post('/api/entities/rooms/times-block', requireLogin, entitiesController.blockRoom);
 
-  app.post('/api/entities/rooms/times-unblock', requireLogin, UsersController.unblockRoom);
+  app.post('/api/entities/rooms/times-unblock', requireLogin, entitiesController.unblockRoom);
 };
