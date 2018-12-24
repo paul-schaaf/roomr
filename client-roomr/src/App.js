@@ -9,9 +9,9 @@ class App extends React.Component {
     return (
       <Router>
         <React.Fragment>
-          <Route path="/" exact component={BookingApp} />
-          <Route path="/admin" exact component={AdminPage} />
-          <Route path="/login" exact component={LoginPage} />
+        <Route path="/admin" exact component={AdminPage} />
+        <Route path="/login" exact component={LoginPage} />
+        <Route path="/:id" exact component={BookingApp} />    
         </React.Fragment>
       </Router>
     );
