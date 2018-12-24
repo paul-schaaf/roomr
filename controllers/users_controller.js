@@ -39,9 +39,9 @@ const timeArray = [
 ];
 
 module.exports = {
-  //expects params with object {entity}
+  //expects json  with  {activeEntity}
   getAllRooms: async (req, res, next) => {
-    const entityName = req.params.entity;
+    const entityName = req.user.activeEntity;
     try {
       const entity = await Entity.findOne({ name: entityName });
       const rooms = entity.rooms.slice();
@@ -126,12 +126,13 @@ module.exports = {
   },
   // expects json with {roomName and entity}
   createRoom: async (req, res, next) => {
+    const entityName = req.user.activeEntity;
     const roomProps = req.body;
     try {
-      const entity = await Entity.findOne({ name: roomProps.entity });
+      const entity = await Entity.findOne({ name: entityName });
       if (!entity) {
         res.locals.type = 'clientError';
-        throw new Error(`There is no entity called:${roomProps.entity}`);
+        throw new Error(`There is no entity called:${entityName}`);
       }
       const roomDoesNotExist = entity.rooms.every(room => room.roomName !== roomProps.roomName);
       if (roomDoesNotExist) {
@@ -149,12 +150,13 @@ module.exports = {
 
   //expects params with {entity and roomName}
   deleteRoom: async (req, res, next) => {
+    const entityName = req.user.activeEntity;
     const roomProps = req.params;
     try {
-      const entity = await Entity.findOne({ name: roomProps.entity});
+      const entity = await Entity.findOne({ name: entityName });
       if (!entity) {
         res.locals.type = 'clientError';
-        throw new Error(`There is no entity called:${roomProps.entity}`);
+        throw new Error(`There is no entity called:${entityName}`);
       }
       const room = entity.rooms.find(roomObject => roomObject.roomName === roomProps.roomName);
       if (room) {
@@ -172,12 +174,13 @@ module.exports = {
   },
   //expects json with {entity, roomName, start, end}
   blockRoom: async (req, res, next) => {
+    const entityName = req.user.activeEntity;
     const roomProps = req.body;
     try {
-      const entity = await Entity.findOne({ name: roomProps.entity });
+      const entity = await Entity.findOne({ name: entityName });
       if (!entity) {
         res.locals.type = 'clientError';
-        throw new Error(`There is no entity called:${roomProps.entity}`);
+        throw new Error(`There is no entity called:${entityName}`);
       }
       const room = entity.rooms.find(roomObject => roomObject.roomName === roomProps.roomName);
       if (room) {
@@ -205,9 +208,14 @@ module.exports = {
 
   //expects json with {entity, roomName, start, end}
   unblockRoom: async (req, res, next) => {
+    const entityName = req.user.activeEntity;
     const roomProps = req.body;
     try {
-      const entity = await Entity.findOne({ name: roomProps.entity });
+      const entity = await Entity.findOne({ name: entityName });
+      if (!entity) {
+        res.locals.type = 'clientError';
+        throw new Error(`There is no entity called:${entityName}`);
+      }
       const room = entity.rooms.find(roomObject => roomObject.roomName === roomProps.roomName);
       if (room) {
         const indexStart = timeArray.indexOf(roomProps.start);

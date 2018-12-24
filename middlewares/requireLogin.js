@@ -8,28 +8,6 @@ const requireLogin = (req, res, next) => {
       res.locals.type = 'clientErrorUnauthorized';
       throw new Error('You are not authorized to access this page. Please log in first.')
     }
-
-    /**
-     * The previous check checks only whether a user is logged in. Once a user is logged in, he could try accessing
-     * other members' info
-     * This check makes sure that cannot happen by comparing the activeEntity aka the one he used to login with the entity
-     * he is trying to access now
-     *
-     */
-
-   //for get and delete requests
-   if (req.params) {
-     if(req.user.activeEntity !== req.params.entity) {
-      res.locals.type = 'clientErrorUnauthorized';
-      throw new Error('You are trying to access an entity that you are currently not logged into.')
-     }
-   } else {
-      //for post requests
-    if(req.user.activeEntity !== req.body.entity) {
-      res.locals.type = 'clientErrorUnauthorized';
-      throw new Error('You are trying to access an entity that you are currently not logged into.')
-    }
-   }
     next()
   } catch(err) {
     next(err);
