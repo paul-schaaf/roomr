@@ -12,10 +12,12 @@ module.exports = app => {
   );
 
   app.get('/api/logout', async (req, res) => {
-    const user = req.user;
-    user.activeEntity = 'none';
-    await user.save();
-    req.logout();
+    if (req.user) {
+      const user = req.user;
+      user.activeEntity = 'none';
+      await user.save();
+      req.logout();
+    }
     res.redirect('/login');
   })
 };
