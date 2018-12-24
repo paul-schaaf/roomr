@@ -6,7 +6,7 @@ module.exports = app => {
 
   app.get('/api/entities/rooms', requireLogin, UsersController.getAllRooms);
 
-  app.post('/api/entities', requireLogin, UsersController.createEntity);
+  app.post('/api/entities', UsersController.createEntity);
 
   app.post('/api/entities/rooms', requireLogin, UsersController.createRoom);
 
