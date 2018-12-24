@@ -20,6 +20,13 @@ passport.use(new LocalStrategy({
   passReqToCallback:true
   },
   async (req, username, password, done) => {
+    //if req.user exsits before passport assigns req.user, it logs out the previous req.user first
+    if(req.user) {
+      const user = req.user;
+      user.activeEntity = 'none';
+      await user.save();
+      req.logout();
+    }
     try {
       const entity = await Entity.findOne({ name: req.body.entity });
       if (!entity) return done(null, false);
