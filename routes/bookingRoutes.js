@@ -4,7 +4,7 @@ const requireLogin = require('../middlewares/requireLogin');
 module.exports = app => {
   app.delete('/api/entities/rooms/:entity/:roomName', UsersController.deleteRoom);
 
-  app.get('/api/entities/rooms/:entity', UsersController.getAllRooms);
+  app.get('/api/entities/rooms/:entity', requireLogin, UsersController.getAllRooms);
 
   app.post('/api/entities', UsersController.createEntity);
 

@@ -16,10 +16,20 @@ const requireLogin = (req, res, next) => {
      * he is trying to access now
      *
      */
+
+   //for get and delete requests
+   if (req.params) {
+     if(req.user.activeEntity !== req.params.entity) {
+      res.locals.type = 'clientErrorUnauthorized';
+      throw new Error('You are trying to access an entity that you are currently not logged into.')
+     }
+   } else {
+      //for post requests
     if(req.user.activeEntity !== req.body.entity) {
       res.locals.type = 'clientErrorUnauthorized';
       throw new Error('You are trying to access an entity that you are currently not logged into.')
     }
+   }
     next()
   } catch(err) {
     next(err);
