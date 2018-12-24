@@ -18,7 +18,7 @@ const requireLogin = (req, res, next) => {
      */
     if(req.user.activeEntity !== req.body.entity) {
       res.locals.type = 'clientErrorUnauthorized';
-      throw new Error('You are trying to authorize an entity that you are currently not logged into.')
+      throw new Error('You are trying to access an entity that you are currently not logged into.')
     }
     next()
   } catch(err) {
