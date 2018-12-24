@@ -46,7 +46,7 @@ const addRoom = async (appState, reqData) => {
   if (roomName === '') {
     throw new Error('Please enter a room before submitting!');
   }
-  await axios.post('/api/users/rooms', { roomName });
+  await axios.post('/api/entities/rooms', { roomName });
   appState.setState({ errorMessage: '' });
 };
 
@@ -55,7 +55,7 @@ const deleteRoom = async (appState, reqData) => {
   if (roomName === '') {
     throw new Error('Please enter a room before submitting!');
   }
-  await axios.delete(`/api/users/rooms/${roomName}`);
+  await axios.delete(`/api/entities/rooms/${roomName}`);
   appState.setState({ errorMessage: '' });
 };
 
@@ -64,7 +64,7 @@ const blockRoom = async (appState, reqData) => {
   if (roomName === '') {
     throw new Error('Please enter a room before submitting!');
   }
-  await axios.post('/api/users/rooms/times-block', {
+  await axios.post('/api/entities/rooms/times-block', {
     roomName,
     start,
     end,
@@ -78,7 +78,7 @@ const unblockRoom = async (appState, reqData) => {
   if (roomName === '') {
     throw new Error('Please enter a room before submitting!');
   }
-  await axios.post('/api/users/rooms/times-unblock', {
+  await axios.post('/api/entities/rooms/times-unblock', {
     roomName,
     start,
     end,
