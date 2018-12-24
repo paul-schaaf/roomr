@@ -15,7 +15,7 @@ import axiosErrorHandler from '../errorHandling/axiosErrorHandler';
 */
 
 const setRoomDataOnce = async (appState) => {
-  const response = await axios.get('/api/users/rooms');
+  const response = await axios.get('/api/entities/rooms');
   appState.setState({ data: response.data, getStatus: 'successful' });
 };
 
@@ -33,7 +33,7 @@ const setRoomDataOnce = async (appState) => {
 const setRoomDataLoop = async (appState) => {
   setInterval(async () => {
     try {
-      const response = await axios.get('/api/users/rooms');
+      const response = await axios.get('/api/entities/rooms');
       appState.setState({ data: response.data, getStatus: 'successful' });
     } catch (err) {
       appState.setState({ getStatus: 'failed' });
