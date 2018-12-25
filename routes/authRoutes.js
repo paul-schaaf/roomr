@@ -11,10 +11,8 @@ module.exports = app => {
         } else {
           res.redirect('/' + req.user.activeEntity);
         }
-        
       }
   );
-
 
   //changes user's activeEntity to "none" in mongo and then logs them out
   app.get('/api/logout', async (req, res) => {
