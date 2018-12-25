@@ -94,9 +94,9 @@ module.exports = {
         await user.save();
       }
       await entity.save();
-      res.redirect('../../login/createSuccess');
+      return res.redirect('../../login/createSuccess');
     } catch(err) {
-      res.redirect('../../login/createFail');
+      return res.redirect('../../login/createFail');
     }
   },
   //expects json with {entity, email, and password}
