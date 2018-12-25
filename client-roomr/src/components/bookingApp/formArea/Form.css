@@ -11,6 +11,10 @@ form select {
   font-size:10.5px;
 }
 
+form select:focus {
+  outline-style:none;
+}
+
 .input-room {
   border:none;
   border-bottom:1px solid #1E4363;
