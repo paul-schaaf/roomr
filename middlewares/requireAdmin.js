@@ -1,12 +1,10 @@
 const requireAdmin = (req, res, next) => {
   try {
-    const activeEntity = req.user.activeEntity;
-    const isAdmin = req.user.entities.find((entity) => entity.name === activeEntity).isAdmin;
     /**
      * checks if user is logged in, if user is loggin in, passport - which
      * runs before requireLogin - should have added a "user" property to req
      */
-    if(!isAdmin) {
+    if(!req.user.isAdminNow) {
       res.locals.type = 'clientErrorUnauthorized';
       throw new Error('You are not authorized to access this page. You are not an admin of this entity.')
     }
