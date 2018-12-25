@@ -62,7 +62,8 @@ module.exports = {
   createEntity: async (req, res, next) => {
     const entityProps = req.body;
     if(entityProps.entity === '') {
-      res.redirect('../../login/createNone');
+      //'return' is required here or node will throw an error
+      return res.redirect('../../login/createNone');
     }
     try {
       const previousEntity = await Entity.findOne({ name: entityProps.entity });
