@@ -11,7 +11,7 @@
   height:40px;
 }
 
-p {
+.error-message__text {
   padding-right:5px;
   margin:0;
   margin-top:-1.5px;
@@ -25,7 +25,7 @@ p {
   cursor: pointer;
 }
 
-error-button:hover {
+.error-button:hover {
   background:white;
   color:#BC2D19;
   transition: .5s ease;
@@ -38,7 +38,7 @@ error-button:hover {
     padding:5px 20px 5px 20px;
   }
 
-  p{
+  .error-message__text{
     margin-bottom:10px;
   }
 }
