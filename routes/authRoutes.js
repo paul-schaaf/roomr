@@ -1,8 +1,6 @@
 const passport = require('passport');
 const mongoose = require('mongoose');
 
-const User = mongoose.model('users');
-
 //logs in user, then redirects to /'entityName'
 module.exports = app => {
   app.post('/api/login',
