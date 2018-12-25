@@ -9,3 +9,10 @@
   color:#1E4363;
   font-size:11px;
 }
+
+@media screen and (max-width: 600px) {
+  .logout-button{
+    position: relative;
+    padding-left:30px;
+  }
+}
