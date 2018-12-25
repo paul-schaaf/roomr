@@ -14,7 +14,7 @@ class ErrorMessage extends React.Component {
     return (
       <div className="error-message">
         <p>{this.props.errorMessage}</p>
-        <button type="button" onClick={this.onErrorButtonClick}>X</button>
+        <button className="error-button" type="button" onClick={this.onErrorButtonClick}>X</button>
       </div>
     )
   }

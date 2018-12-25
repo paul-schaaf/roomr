@@ -61,6 +61,9 @@ module.exports = {
   //expects json with {entity, email, and password}
   createEntity: async (req, res, next) => {
     const entityProps = req.body;
+    if(entityProps.entity === '') {
+      res.redirect('../../login/createNone');
+    }
     try {
       const previousEntity = await Entity.findOne({ name: entityProps.entity });
       if(previousEntity) {
@@ -85,11 +88,9 @@ module.exports = {
         await user.save();
       }
       await entity.save();
-      res.redirect('../../login');
+      res.redirect('../../login/createSuccess');
     } catch(err) {
-      res.locals.type = 'clientError'
-      err.message = `There already is an entity called ${entityProps.entity}`;
-      next(err);
+      res.redirect('../../login/createFail');
     }
   },
   //expects json with {entity, email, and password}
