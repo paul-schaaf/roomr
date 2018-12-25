@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './ErrorPage.css';
 
 /*
@@ -17,6 +18,7 @@ const ErrorPage = ({ loginMessage }) => {
       <div className="error-box">
         <p className="error-box__heading">ERROR</p>
         <p>{message}</p>
+        <Link className="error-box__link"to="/login">▹ Back to Login</Link>
       </div>
     </div>
   )
