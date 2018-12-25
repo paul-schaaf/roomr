@@ -7,9 +7,9 @@ module.exports = app => {
     passport.authenticate('local', { failureRedirect: '/login' }),
       (req, res) => {
         if(req.user.isAdminNow){
-          res.redirect('/' + req.user.activeEntity + '/admin');
+          res.redirect('/app/' + req.user.activeEntity + '/admin');
         } else {
-          res.redirect('/' + req.user.activeEntity);
+          res.redirect('/app/' + req.user.activeEntity);
         }
       }
   );
