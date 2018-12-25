@@ -38,21 +38,25 @@ class BookingPage extends React.Component {
   };
     
   onAddRoomSubmit = async (reqData) => {
+    await this.setState({ errorMessage: '', errorType: '' });
     await roomrapi.handledAddRoom(this, reqData);
     roomrapi.handledSetRoomDataOnce(this);
   }
 
   onDeleteRoomSubmit = async (reqData) => {
+    await this.setState({ errorMessage: '', errorType: '' });
     await roomrapi.handledDeleteRoom(this, reqData);
     roomrapi.handledSetRoomDataOnce(this);
   }
 
   onBlockRoomSubmit = async (reqData) => {
+    await this.setState({ errorMessage: '', errorType: '' });
     await roomrapi.handledBlockRoom(this, reqData);
     roomrapi.handledSetRoomDataOnce(this);
   }
 
   onUnblockRoomSubmit = async (reqData) => {
+    await this.setState({ errorMessage: '', errorType: '' });
     await roomrapi.handledUnblockRoom(this, reqData);
     roomrapi.handledSetRoomDataOnce(this);
   }
