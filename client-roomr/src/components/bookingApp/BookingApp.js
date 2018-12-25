@@ -30,7 +30,8 @@ class BookingPage extends React.Component {
     getStatus: 'pending',
     data: [],
     errorMessage:'',
-    errorType:''
+    errorType:'',
+    isAdmin: (this.props.match.params.isAdmin === 'admin') ? true : false
   };
 
   async componentDidMount() {
@@ -92,6 +93,7 @@ class BookingPage extends React.Component {
           <div className="form-area">
             <LogoutButton />
             <FormList
+              isAdmin={this.props.match.params.isAdmin}
               data={this.state.data}
               onAddRoomSubmit={this.onAddRoomSubmit} 
               onDeleteRoomSubmit={this.onDeleteRoomSubmit}
@@ -117,6 +119,7 @@ class BookingPage extends React.Component {
           <div className="form-area">
             <LogoutButton />
             <FormList
+              isAdmin={this.props.match.params.isAdmin}
               data={this.state.data}
               onAddRoomSubmit={this.onAddRoomSubmit} 
               onDeleteRoomSubmit={this.onDeleteRoomSubmit}
@@ -139,6 +142,7 @@ class BookingPage extends React.Component {
       <div className="form-area">
         <LogoutButton />
         <FormList
+          isAdmin={this.props.match.params.isAdmin}
           data={this.state.data}
           onAddRoomSubmit={this.onAddRoomSubmit} 
           onDeleteRoomSubmit={this.onDeleteRoomSubmit}

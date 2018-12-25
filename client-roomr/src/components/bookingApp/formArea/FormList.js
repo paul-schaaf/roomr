@@ -27,20 +27,20 @@ const FormList = props =>  {
             buttonValue="▹ unblock room"
             datalistName="unblock"
           />
-          <Form
+          {props.isAdmin && < Form
             data={props.data}
             formAction={props.onAddRoomSubmit}
             buttonValue="▹ add room"
             DataListRequired="false"
             noSelect="true"
-          />
-          <Form
+          />}
+          {props.isAdmin && <Form
             data={props.data}
             formAction={props.onDeleteRoomSubmit}
             buttonValue="▹ delete room" 
             noSelect="true"
             datalistName="delete"
-          />
+          />}
         </div>
     )
 }

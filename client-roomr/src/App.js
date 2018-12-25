@@ -9,7 +9,7 @@ class App extends React.Component {
     return (
       <Router>
         <React.Fragment>
-        <Route path="/app/:id/admin" exact component={AdminPage} />
+        <Route path="/app/:id/:isAdmin" exact component={BookingApp} />
         <Route path="/login" exact component={LoginPage} />
         <Route path="/login/:type" exact component={LoginPage} />
         <Route path="/app/:id" exact component={BookingApp} />    
