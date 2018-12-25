@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import BookingApp from './components/bookingApp/BookingApp';
-import AdminPage from './components/adminPage/AdminPage';
 import LoginPage from './components/loginPage/LoginPage';
 
 class App extends React.Component {
@@ -9,10 +8,11 @@ class App extends React.Component {
     return (
       <Router>
         <React.Fragment>
-        <Route path="/" exact render={()=> (<Redirect to="/login"/>)}/>
-        <Route path="/admin" exact component={AdminPage} />
+        <Route path="/app/:id/:isAdmin" exact component={BookingApp} />
         <Route path="/login" exact component={LoginPage} />
-        <Route path="/:id" exact component={BookingApp} />    
+        <Route path="/login/:type" exact component={LoginPage} />
+        <Route path="/app/:id" exact component={BookingApp} />  
+        <Route path="/" exact render={ () => <Redirect to="/login"/> }/>
         </React.Fragment>
       </Router>
     );

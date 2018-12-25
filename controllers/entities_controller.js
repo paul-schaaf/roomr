@@ -61,6 +61,15 @@ module.exports = {
   //expects json with {entity, email, and password}
   createEntity: async (req, res, next) => {
     const entityProps = req.body;
+    if(entityProps.entity === '') {
+      /*
+      * 'return' is required here or node will throw an error
+      * this is because it runs the rest of the code below the redirect
+      * when it should just exit the function
+      * 'return' makes sure this happens
+      */
+      return res.redirect('../../login/createNone');
+    }
     try {
       const previousEntity = await Entity.findOne({ name: entityProps.entity });
       if(previousEntity) {
@@ -85,11 +94,9 @@ module.exports = {
         await user.save();
       }
       await entity.save();
-      res.redirect('../../login');
+      res.redirect('../../login/createSuccess');
     } catch(err) {
-      res.locals.type = 'clientError'
-      err.message = `There already is an entity called ${entityProps.entity}`;
-      next(err);
+      res.redirect('../../login/createFail');
     }
   },
   //expects json with {entity, email, and password}

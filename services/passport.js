@@ -24,16 +24,18 @@ passport.use(new LocalStrategy({
     if(req.user) {
       const user = req.user;
       user.activeEntity = 'none';
+      user.isAdminNow = false;
       await user.save();
       req.logout();
     }
     try {
       const entity = await Entity.findOne({ name: req.body.entity });
       if (!entity) return done(null, false);
-      const userExists = entity.users.find((user) => user.email === username && user.password === password);
-      if (!userExists) return done(null, false);
+      const userInEntity = entity.users.find((user) => user.email === username && user.password === password);
+      if (!userInEntity) return done(null, false);
       let user = await User.findOne({ email: username });
       user.activeEntity = req.body.entity;
+      user.isAdminNow = userInEntity.isAdmin;
       await user.save();
       user = await User.findOne({ email: username });
       return done(null, user);

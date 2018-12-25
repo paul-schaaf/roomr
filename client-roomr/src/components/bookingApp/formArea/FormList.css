@@ -1,3 +1,39 @@
 .forms {
-  border-top:1px solid #1E4363;
+  /*border-top:1px solid #1E4363; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.forms--blocking {
+  display: flex;
+}
+
+.forms--rooms {
+  display:flex;
+}
+
+@media screen and (max-width: 600px) {
+  .forms {
+    border-top:1px solid #1E4363;
+  }
+
+  .forms--blocking {
+    flex-direction: column;
+  }
+
+}
+
+@media (max-width: 1000px) {
+  .forms--rooms {
+    display:none;
+  }
+}
+
+@media (min-width: 1000px) {
+  .forms--rooms {
+    margin-top:20px;
+    margin-bottom:5px;
+  }
 }

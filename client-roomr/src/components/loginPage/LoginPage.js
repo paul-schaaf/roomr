@@ -1,5 +1,6 @@
 import React from 'react';
 import './LoginPage.css';
+import LoginMessage from './LoginMessage';
 
 class LoginPage extends React.Component {
   state = {
@@ -9,7 +10,8 @@ class LoginPage extends React.Component {
     submitValue: 'login',
     entity: '',
     email: '',
-    password: ''
+    password: '',
+    info: this.props.match.params.type
   };
 
   onLoginTab = () => {
@@ -28,10 +30,15 @@ class LoginPage extends React.Component {
     return (this.state.tab === 'login') ? '/api/login' : '/api/entities';
   }
 
+  onButtonClick = () => {
+    this.setState({ info: '' });
+  }
+
   render () {
     return (
       <div className="login-page">
         <div className="login-box">
+          {this.props.match.params && this.state.info && <LoginMessage onButtonClick={this.onButtonClick}info={this.state.info}/>}
           <div className="login-box__tabs">
             <div style={{ background: this.state.loginColor }} onClick={this.onLoginTab} >Login</div>
             <div style={{ background: this.state.createColor }} onClick={this.onCreateTab} >Create</div>

@@ -15,32 +15,37 @@ import './FormList.css';
 const FormList = props =>  {
     return (
         <div className="forms">
-          <Form 
-            data={props.data}
-            formAction={props.onBlockRoomSubmit}
-            buttonValue="▹ reserve room"
-            datalistName="reserve"
-          />
-          <Form
-            data={props.data}
-            formAction={props.onUnblockRoomSubmit}
-            buttonValue="▹ unblock room"
-            datalistName="unblock"
-          />
-          <Form
-            data={props.data}
-            formAction={props.onAddRoomSubmit}
-            buttonValue="▹ add room"
-            DataListRequired="false"
-            noSelect="true"
-          />
-          <Form
-            data={props.data}
-            formAction={props.onDeleteRoomSubmit}
-            buttonValue="▹ delete room" 
-            noSelect="true"
-            datalistName="delete"
-          />
+          <div className="forms--blocking">
+            <Form 
+              data={props.data}
+              formAction={props.onBlockRoomSubmit}
+              buttonValue="▹ reserve room"
+              datalistName="reserve"
+            />
+            <Form
+              data={props.data}
+              formAction={props.onUnblockRoomSubmit}
+              buttonValue="▹ unblock room"
+              datalistName="unblock"
+            />
+          </div>
+          {props.showSettings && 
+          <div className="forms--rooms">
+            < Form
+              data={props.data}
+              formAction={props.onAddRoomSubmit}
+              buttonValue="▹ add room"
+              DataListRequired="false"
+              noSelect
+            />
+            <Form
+              data={props.data}
+              formAction={props.onDeleteRoomSubmit}
+              buttonValue="▹ delete room" 
+              noSelect
+              datalistName="delete"
+            />
+          </div>}
         </div>
     )
 }
