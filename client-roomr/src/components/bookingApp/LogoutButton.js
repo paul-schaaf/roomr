@@ -4,7 +4,7 @@ import './LogoutButton.css';
 const LogoutButton = () => {
   return (
     <div className="logout-button">
-      <a href="/api/logout">logout</a>
+      <a href="/api/logout">▹ logout</a>
     </div>
   )
 }

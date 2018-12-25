@@ -1,6 +1,6 @@
 .logout-button {
   position: absolute;
-  top:-10px;
+  top:0px;
   right:15px;
 }
 
@@ -10,9 +10,14 @@
   font-size:11px;
 }
 
+.logout-button:hover {
+  transform:translateX(1px);
+}
+
 @media screen and (max-width: 600px) {
   .logout-button{
     position: relative;
     padding-left:30px;
+    top:-10px;
   }
 }

@@ -1,3 +1,19 @@
 .forms {
-  border-top:1px solid #1E4363;
+  /*border-top:1px solid #1E4363; */
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 600px) {
+  .forms {
+    border-top:1px solid #1E4363;
+    display:block;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .forms {
+    justify-content: left;
+  }
+
 }
