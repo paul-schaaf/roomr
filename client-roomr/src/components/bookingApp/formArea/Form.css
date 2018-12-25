@@ -25,6 +25,10 @@ form select {
   color: #1E4363;
 }
 
+.input-room:focus {
+  outline-style:none;
+}
+
 .submit-button {
 margin-left:0px;
 float:right;
@@ -38,9 +42,15 @@ cursor: pointer;
 padding: 1.5px 5px 1.5px 5px;
 }
 
+.submit-button:focus{
+  outline-style:none;
+}
+
 .submit-button:hover {
   transform:translateX(1px);
 }
+
+
 
 @media screen and (max-width: 600px) {
   .forms {
