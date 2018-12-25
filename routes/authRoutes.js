@@ -1,12 +1,17 @@
 const passport = require('passport');
 const mongoose = require('mongoose');
 
-//logs in user, then redirects to /'entityName'
+//logs in user, then redirects to /'entityName' or /'entityName/admin' if user is an admin
 module.exports = app => {
   app.post('/api/login',
     passport.authenticate('local', { failureRedirect: '/login' }),
       (req, res) => {
-        res.redirect('/' + req.user.activeEntity);
+        if(req.user.isAdminNow){
+          res.redirect('/' + req.user.activeEntity + '/admin');
+        } else {
+          res.redirect('/' + req.user.activeEntity);
+        }
+        
       }
   );
 
