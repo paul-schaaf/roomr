@@ -15,7 +15,7 @@ import './FormList.css';
 const FormList = props =>  {
     return (
         <div className="forms">
-          <div className="forms--upper">
+          <div className="forms--blocking">
             <Form 
               data={props.data}
               formAction={props.onBlockRoomSubmit}
@@ -29,22 +29,22 @@ const FormList = props =>  {
               datalistName="unblock"
             />
           </div>
-          <div className="forms--lower">
-            {props.isAdmin && < Form
+          {props.isAdmin && <div className="forms--rooms">
+            < Form
               data={props.data}
               formAction={props.onAddRoomSubmit}
               buttonValue="▹ add room"
               DataListRequired="false"
-              noSelect="true"
-            />}
-            {props.isAdmin && <Form
+              noSelect
+            />
+            <Form
               data={props.data}
               formAction={props.onDeleteRoomSubmit}
               buttonValue="▹ delete room" 
-              noSelect="true"
+              noSelect
               datalistName="delete"
-            />}
-          </div>
+            />
+          </div>}
         </div>
     )
 }
