@@ -29,7 +29,8 @@ const FormList = props =>  {
               datalistName="unblock"
             />
           </div>
-          {props.isAdmin && <div className="forms--rooms">
+          {props.showSettings && 
+          <div className="forms--rooms">
             < Form
               data={props.data}
               formAction={props.onAddRoomSubmit}

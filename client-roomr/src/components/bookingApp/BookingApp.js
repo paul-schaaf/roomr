@@ -6,6 +6,7 @@ import ErrorPage from './errorPages/ErrorPage';
 import roomrapi from '../../apis/roomrapi';
 import ErrorMessage from './errorPages/ErrorMessage';
 import LogoutButton from './LogoutButton';
+import SettingsButton from './SettingsButton';
 
 import './BookingApp.css';
 
@@ -31,7 +32,8 @@ class BookingPage extends React.Component {
     data: [],
     errorMessage:'',
     errorType:'',
-    isAdmin: (this.props.match.params.isAdmin === 'admin') ? true : false
+    isAdmin: (this.props.match.params.isAdmin === 'admin') ? true : false,
+    showSettings: false
   };
 
   async componentDidMount() {
@@ -66,6 +68,10 @@ class BookingPage extends React.Component {
   onErrorButtonClick = () => {
     this.setState({ errorMessage: '', errorType: '' });
   }
+
+  onSettingsButtonClick = () => {
+    this.setState({ showSettings: !this.state.showSettings });
+  }
   
   render() { //app is awaiting server response
     if (this.state.getStatus === "pending" && this.state.errorType === '') {
@@ -92,8 +98,13 @@ class BookingPage extends React.Component {
           <ErrorMessage errorMessage={this.state.errorMessage} onErrorButtonClick={this.onErrorButtonClick}/>
           <div className="form-area">
             <LogoutButton />
+            {this.props.match.params.isAdmin &&
+            <SettingsButton
+              onSettingsButtonClick={this.onSettingsButtonClick}
+              showSettings={this.state.showSettings}
+            />}
             <FormList
-              isAdmin={this.props.match.params.isAdmin}
+              showSettings={this.state.showSettings}
               data={this.state.data}
               onAddRoomSubmit={this.onAddRoomSubmit} 
               onDeleteRoomSubmit={this.onDeleteRoomSubmit}
@@ -118,8 +129,13 @@ class BookingPage extends React.Component {
         <React.Fragment>
           <div className="form-area">
             <LogoutButton />
+            {this.props.match.params.isAdmin &&
+            <SettingsButton
+              onSettingsButtonClick={this.onSettingsButtonClick}
+              showSettings={this.state.showSettings}
+            />}
             <FormList
-              isAdmin={this.props.match.params.isAdmin}
+              showSettings={this.state.showSettings}
               data={this.state.data}
               onAddRoomSubmit={this.onAddRoomSubmit} 
               onDeleteRoomSubmit={this.onDeleteRoomSubmit}
@@ -141,8 +157,13 @@ class BookingPage extends React.Component {
     return (
       <div className="form-area">
         <LogoutButton />
+        {this.props.match.params.isAdmin &&
+            <SettingsButton
+              onSettingsButtonClick={this.onSettingsButtonClick}
+              showSettings={this.state.showSettings}
+            />}
         <FormList
-          isAdmin={this.props.match.params.isAdmin}
+          showSettings={this.state.showSettings}
           data={this.state.data}
           onAddRoomSubmit={this.onAddRoomSubmit} 
           onDeleteRoomSubmit={this.onDeleteRoomSubmit}
