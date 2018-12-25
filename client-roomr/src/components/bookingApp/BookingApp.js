@@ -5,6 +5,7 @@ import TimeLine from './infoArea/TimeLine';
 import ErrorPage from './errorPages/ErrorPage';
 import roomrapi from '../../apis/roomrapi';
 import ErrorMessage from './errorPages/ErrorMessage';
+import LogoutButton from './LogoutButton';
 
 import './BookingApp.css';
 
@@ -89,6 +90,7 @@ class BookingPage extends React.Component {
         <React.Fragment>
           <ErrorMessage errorMessage={this.state.errorMessage} onErrorButtonClick={this.onErrorButtonClick}/>
           <div className="form-area">
+            <LogoutButton />
             <FormList
               data={this.state.data}
               onAddRoomSubmit={this.onAddRoomSubmit} 
@@ -113,6 +115,7 @@ class BookingPage extends React.Component {
       return (
         <React.Fragment>
           <div className="form-area">
+            <LogoutButton />
             <FormList
               data={this.state.data}
               onAddRoomSubmit={this.onAddRoomSubmit} 
@@ -134,6 +137,7 @@ class BookingPage extends React.Component {
     //request successful but database still empty
     return (
       <div className="form-area">
+        <LogoutButton />
         <FormList
           data={this.state.data}
           onAddRoomSubmit={this.onAddRoomSubmit} 
