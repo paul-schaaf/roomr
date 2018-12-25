@@ -1,19 +1,25 @@
 .forms {
   /*border-top:1px solid #1E4363; */
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+.forms--upper {
+  display: flex;
+}
+
+.forms--lower {
+  display:flex;
 }
 
 @media screen and (max-width: 600px) {
   .forms {
     border-top:1px solid #1E4363;
-    display:block;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .forms {
-    justify-content: left;
   }
 
+  .forms--upper {
+    flex-direction: column;
+  }
 }
