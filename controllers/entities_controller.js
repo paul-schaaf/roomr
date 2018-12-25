@@ -62,7 +62,12 @@ module.exports = {
   createEntity: async (req, res, next) => {
     const entityProps = req.body;
     if(entityProps.entity === '') {
-      //'return' is required here or node will throw an error
+      /*
+      * 'return' is required here or node will throw an error
+      * this is because it runs the rest of the code below the redirect
+      * when it should just exit the function
+      * 'return' makes sure this happens
+      */
       return res.redirect('../../login/createNone');
     }
     try {
