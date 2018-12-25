@@ -72,6 +72,10 @@ class BookingPage extends React.Component {
   onSettingsButtonClick = () => {
     this.setState({ showSettings: !this.state.showSettings });
   }
+
+  componentWillUnmount = () => {
+    roomrapi.clearRoomInterval();
+  }
   
   render() { //app is awaiting server response
     if (this.state.getStatus === "pending" && this.state.errorType === '') {

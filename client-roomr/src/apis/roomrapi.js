@@ -14,6 +14,8 @@ import axiosErrorHandler from '../errorHandling/axiosErrorHandler';
 * unblockRoom: "un"-reserves room
 */
 
+let roomInterval;
+
 const setRoomDataOnce = async (appState) => {
   const response = await axios.get('/api/entities/rooms');
   appState.setState({ data: response.data, getStatus: 'successful' });
@@ -31,12 +33,16 @@ const setRoomDataOnce = async (appState) => {
 * the set interval function
 */
 const setRoomDataLoop = async (appState) => {
-  setInterval(async () => {
+  roomInterval = setInterval(async () => {
     try {
       const response = await axios.get('/api/entities/rooms');
       appState.setState({ data: response.data, getStatus: 'successful' });
     } catch (err) {
-      appState.setState({ getStatus: 'failed' });
+      if (err.response) {
+        appState.setState({ errorMessage: err.response.data.message, errorType: err.response.data.type });
+      } else if (err.request) { // this error appears when there is no response from the server
+        appState.setState({ getStatus: 'failed', errorType: 'serverError' });
+      }
     }
   }, 10000);
 };
@@ -111,6 +117,10 @@ const roomrapi = {
   handledUnblockRoom: async (appState, reqData) => {
     await axiosErrorHandler(unblockRoom, appState, reqData);
   },
+  //It is necessary to clear the interval. Otherwise it will try to keep running even with BookingApp Unmounted
+  clearRoomInterval: () => {
+    clearInterval(roomInterval);
+  }
 };
 
 export default roomrapi;
