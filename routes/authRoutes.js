@@ -16,6 +16,7 @@ module.exports = app => {
     if (req.user) {
       const user = req.user;
       user.activeEntity = 'none';
+      user.isAdminNow = false;
       await user.save();
       req.logout();
     }

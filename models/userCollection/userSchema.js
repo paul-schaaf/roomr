@@ -12,6 +12,11 @@ const userSchema = new Schema ({
     default: 'none',
     required:true
   },
+  isAdminNow: {
+    type: Boolean,
+    default: false,
+    required:true
+  },
   entities: [entities]
 });
 
