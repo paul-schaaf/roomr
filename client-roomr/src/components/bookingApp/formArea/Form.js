@@ -98,7 +98,7 @@ class Form extends React.Component {
       return (
         <form /*onSubmit={this.onUserFormSubmit} */>
           <input className="input-user input-user--email" autoComplete="off" name="email" onChange={this.onInputChange} value={this.state.email} type="text" placeholder="email..."></input>
-          <input className="submit-button" type="submit" value={this.props.buttonValue}></input>
+          <input disabled className="submit-button" type="submit" value={this.props.buttonValue}></input>
         </form>
       )
     }
