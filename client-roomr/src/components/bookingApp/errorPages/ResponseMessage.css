@@ -5,9 +5,6 @@
   justify-content: center;
 
   color:white;
-  /*background: #1E4363;*/
-  background: #BC2D19;
-
   height:40px;
 }
 
@@ -20,14 +17,11 @@
 .response-button {
   border: 1px solid white;
   background: #BC2D19;
-  color:white;
   border-radius:5px;
   cursor: pointer;
 }
 
 .response-button:hover {
-  background:white;
-  color:#BC2D19;
   transition: .5s ease;
 }
 

@@ -108,7 +108,8 @@ class BookingPage extends React.Component {
     if (this.state.getStatus === "successful" && this.state.data.length > 0){
       return (
         <React.Fragment>
-          {this.state.errorType === 'clientError' && <ResponseMessage responseMessage={this.state.responseMessage} onMessageButtonClick={this.onMessageButtonClick}/>}
+          {this.state.errorType === 'clientError' && <ResponseMessage clientError responseMessage={this.state.responseMessage} onMessageButtonClick={this.onMessageButtonClick}/>}
+          {!this.state.errorType && this.state.responseMessage && <ResponseMessage responseMessage={this.state.responseMessage} onMessageButtonClick={this.onMessageButtonClick}/>}
           <div className="form-area">
             <LogoutButton />
             {this.props.match.params.isAdmin &&
