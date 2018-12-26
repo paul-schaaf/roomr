@@ -99,26 +99,27 @@ module.exports = {
       res.redirect('../../login/createFail');
     }
   },
-  //expects json with {entity, email, and password}
+  //expects json with {email, and password}
   createUser: async (req, res, next) => {
     const userProps = req.body;
+    const entityName = req.user.activeEntity;
     try {
-      const entity = await Entity.findOne({ name: userProps.entity });
+      const entity = await Entity.findOne({ name: entityName });
       if (!entity) {
         res.locals.type = 'clientError';
-        throw new Error(`There is no entity called:${userProps.entity}`);
+        throw new Error(`There is no entity called:${entityName}`);
       }
       const userDoesNotExist = entity.users.every(user => user.email !== userProps.email);
       if (userDoesNotExist) {
         await entity.users.push(userProps);
         const user = await User.findOne({ email: userProps.email });
         if(user) {
-          await user.entities.push({ name: userProps.entity });
+          await user.entities.push({ name: entityName });
           await user.save();
         } else {
           await User.create({ email: userProps.email });
           const user = await User.findOne({ email: userProps.email });
-          await user.entities.push({ name: userProps.entity });
+          await user.entities.push({ name: entityName });
           await user.save();
         }
         await entity.save();

@@ -6,11 +6,7 @@
   align-items: center;
 }
 
-.forms--blocking {
-  display: flex;
-}
-
-.forms--rooms {
+.formbox {
   display:flex;
 }
 
@@ -25,15 +21,14 @@
 
 }
 
-@media (max-width: 1000px) {
-  .forms--rooms {
-    display:none;
-  }
-}
-
 @media (min-width: 1000px) {
   .forms--rooms {
     margin-top:20px;
+    margin-bottom:5px;
+  }
+
+  .forms--users {
+    margin-top:15px;
     margin-bottom:5px;
   }
 }

@@ -92,6 +92,21 @@ const unblockRoom = async (appState, reqData) => {
   appState.setState({ errorMessage: '' });
 };
 
+const addUser = async (appState, reqData) => {
+  const { email, password } = reqData;
+  if (email === '') {
+    throw new Error('Please enter an email before submitting!');
+  }
+  if (password === '') {
+    throw new Error('Please enter a password before submitting!');
+  }
+
+  await axios.post('/api/entities/users', {
+    email,
+    password,
+  });
+};
+
 const roomrapi = {
 
   handledSetRoomDataOnce: async (appState) => {
@@ -116,6 +131,10 @@ const roomrapi = {
 
   handledUnblockRoom: async (appState, reqData) => {
     await axiosErrorHandler(unblockRoom, appState, reqData);
+  },
+
+  handledAddUser: async (appState, reqData) => {
+    await axiosErrorHandler(addUser, appState, reqData);
   },
   //It is necessary to clear the interval. Otherwise it will try to keep running even with BookingApp Unmounted
   clearRoomInterval: () => {

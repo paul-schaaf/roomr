@@ -43,9 +43,11 @@ const timeArray = [
 
 class Form extends React.Component {
   state = {
-    "start":"09:00",
-    "end":"09:15",
-    "room": ''
+    start:"09:00",
+    end:"09:15",
+    room: '',
+    email: '',
+    password: ''
   }
 
   onInputChange = (event) => {
@@ -62,28 +64,55 @@ class Form extends React.Component {
     }
   }
 
-  onFormSubmit = event => {
+  onRoomFormSubmit = event => {
     event.preventDefault();
     this.props.formAction({
-      "roomName": this.state.room,
-      "start": this.state.start,
-      "end": this.state.end
+      roomName: this.state.room,
+      start: this.state.start,
+      end: this.state.end
     })
     this.setState({ "room": '' });
   }
 
+  onUserFormSubmit = event => {
+    event.preventDefault();
+    this.props.formAction({
+      email: this.state.email,
+      password: this.state.password
+    })
+    this.setState({ email: '', password: '' });
+  }
+
   render () {
+    if (this.props.userForm && !this.props.deleteForm) {
+      return (
+        <form onSubmit={this.onUserFormSubmit}>
+          <input className="input-user input-user--email" autoComplete="off" name="email" onChange={this.onInputChange} value={this.state.email} type="text" placeholder="email..."></input>
+          <input className="input-user input-user--password" autoComplete="off" name="password" onChange={this.onInputChange} value={this.state.password} type="text" placeholder="password..."></input>
+          <input className="submit-button" type="submit" value={this.props.buttonValue}></input>
+        </form>
+      )
+    }
+
+    if (this.props.userForm && this.props.deleteForm) {
+      return (
+        <form /*onSubmit={this.onUserFormSubmit} */>
+          <input className="input-user input-user--email" autoComplete="off" name="email" onChange={this.onInputChange} value={this.state.email} type="text" placeholder="email..."></input>
+          <input className="submit-button" type="submit" value={this.props.buttonValue}></input>
+        </form>
+      )
+    }
     if (this.props.noSelect) {
       return (
-        <form onSubmit={this.onFormSubmit}>
+        <form onSubmit={this.onRoomFormSubmit}>
             <input className="input-room" autoComplete="off" name="room" list={this.props.datalistName} onChange={this.onInputChange} value={this.state.room} type="text" placeholder="room..."></input>
             <DataList required={this.props.DataListRequired} id={this.props.datalistName} data={this.props.data}/>
             <input className="submit-button" type="submit" value={this.props.buttonValue}></input>
-      </form>
+        </form>
       )
     } else {
       return(
-        <form onSubmit={this.onFormSubmit}>
+        <form onSubmit={this.onRoomFormSubmit}>
               <input className="input-room" autoComplete="off" name="room" list={this.props.datalistName} onChange={this.onInputChange} value={this.state.room} type="text" placeholder="room..."></input>
               <DataList required={this.props.DataListRequired} id={this.props.datalistName} data={this.props.data}/>
               <select name="start" onChange={this.onInputChange} value={this.state.start} type="text">

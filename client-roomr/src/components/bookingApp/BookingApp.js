@@ -65,6 +65,18 @@ class BookingPage extends React.Component {
     roomrapi.handledSetRoomDataOnce(this);
   }
 
+  onAddUserSubmit = async (reqData) => {
+    await this.setState({ errorMessage: '', errorType: '' });
+    await roomrapi.handledAddUser(this, reqData);
+    roomrapi.handledSetRoomDataOnce(this);
+  }
+
+  onDeleteUserSubmit = async (reqData) => {
+    await this.setState({ errorMessage: '', errorType: '' });
+    await roomrapi.handledDeleteUser(this, reqData);
+    roomrapi.handledSetRoomDataOnce(this);
+  }
+
   onErrorButtonClick = () => {
     this.setState({ errorMessage: '', errorType: '' });
   }
@@ -111,6 +123,8 @@ class BookingPage extends React.Component {
               onDeleteRoomSubmit={this.onDeleteRoomSubmit}
               onBlockRoomSubmit={this.onBlockRoomSubmit}
               onUnblockRoomSubmit={this.onUnblockRoomSubmit}
+              onAddUserSubmit={this.onAddUserSubmit}
+              onDeleteUserSubmit={this.onDeleteUserSubmit}
             />
           </div>
           <div className="info-area">
@@ -141,6 +155,8 @@ class BookingPage extends React.Component {
             onDeleteRoomSubmit={this.onDeleteRoomSubmit}
             onBlockRoomSubmit={this.onBlockRoomSubmit}
             onUnblockRoomSubmit={this.onUnblockRoomSubmit}
+            onAddUserSubmit={this.onAddUserSubmit}
+            onDeleteUserSubmit={this.onDeleteUserSubmit}
           />
         </div>
       </React.Fragment>
