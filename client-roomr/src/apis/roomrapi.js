@@ -53,7 +53,7 @@ const addRoom = async (appState, reqData) => {
     throw new Error('Please enter a room before submitting!');
   }
   await axios.post('/api/entities/rooms', { roomName });
-  appState.setState({ responseMessage: '' });
+  appState.setState({ responseMessage: 'Successfully added room: ' + roomName});
 };
 
 const deleteRoom = async (appState, reqData) => {
@@ -62,7 +62,7 @@ const deleteRoom = async (appState, reqData) => {
     throw new Error('Please enter a room before submitting!');
   }
   await axios.delete(`/api/entities/rooms/${roomName}`);
-  appState.setState({ responseMessage: '' });
+  appState.setState({ responseMessage: 'Successfully deleted room: ' + roomName});
 };
 
 const blockRoom = async (appState, reqData) => {
@@ -75,7 +75,7 @@ const blockRoom = async (appState, reqData) => {
     start,
     end,
   });
-  appState.setState({ responseMessage: 'Successfully blocked room' });
+  appState.setState({ responseMessage: 'Successfully blocked room: ' + roomName});
 };
 
 
@@ -89,7 +89,7 @@ const unblockRoom = async (appState, reqData) => {
     start,
     end,
   });
-  appState.setState({ responseMessage: '' });
+  appState.setState({ responseMessage: 'Successfully unblocked room: ' + roomName});
 };
 
 const addUser = async (appState, reqData) => {
@@ -105,6 +105,8 @@ const addUser = async (appState, reqData) => {
     email,
     password,
   });
+
+  appState.setState({ responseMessage: 'Successfully added user: ' + email });
 };
 
 const roomrapi = {
