@@ -31,7 +31,7 @@ const FormList = props =>  {
           </div>
           {props.showSettings && 
           <div className="formbox forms--rooms">
-            < Form
+            <Form
               data={props.data}
               formAction={props.onAddRoomSubmit}
               buttonValue="▹ add room"
@@ -48,7 +48,7 @@ const FormList = props =>  {
           </div>}
           {props.showSettings &&
           <div className="formbox forms--users">
-            < Form
+            <Form
               data={props.data}
               formAction={props.onAddUserSubmit}
               buttonValue="▹ add user"
