@@ -17,7 +17,7 @@ import './BookingApp.css';
 *
 * state.errorType shows the type of error in a shorter format
 *
-* state.errorMessage saves whether all other requests(post, delete) were successful and renders dynamic error messages
+* state.responseMessage saves whether all other requests(post, delete) were successful and renders dynamic error messages
 * depending for example on the server response using ErrorMessage.js
 *
 * state.data holds all data received through the get requests and App.js passes that data down to the individual components
@@ -30,7 +30,7 @@ class BookingPage extends React.Component {
   state = {
     getStatus: 'pending',
     data: [],
-    errorMessage:'',
+    responseMessage:'',
     errorType:'',
     isAdmin: (this.props.match.params.isAdmin === 'admin') ? true : false,
     showSettings: false
@@ -42,43 +42,43 @@ class BookingPage extends React.Component {
   };
     
   onAddRoomSubmit = async (reqData) => {
-    await this.setState({ errorMessage: '', errorType: '' });
+    await this.setState({ responseMessage: '', errorType: '' });
     await roomrapi.handledAddRoom(this, reqData);
     roomrapi.handledSetRoomDataOnce(this);
   }
 
   onDeleteRoomSubmit = async (reqData) => {
-    await this.setState({ errorMessage: '', errorType: '' });
+    await this.setState({ responseMessage: '', errorType: '' });
     await roomrapi.handledDeleteRoom(this, reqData);
     roomrapi.handledSetRoomDataOnce(this);
   }
 
   onBlockRoomSubmit = async (reqData) => {
-    await this.setState({ errorMessage: '', errorType: '' });
+    await this.setState({ responseMessage: '', errorType: '' });
     await roomrapi.handledBlockRoom(this, reqData);
     roomrapi.handledSetRoomDataOnce(this);
   }
 
   onUnblockRoomSubmit = async (reqData) => {
-    await this.setState({ errorMessage: '', errorType: '' });
+    await this.setState({ responseMessage: '', errorType: '' });
     await roomrapi.handledUnblockRoom(this, reqData);
     roomrapi.handledSetRoomDataOnce(this);
   }
 
   onAddUserSubmit = async (reqData) => {
-    await this.setState({ errorMessage: '', errorType: '' });
+    await this.setState({ responseMessage: '', errorType: '' });
     await roomrapi.handledAddUser(this, reqData);
     roomrapi.handledSetRoomDataOnce(this);
   }
 
   onDeleteUserSubmit = async (reqData) => {
-    await this.setState({ errorMessage: '', errorType: '' });
+    await this.setState({ responseMessage: '', errorType: '' });
     await roomrapi.handledDeleteUser(this, reqData);
     roomrapi.handledSetRoomDataOnce(this);
   }
 
   onErrorButtonClick = () => {
-    this.setState({ errorMessage: '', errorType: '' });
+    this.setState({ responseMessage: '', errorType: '' });
   }
 
   onSettingsButtonClick = () => {
@@ -101,14 +101,14 @@ class BookingPage extends React.Component {
     
     //errorPage for unauthorized login
     if(this.state.errorType === 'clientErrorUnauthorized') {
-      return <ErrorPage loginMessage={this.state.errorMessage} />
+      return <ErrorPage loginMessage={this.state.responseMessage} />
     }
     
     //request was successful and there is data in the database
     if (this.state.getStatus === "successful" && this.state.data.length > 0){
       return (
         <React.Fragment>
-          {this.state.errorType === 'clientError' && <ErrorMessage errorMessage={this.state.errorMessage} onErrorButtonClick={this.onErrorButtonClick}/>}
+          {this.state.errorType === 'clientError' && <ErrorMessage errorMessage={this.state.responseMessage} onErrorButtonClick={this.onErrorButtonClick}/>}
           <div className="form-area">
             <LogoutButton />
             {this.props.match.params.isAdmin &&
@@ -140,7 +140,7 @@ class BookingPage extends React.Component {
     //request successful but database still empty
     return (
       <React.Fragment>
-        {this.state.errorType === 'clientError' && <ErrorMessage errorMessage={this.state.errorMessage} onErrorButtonClick={this.onErrorButtonClick}/>}
+        {this.state.errorType === 'clientError' && <ErrorMessage errorMessage={this.state.responseMessage} onErrorButtonClick={this.onErrorButtonClick}/>}
         <div className="form-area">
           <LogoutButton />
           {this.props.match.params.isAdmin &&

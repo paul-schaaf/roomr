@@ -39,7 +39,7 @@ const setRoomDataLoop = async (appState) => {
       appState.setState({ data: response.data, getStatus: 'successful' });
     } catch (err) {
       if (err.response) {
-        appState.setState({ errorMessage: err.response.data.message, errorType: err.response.data.type });
+        appState.setState({ responseMessage: err.response.data.message, errorType: err.response.data.type });
       } else if (err.request) { // this error appears when there is no response from the server
         appState.setState({ getStatus: 'failed', errorType: 'serverError' });
       }
@@ -53,7 +53,7 @@ const addRoom = async (appState, reqData) => {
     throw new Error('Please enter a room before submitting!');
   }
   await axios.post('/api/entities/rooms', { roomName });
-  appState.setState({ errorMessage: '' });
+  appState.setState({ responseMessage: '' });
 };
 
 const deleteRoom = async (appState, reqData) => {
@@ -62,7 +62,7 @@ const deleteRoom = async (appState, reqData) => {
     throw new Error('Please enter a room before submitting!');
   }
   await axios.delete(`/api/entities/rooms/${roomName}`);
-  appState.setState({ errorMessage: '' });
+  appState.setState({ responseMessage: '' });
 };
 
 const blockRoom = async (appState, reqData) => {
@@ -75,7 +75,7 @@ const blockRoom = async (appState, reqData) => {
     start,
     end,
   });
-  appState.setState({ errorMessage: '' });
+  appState.setState({ responseMessage: '' });
 };
 
 
@@ -89,7 +89,7 @@ const unblockRoom = async (appState, reqData) => {
     start,
     end,
   });
-  appState.setState({ errorMessage: '' });
+  appState.setState({ responseMessage: '' });
 };
 
 const addUser = async (appState, reqData) => {
