@@ -11,7 +11,7 @@ module.exports = app => {
 
   app.post('/api/entities/rooms', requireLogin, requireAdmin, entitiesController.createRoom);
 
-  app.post('/api/entities/users', entitiesController.createUser);
+  app.post('/api/entities/users', requireLogin, requireAdmin, entitiesController.createUser);
 
   app.post('/api/entities/rooms/times-block', requireLogin, entitiesController.blockRoom);
 

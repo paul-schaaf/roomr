@@ -109,9 +109,10 @@ module.exports = {
         res.locals.type = 'clientError';
         throw new Error(`There is no entity called:${entityName}`);
       }
+      
       const userDoesNotExist = entity.users.every(user => user.email !== userProps.email);
       if (userDoesNotExist) {
-        await entity.users.push(userProps);
+        await entity.users.push({email: userProps.email, password: userProps.password, entity: entityName});
         const user = await User.findOne({ email: userProps.email });
         if(user) {
           await user.entities.push({ name: entityName });
