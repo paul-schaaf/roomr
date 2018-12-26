@@ -1,4 +1,4 @@
-.error-message {
+.response-message {
   text-align: center;
   display: flex;
   align-items: center;
@@ -11,13 +11,13 @@
   height:40px;
 }
 
-.error-message__text {
+.response-message__text {
   padding-right:5px;
   margin:0;
   margin-top:-1.5px;
 }
 
-.error-button {
+.response-button {
   border: 1px solid white;
   background: #BC2D19;
   color:white;
@@ -25,20 +25,20 @@
   cursor: pointer;
 }
 
-.error-button:hover {
+.response-button:hover {
   background:white;
   color:#BC2D19;
   transition: .5s ease;
 }
 
 @media screen and (max-width: 600px) {
-  .error-message{
+  .response-message{
     flex-direction: column;
     height:60px;
     padding:5px 20px 5px 20px;
   }
 
-  .error-message__text{
+  .response-message__text{
     margin-bottom:10px;
   }
 }

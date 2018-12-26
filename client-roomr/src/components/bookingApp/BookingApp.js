@@ -4,7 +4,7 @@ import RoomList from './infoArea/RoomList';
 import TimeLine from './infoArea/TimeLine';
 import ErrorPage from './errorPages/ErrorPage';
 import roomrapi from '../../apis/roomrapi';
-import ErrorMessage from './errorPages/ErrorMessage';
+import ResponseMessage from './errorPages/ResponseMessage';
 import LogoutButton from './LogoutButton';
 import SettingsButton from './SettingsButton';
 
@@ -18,7 +18,7 @@ import './BookingApp.css';
 * state.errorType shows the type of error in a shorter format
 *
 * state.responseMessage saves whether all other requests(post, delete) were successful and renders dynamic error messages
-* depending for example on the server response using ErrorMessage.js
+* depending for example on the server response using ResponseMessage.js
 *
 * state.data holds all data received through the get requests and App.js passes that data down to the individual components
 * in the case where
@@ -108,7 +108,7 @@ class BookingPage extends React.Component {
     if (this.state.getStatus === "successful" && this.state.data.length > 0){
       return (
         <React.Fragment>
-          {this.state.errorType === 'clientError' && <ErrorMessage errorMessage={this.state.responseMessage} onMessageButtonClick={this.onMessageButtonClick}/>}
+          {this.state.errorType === 'clientError' && <ResponseMessage responseMessage={this.state.responseMessage} onMessageButtonClick={this.onMessageButtonClick}/>}
           <div className="form-area">
             <LogoutButton />
             {this.props.match.params.isAdmin &&
@@ -140,7 +140,7 @@ class BookingPage extends React.Component {
     //request successful but database still empty
     return (
       <React.Fragment>
-        {this.state.errorType === 'clientError' && <ErrorMessage errorMessage={this.state.responseMessage} onMessageButtonClick={this.onMessageButtonClick}/>}
+        {this.state.errorType === 'clientError' && <ResponseMessage responseMessage={this.state.responseMessage} onMessageButtonClick={this.onMessageButtonClick}/>}
         <div className="form-area">
           <LogoutButton />
           {this.props.match.params.isAdmin &&
