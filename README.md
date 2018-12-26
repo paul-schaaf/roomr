@@ -56,6 +56,6 @@ the form at the top is a little difficult to reach and use
 ### Authentication System
 *WORK IN PROGRESS*: The authentication system is currently being worked on. It happens on different branches, not to interfere with the working master branch. It uses React router for client side routing and adds a login page, memberonly pages and an admin area. Server side authentication will be done using passport.js, specifically the passport-local strategy.
 
-Live on master-dev: It is now possible to create entities. This makes the creator admin of that entity. The creator can then log in and block and unblock rooms, show admin settings, add and remove rooms. Next comes more admin features such as adding and removing users (just the front-end, back-end is ready already)
+Live on master-dev: It is now possible to create entities. This makes the creator admin of that entity. The creator can then log in and block and unblock rooms, show admin settings, add and remove rooms. Admin can also add users that can log into the entity. He has to give them an email and password to add them. Deleting users is not yet available. ErrorMessage.js was edited to also show success messages when a form action succeeds
 
 More will follow...
