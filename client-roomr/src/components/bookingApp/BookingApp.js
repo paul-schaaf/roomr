@@ -77,7 +77,7 @@ class BookingPage extends React.Component {
     roomrapi.handledSetRoomDataOnce(this);
   }
 
-  onErrorButtonClick = () => {
+  onMessageButtonClick = () => {
     this.setState({ responseMessage: '', errorType: '' });
   }
 
@@ -108,7 +108,7 @@ class BookingPage extends React.Component {
     if (this.state.getStatus === "successful" && this.state.data.length > 0){
       return (
         <React.Fragment>
-          {this.state.errorType === 'clientError' && <ErrorMessage errorMessage={this.state.responseMessage} onErrorButtonClick={this.onErrorButtonClick}/>}
+          {this.state.errorType === 'clientError' && <ErrorMessage errorMessage={this.state.responseMessage} onMessageButtonClick={this.onMessageButtonClick}/>}
           <div className="form-area">
             <LogoutButton />
             {this.props.match.params.isAdmin &&
@@ -140,7 +140,7 @@ class BookingPage extends React.Component {
     //request successful but database still empty
     return (
       <React.Fragment>
-        {this.state.errorType === 'clientError' && <ErrorMessage errorMessage={this.state.responseMessage} onErrorButtonClick={this.onErrorButtonClick}/>}
+        {this.state.errorType === 'clientError' && <ErrorMessage errorMessage={this.state.responseMessage} onMessageButtonClick={this.onMessageButtonClick}/>}
         <div className="form-area">
           <LogoutButton />
           {this.props.match.params.isAdmin &&

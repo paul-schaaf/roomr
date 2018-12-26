@@ -7,7 +7,7 @@ import './ErrorMessage.css';
 class ErrorMessage extends React.Component {
 
   onErrorButtonClick = event => {
-    this.props.onErrorButtonClick();
+    this.props.onMessageButtonClick();
   }
 
   render () {

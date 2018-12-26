@@ -75,7 +75,7 @@ const blockRoom = async (appState, reqData) => {
     start,
     end,
   });
-  appState.setState({ responseMessage: '' });
+  appState.setState({ responseMessage: 'Successfully blocked room', errorType: 'clientError' });
 };
 
 
