@@ -4,7 +4,7 @@ import RoomList from './infoArea/RoomList';
 import TimeLine from './infoArea/TimeLine';
 import ErrorPage from './errorPages/ErrorPage';
 import roomrapi from '../../apis/roomrapi';
-import ResponseMessage from './errorPages/ResponseMessage';
+import ResponseMessage from './ResponseMessage';
 import LogoutButton from './LogoutButton';
 import SettingsButton from './SettingsButton';
 
