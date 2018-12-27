@@ -2,7 +2,7 @@ import React from 'react';
 import FormList from './formArea/FormList';
 import RoomList from './infoArea/RoomList';
 import TimeLine from './infoArea/TimeLine';
-import ErrorPage from './errorPages/ErrorPage';
+import ErrorPage from './specialPages/ErrorPage';
 import roomrapi from '../../apis/roomrapi';
 import ResponseMessage from './ResponseMessage';
 import LogoutButton from './LogoutButton';
