@@ -7,7 +7,7 @@ module.exports = app => {
 
   app.delete('/api/entities/rooms/:roomName', requireLogin, requireAdmin, entitiesController.deleteRoom);
 
-  app.delete('/api/entities/users/:user', requireLogin, requireAdmin, entitiesController.deleteUser);
+  app.delete('/api/entities/users/:email', requireLogin, requireAdmin, entitiesController.deleteUser);
 
   app.post('/api/entities', entitiesController.createEntity);
 
