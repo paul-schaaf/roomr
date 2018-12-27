@@ -14,11 +14,11 @@ class LoginMessage extends React.Component{
 
   async componentDidMount() {
     if(this.props.info === 'loginFail') {
-      await this.setState({ message: 'Incorrect Login Info ', background: '#BC2D19' });
+      await this.setState({ message: 'Incorrect login info ', background: '#BC2D19' });
     } else if (this.props.info === 'createSuccess') {
       await this.setState({ message: 'Entity created. You can now log in.', background: '#1E4363'});
     } else if (this.props.info === 'createFail') {
-      await this.setState({ message: 'This Entity exists already.', background: '#BC2D19' });
+      await this.setState({ message: 'This entity exists already.', background: '#BC2D19' });
     } else if (this.props.info === 'createNone') {
       await this.setState({ message: 'Please enter an entity name.', background: '#BC2D19' });
     } else if (this.props.info === 'createFailEmail') {

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Entity = mongoose.model('entities');
 const User = mongoose.model('users');
+const validator = require('email-validator');
 
 const timeArray = [
   '09:00',
@@ -70,9 +71,12 @@ module.exports = {
       */
       return res.redirect('../../login/createNone');
     }
+    if (!validator.validate(entityProps.email)) {
+      return res.redirect('../../login/createFailEmail');
+    }
     try {
-      const previousEntity = await Entity.findOne({ name: entityProps.entity });
-      if(previousEntity) {
+      const entityExists = await Entity.findOne({ name: entityProps.entity });
+      if(entityExists) {
         throw new Error();
       }
       await Entity.create({ name: entityProps.entity });
@@ -104,6 +108,10 @@ module.exports = {
     const userProps = req.body;
     const entityName = req.user.activeEntity;
     try {
+      if (!validator.validate(userProps.email)) {
+        res.locals.type = 'clientError';
+        throw new Error(`Please enter a valid email.`);
+      }
       const entity = await Entity.findOne({ name: entityName });
       if (!entity) {
         res.locals.type = 'clientError';
