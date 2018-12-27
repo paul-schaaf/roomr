@@ -158,9 +158,17 @@ module.exports = {
        */
       const userInEntity = entity.users.find(userObject => userObject.email === userEmail);
       if (userInEntity) {
+        /**
+        * any entity needs at least 1 admin to add or delete users,
+        * make others admins and delete the entity
+        */
+        if(userInEntity.isAdmin && entity.adminCount === 1) {
+          res.locals.type = 'clientError';
+          throw new Error('Every entity needs at least 1 admin.');
+        }
         const indexOfUser = entity.users.indexOf(userInEntity);
         entity.users.splice(indexOfUser, 1);
-        /**
+      /**
        * above the user was spliced from the user array
        * within its respective entity, below the entity
        * is spliced from the User in its user.entities

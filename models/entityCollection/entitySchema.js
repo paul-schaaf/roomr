@@ -9,6 +9,11 @@ const entitySchema = new Schema ({
     required: true,
     unique: true
   },
+  adminCount: {
+    type: Number,
+    required: true,
+    default: 1
+  },
   users: [users],
   rooms: [rooms]
 });
