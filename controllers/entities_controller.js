@@ -141,6 +141,51 @@ module.exports = {
       next(err);
     }
   },
+  //expects params with {user}
+  deleteUser: async (req, res, next) => {
+    const entityName = req.user.activeEntity;
+    const userEmail = req.params.email;
+    try{
+      const entity = await Entity.findOne({ name: entityName });
+      if (!entity) {
+        res.locals.type = 'clientError';
+        throw new Error(`There is no entity called:${entityName}`);
+      }
+      /**
+       * userInEntity refers to the userSubSchema within
+       * the entitySchema as as opposed to the userSchema
+       * entityInUser works vice-versa
+       */
+      const userInEntity = entity.users.find(userObject => userObject.email === userEmail);
+      if (userInEntity) {
+        const indexOfUser = entity.users.indexOf(userInEntity);
+        entity.users.splice(indexOfUser, 1);
+        /**
+       * above the user was spliced from the user array
+       * within its respective entity, below the entity
+       * is spliced from the User in its user.entities
+       * array. If the user has no more entities, the user
+       * is deleted
+       */
+        const user = await User.findOne({ email: userEmail });
+        const entityInUser = user.entities.find(entityObject => entityObject.name === entityName);
+        const indexOfEntity = user.entities.indexOf(entityInUser);
+        user.entities.splice(indexOfEntity, 1);
+        await user.save();
+        if (user.entities.length === 0) {
+          await User.deleteOne({ email: userEmail });
+        }
+        await entity.save();
+        res.send(`User: ${userEmail} successfully deleted`);
+      } else {
+        res.locals.type = 'clientError';
+        throw new Error(`There is no user called: ${userEmail}.`);
+      }
+    } catch(err) {
+      next(err);
+    }
+
+  },
   // expects json with {roomName}, uses req.user.activeEntity for {entity}
   createRoom: async (req, res, next) => {
     const entityName = req.user.activeEntity;
