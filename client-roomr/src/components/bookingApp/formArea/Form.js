@@ -84,20 +84,11 @@ class Form extends React.Component {
   }
 
   render () {
-    if (this.props.userForm && !this.props.deleteForm) {
+    if (this.props.userForm) {
       return (
         <form onSubmit={this.onUserFormSubmit}>
           <input className="input-user input-user--email" autoComplete="off" name="email" onChange={this.onInputChange} value={this.state.email} type="text" placeholder="email..."></input>
-          <input className="input-user input-user--password" autoComplete="off" name="password" onChange={this.onInputChange} value={this.state.password} type="text" placeholder="password..."></input>
-          <input className="submit-button" type="submit" value={this.props.buttonValue}></input>
-        </form>
-      )
-    }
-
-    if (this.props.userForm && this.props.deleteForm) {
-      return (
-        <form onSubmit={this.onUserFormSubmit}>
-          <input className="input-user input-user--email" autoComplete="off" name="email" onChange={this.onInputChange} value={this.state.email} type="text" placeholder="email..."></input>
+          {!this.props.deleteForm && <input className="input-user input-user--password" autoComplete="off" name="password" onChange={this.onInputChange} value={this.state.password} type="text" placeholder="password..."></input>} 
           <input className="submit-button" type="submit" value={this.props.buttonValue}></input>
         </form>
       )
