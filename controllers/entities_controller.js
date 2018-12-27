@@ -48,7 +48,7 @@ const timeArray = [
 
 module.exports = {
   //uses req.user.activeEntity 
-  getAllRooms: async (req, res, next) => {
+  getRooms: async (req, res, next) => {
     const entityName = req.user.activeEntity;
     try {
       const entity = await Entity.findOne({ name: entityName });
