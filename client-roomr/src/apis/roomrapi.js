@@ -52,6 +52,7 @@ const addRoom = async (appState, reqData) => {
   if (roomName === '') {
     throw new Error('Please enter a room before submitting!');
   }
+  appState.setState({ responseMessage: 'loading' });
   await axios.post('/api/entities/rooms', { roomName });
   appState.setState({ responseMessage: 'Successfully added room: ' + roomName});
 };
@@ -61,6 +62,7 @@ const deleteRoom = async (appState, reqData) => {
   if (roomName === '') {
     throw new Error('Please enter a room before submitting!');
   }
+  appState.setState({ responseMessage: 'loading' });
   await axios.delete(`/api/entities/rooms/${roomName}`);
   appState.setState({ responseMessage: 'Successfully deleted room: ' + roomName});
 };
@@ -70,6 +72,7 @@ const blockRoom = async (appState, reqData) => {
   if (roomName === '') {
     throw new Error('Please enter a room before submitting!');
   }
+  appState.setState({ responseMessage: 'loading' });
   await axios.post('/api/entities/rooms/times-block', {
     roomName,
     start,
@@ -84,6 +87,7 @@ const unblockRoom = async (appState, reqData) => {
   if (roomName === '') {
     throw new Error('Please enter a room before submitting!');
   }
+  appState.setState({ responseMessage: 'loading' });
   await axios.post('/api/entities/rooms/times-unblock', {
     roomName,
     start,
@@ -100,7 +104,7 @@ const addUser = async (appState, reqData) => {
   if (password === '') {
     throw new Error('Please enter a password before submitting!');
   }
-
+  appState.setState({ responseMessage: 'loading' });
   await axios.post('/api/entities/users', {
     email,
     password,
@@ -114,6 +118,7 @@ const deleteUser = async (appState, reqData) => {
   if (email === '') {
     throw new Error('Please enter an email before submitting!');
   }
+  appState.setState({ responseMessage: 'loading' });
   await axios.delete(`/api/entities/users/${email}`);
   appState.setState({ responseMessage: 'Successfully deleted user: ' + email });
 }

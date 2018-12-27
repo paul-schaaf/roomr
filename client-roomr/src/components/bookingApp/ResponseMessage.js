@@ -6,15 +6,19 @@ import './ResponseMessage.css';
 */
 class ResponseMessage extends React.Component {
   state =  {
-    background: '',
-    buttonBackground: '',
-    buttonColor: ''
+    background: '#1E4363',
+    buttonBackground: '#1E4363',
+    buttonColor: 'white'
   }
 
+
+
   componentDidMount = async () => {
-    await this.setState({ background: (this.props.clientError) ? '#BC2D19' : '#1E4363' });
-    this.setState({ buttonBackground: this.state.background });
-    this.setState({ buttonColor: 'white' });
+    if (this.props.clientError) {
+      await this.setState({ background: '#BC2D19' });
+      await this.setState({ buttonBackground: this.state.background });
+      this.setState({ buttonColor: 'white' });
+    }
   }
 
   onMessageButtonClick = event => {
@@ -34,14 +38,17 @@ class ResponseMessage extends React.Component {
   render () {
     return (
       <div style={{ background: this.state.background }} className="response-message">
-        <p className="response-message__text">{this.props.responseMessage}</p>
-        <button
+        {this.props.responseMessage !== 'loading' && 
+        <p className="response-message__text">{this.props.responseMessage}</p>}
+        {this.props.responseMessage !== 'loading' && <button
         style={{ background: this.state.buttonBackground, color: this.state.buttonColor }}
         onMouseEnter={this.onIsHovered}
         onMouseLeave={this.onIsNotHovered}
         className="response-button"
         type="button"
-        onClick={this.onMessageButtonClick}>X</button>
+        onClick={this.onMessageButtonClick}>X</button>}
+        {this.props.responseMessage === 'loading' &&
+        <div className="response-message__loading-box"></div>}
       </div>
     )
   }
