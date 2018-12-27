@@ -21,6 +21,8 @@ class LoginMessage extends React.Component{
       await this.setState({ message: 'This Entity exists already.', background: '#BC2D19' });
     } else if (this.props.info === 'createNone') {
       await this.setState({ message: 'Please enter an entity name.', background: '#BC2D19' });
+    } else if (this.props.info === 'createFailEmail') {
+      await this.setState({ message: 'Please enter a valid email.', background: '#BC2D19' });
     }
     this.setState({ buttonBackground: this.state.background });
   }

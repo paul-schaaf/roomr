@@ -33,6 +33,11 @@
   transition: .5s ease;
 }
 
+.login-button--createFailEmail:hover {
+  color:#BC2D19;
+  transition: .5s ease;
+}
+
 .login-button--createSuccess:hover {
   color:#1E4363;
   transition: .5s ease;
