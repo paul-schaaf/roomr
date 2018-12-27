@@ -94,7 +94,7 @@ class BookingPage extends React.Component {
     if (this.state.getStatus === "pending" && this.state.errorType === '') {
       return <LoadingPage />
     } 
-
+    
     //the request failed because the server didnt respond
     if (this.state.getStatus === "failed" && this.state.errorType === 'serverError') {
       return <ErrorPage />

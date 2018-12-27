@@ -12,4 +12,19 @@
   width:50px;
   background: #1E4363;
   border-radius:100%;
+  transform: translateX(-50px);
+
+  animation: .5s loading ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes loading{
+  0% {
+    transform: translateX(-50px);
+  }
+
+  100% {
+    transform: translateX(50px);
+  }
 }
