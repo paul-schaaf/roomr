@@ -43,8 +43,8 @@ const timeArray = [
 
 class Form extends React.Component {
   state = {
-    start:"09:00",
-    end:"09:15",
+    start:'09:00',
+    end:'09:15',
     room: '',
     email: '',
     password: ''
@@ -60,7 +60,7 @@ class Form extends React.Component {
     const indexStart = timeArray.indexOf(this.state.start);
     const indexEnd = timeArray.indexOf(this.state.end);
     if (indexEnd < indexStart) {
-      this.setState({ "end": timeArray[indexStart + 1]})
+      this.setState({ end: timeArray[indexStart + 1]})
     }
   }
 
@@ -71,7 +71,7 @@ class Form extends React.Component {
       start: this.state.start,
       end: this.state.end
     })
-    this.setState({ "room": '' });
+    this.setState({ room: '' });
   }
 
   onUserFormSubmit = event => {
