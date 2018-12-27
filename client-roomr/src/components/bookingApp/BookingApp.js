@@ -99,12 +99,12 @@ class BookingPage extends React.Component {
       return <ErrorPage />
     } 
     
-    //errorPage for unauthorized login
+    //errorPage for unauthorized access
     if(this.state.errorType === 'clientErrorUnauthorized') {
       return <ErrorPage loginMessage={this.state.responseMessage} />
     }
     
-    //request was successful and there is data in the database
+    //request was successful
     if (this.state.getStatus === "successful"){
       return (
         <React.Fragment>
