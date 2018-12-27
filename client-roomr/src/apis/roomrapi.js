@@ -109,6 +109,15 @@ const addUser = async (appState, reqData) => {
   appState.setState({ responseMessage: 'Successfully added user: ' + email });
 };
 
+const deleteUser = async (appState, reqData) => {
+  const { email } = reqData;
+  if (email === '') {
+    throw new Error('Please enter an email before submitting!');
+  }
+  await axios.delete(`/api/entities/users/${email}`);
+  appState.setState({ responseMessage: 'Successfully deleted user: ' + email });
+}
+
 const roomrapi = {
 
   handledSetRoomDataOnce: async (appState) => {
@@ -137,6 +146,10 @@ const roomrapi = {
 
   handledAddUser: async (appState, reqData) => {
     await axiosErrorHandler(addUser, appState, reqData);
+  },
+
+  handledDeleteUser: async (appState, reqData) => {
+    await axiosErrorHandler(deleteUser, appState, reqData);
   },
   //It is necessary to clear the interval. Otherwise it will try to keep running even with BookingApp Unmounted
   clearRoomInterval: () => {
