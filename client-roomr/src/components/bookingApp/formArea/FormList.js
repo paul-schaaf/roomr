@@ -21,12 +21,14 @@ const FormList = props =>  {
               formAction={props.onBlockRoomSubmit}
               buttonValue="▹ reserve room"
               datalistName="reserve"
+              select
             />
             <Form
               data={props.data}
               formAction={props.onUnblockRoomSubmit}
               buttonValue="▹ unblock room"
               datalistName="unblock"
+              select
             />
           </div>
           {props.showSettings && 
@@ -36,13 +38,13 @@ const FormList = props =>  {
               formAction={props.onAddRoomSubmit}
               buttonValue="▹ add room"
               DataListRequired="false"
-              noSelect
+              
             />
             <Form
               data={props.data}
               formAction={props.onDeleteRoomSubmit}
               buttonValue="▹ delete room" 
-              noSelect
+              
               datalistName="delete"
             />
           </div>}
