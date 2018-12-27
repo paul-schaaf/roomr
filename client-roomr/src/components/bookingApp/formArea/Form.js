@@ -93,29 +93,23 @@ class Form extends React.Component {
         </form>
       )
     }
-    if (this.props.noSelect) {
-      return (
-        <form onSubmit={this.onRoomFormSubmit}>
-            <input className="input-room" autoComplete="off" name="room" list={this.props.datalistName} onChange={this.onInputChange} value={this.state.room} type="text" placeholder="room..."></input>
-            <DataList required={this.props.DataListRequired} id={this.props.datalistName} data={this.props.data}/>
-            <input className="submit-button" type="submit" value={this.props.buttonValue}></input>
-        </form>
-      )
-    } else {
-      return(
-        <form onSubmit={this.onRoomFormSubmit}>
-              <input className="input-room" autoComplete="off" name="room" list={this.props.datalistName} onChange={this.onInputChange} value={this.state.room} type="text" placeholder="room..."></input>
-              <DataList required={this.props.DataListRequired} id={this.props.datalistName} data={this.props.data}/>
-              <select name="start" onChange={this.onInputChange} value={this.state.start} type="text">
-                <InputTimes />
-              </select>
-              <select name="end" onChange={this.onInputChange} value={this.state.end} type="text">
-                <InputTimes start={this.state.start}/>
-              </select>
-              <input className="submit-button" type="submit" value={this.props.buttonValue}></input>
-        </form>
-      )
-    }
+    
+    return(
+      <form onSubmit={this.onRoomFormSubmit}>
+        <input className="input-room" autoComplete="off" name="room" list={this.props.datalistName} onChange={this.onInputChange} value={this.state.room} type="text" placeholder="room..."></input>
+        <DataList required={this.props.DataListRequired} id={this.props.datalistName} data={this.props.data}/>
+        {!this.props.noSelect &&
+        <select name="start" onChange={this.onInputChange} value={this.state.start} type="text">
+          <InputTimes />
+        </select>}
+        {!this.props.noSelect &&
+        <select name="end" onChange={this.onInputChange} value={this.state.end} type="text">
+          <InputTimes start={this.state.start}/>
+        </select>}
+        <input className="submit-button" type="submit" value={this.props.buttonValue}></input>
+      </form>
+    )
+    
     
   }
 }
