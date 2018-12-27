@@ -1,0 +1,15 @@
+.loading-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height:100vh;
+}
+
+.loading-box {
+  height:50px;
+  width:50px;
+  background: #1E4363;
+  border-radius:100%;
+}

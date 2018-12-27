@@ -3,6 +3,7 @@ import FormList from './formArea/FormList';
 import RoomList from './infoArea/RoomList';
 import TimeLine from './infoArea/TimeLine';
 import ErrorPage from './specialPages/ErrorPage';
+import LoadingPage from './specialPages/LoadingPage';
 import roomrapi from '../../apis/roomrapi';
 import ResponseMessage from './ResponseMessage';
 import LogoutButton from './LogoutButton';
@@ -91,7 +92,7 @@ class BookingPage extends React.Component {
   
   render() { //app is awaiting server response
     if (this.state.getStatus === "pending" && this.state.errorType === '') {
-      return <div>Loading...</div>
+      return <LoadingPage />
     } 
 
     //the request failed because the server didnt respond
