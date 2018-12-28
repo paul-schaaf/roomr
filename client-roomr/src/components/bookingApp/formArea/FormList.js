@@ -62,7 +62,7 @@ const FormList = props =>  {
             />
            </div>}
           {props.showSettings &&
-          <div className="formbox forms--users">
+          <div className="formbox forms--admins">
             <Form
               data={props.data}
               formAction={props.onMakeAdminSubmit}
