@@ -136,7 +136,7 @@ const validator = require('email-validator');
   },
   //expects json with {email}
   unmakeAdmin: async (req, res, next) => {
-    const entityName = req.body.entity;
+    const entityName = req.user.activeEntity;
     const userEmail = req.body.email;
     try{
       const entity = await Entity.findOne({ name: entityName });
