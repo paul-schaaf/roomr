@@ -1,10 +1,3 @@
-.forms {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .formbox {
   display:flex;
 }
@@ -24,6 +17,7 @@
   .forms--rooms {
     margin-top:20px;
     margin-bottom:5px;
+    margin-left:94px;
   }
 
   .forms--users {

@@ -83,6 +83,13 @@ padding: 1.5px 5px 1.5px 5px;
   width:150px;
 }
 
+.form--delete-room{
+  margin-left:32px;
+}
+
+.form--delete-room .submit-button {
+  margin-left:104px;
+}
 
 @media screen and (max-width: 600px) {
 
