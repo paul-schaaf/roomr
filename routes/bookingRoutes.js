@@ -14,9 +14,9 @@ module.exports = app => {
   app.delete('/api/entities/users/:email', requireLogin, requireAdmin, usersController.deleteUser);
 
 
-  app.post('/api/entities/admins', requireLogin, requireAdmin, usersController.makeAdmin);
+  app.post('/api/entities/admins-add', requireLogin, requireAdmin, usersController.makeAdmin);
 
-  app.post('/api/entities/admins', requireLogin, requireAdmin, usersController.unmakeAdmin);
+  app.post('/api/entities/admins-remove', requireLogin, requireAdmin, usersController.unmakeAdmin);
 
 
   app.post('/api/entities/rooms', requireLogin, requireAdmin, entitiesController.createRoom);

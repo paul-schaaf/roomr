@@ -129,7 +129,7 @@ const makeAdmin = async (appState, reqData) => {
     throw new Error('Please enter an email before submitting!');
   }
   appState.setState({ responseMessage: 'loading' });
-  await axios.post(`/api/entities/admins`, {
+  await axios.post(`/api/entities/admins-add`, {
     email
   });
   appState.setState({ responseMessage: 'Successfully made user: ' + email + ' admin.'});
