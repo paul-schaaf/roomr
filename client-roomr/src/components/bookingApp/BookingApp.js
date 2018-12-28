@@ -127,6 +127,8 @@ class BookingPage extends React.Component {
               onUnblockRoomSubmit={this.onUnblockRoomSubmit}
               onAddUserSubmit={this.onAddUserSubmit}
               onDeleteUserSubmit={this.onDeleteUserSubmit}
+              onMakeAdminSubmit={this.onMakeAdminSubmit}
+              onUnmakeAdminSubmit={this.onUnmakeAdminSubmit}
             />
           </div>
            {/**

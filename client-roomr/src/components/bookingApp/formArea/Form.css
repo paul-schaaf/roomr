@@ -79,6 +79,9 @@ padding: 1.5px 5px 1.5px 5px;
   transform:translateX(1px);
 }
 
+.submit-button--user {
+  width:150px;
+}
 
 
 @media screen and (max-width: 600px) {

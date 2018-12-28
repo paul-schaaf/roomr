@@ -54,7 +54,6 @@ class Form extends React.Component {
     this.setState({ [event.target.name]: event.target.value})
   }
 
-
   //see InputTimes.js for explanation for this function
   componentDidUpdate (prevProps) {
     const indexStart = timeArray.indexOf(this.state.start);
@@ -88,8 +87,8 @@ class Form extends React.Component {
       return (
         <form onSubmit={this.onUserFormSubmit}>
           <input className="input-user input-user--email" autoComplete="off" name="email" onChange={this.onInputChange} value={this.state.email} type="text" placeholder="email..."></input>
-          {!this.props.deleteForm && <input className="input-user input-user--password" autoComplete="off" name="password" onChange={this.onInputChange} value={this.state.password} type="text" placeholder="password..."></input>} 
-          <input className="submit-button" type="submit" value={this.props.buttonValue}></input>
+          {this.props.hasPassword && <input className="input-user input-user--password" autoComplete="off" name="password" onChange={this.onInputChange} value={this.state.password} type="text" placeholder="password..."></input>} 
+          <input className="submit-button submit-button--user" type="submit" value={this.props.buttonValue}></input>
         </form>
       )
     }
@@ -109,7 +108,6 @@ class Form extends React.Component {
         <input className="submit-button" type="submit" value={this.props.buttonValue}></input>
       </form>
     )
-    
     
   }
 }
