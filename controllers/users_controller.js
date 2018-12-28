@@ -114,6 +114,10 @@ const validator = require('email-validator');
       }
       const userInEntity = entity.users.find(userObject => userObject.email === userEmail);
       if (userInEntity) {
+        if(userInEntity.isAdmin === true) {
+          res.locals.type = 'clientError';
+          throw new Error(`User: ${userEmail} is already admin.`);
+        }
         userInEntity.isAdmin = true;
         entity.adminCount = entity.adminCount + 1;
         const user = await User.findOne({ email: userEmail });
@@ -132,6 +136,38 @@ const validator = require('email-validator');
   },
   //expects json with {email}
   unmakeAdmin: async (req, res, next) => {
-    
+    const entityName = req.body.entity;
+    const userEmail = req.body.email;
+    try{
+      const entity = await Entity.findOne({ name: entityName });
+      if (!entity) {
+        res.locals.type = 'clientError';
+        throw new Error(`There is no entity called:${entityName}`);
+      }
+      const userInEntity = entity.users.find(userObject => userObject.email === userEmail);
+      if (userInEntity) {
+        if(userInEntity.isAdmin === false) {
+          res.locals.type = 'clientError';
+          throw new Error(`User: ${userEmail} is not an admin.`);
+        }
+        if(userInEntity.isAdmin && entity.adminCount === 1) {
+          res.locals.type = 'clientError';
+          throw new Error('Every entity needs at least 1 admin.');
+        }
+        userInEntity.isAdmin = false;
+        entity.adminCount = entity.adminCount - 1;
+        const user = await User.findOne({ email: userEmail });
+        const entityInUser = user.entities.find((entityObject) => entityObject.name === entityName);
+        entityInUser.isAdmin = false;
+        await user.save();
+        await entity.save();
+        res.send(`User: ${userEmail} successfully unmade admin`);
+      } else {
+        res.locals.type = 'clientError';
+        throw new Error(`There is no user called: ${userEmail}.`);
+      }
+    } catch(err) {
+      next(err);
+    }
   },
  }
