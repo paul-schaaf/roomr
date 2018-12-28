@@ -135,6 +135,18 @@ const makeAdmin = async (appState, reqData) => {
   appState.setState({ responseMessage: 'Successfully made user: ' + email + ' admin.'});
 }
 
+const unmakeAdmin = async (appState, reqData) => {
+  const { email } = reqData;
+  if (email === '') {
+    throw new Error('Please enter an email before submitting!');
+  }
+  appState.setState({ responseMessage: 'loading' });
+  await axios.post(`/api/entities/admins-remove`, {
+    email
+  });
+  appState.setState({ responseMessage: 'Successfully removed admin status from user: ' + email });
+}
+
 const roomrapi = {
 
   handledSetRoomDataOnce: async (appState) => {
@@ -171,6 +183,10 @@ const roomrapi = {
 
   handledMakeAdmin: async (appState, reqData) => {
     await axiosErrorHandler(makeAdmin, appState, reqData);
+  },
+
+  handledUnmakeAdmin: async (appstate, reqData) => {
+    await axiosErrorHandler(unmakeAdmin, appstate, reqData);
   },
   //It is necessary to clear the interval. Otherwise it will try to keep running even with BookingApp Unmounted
   clearRoomInterval: () => {
