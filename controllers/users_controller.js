@@ -10,7 +10,8 @@ const validator = require('email-validator');
  * controller file edits BOTH collections
  */
 
- module.exports = {//expects json with {email, and password}
+ module.exports = {
+  //expects json with {email, and password}
  createUser: async (req, res, next) => {
    const userProps = req.body;
    const entityName = req.user.activeEntity;
@@ -101,10 +102,36 @@ const validator = require('email-validator');
     }
 
   },
+  //expects json with {email}
   makeAdmin: async (req, res, next) => {
-
+    const entityName = req.user.activeEntity;
+    const userEmail = req.body.email;
+    try{
+      const entity = await Entity.findOne({ name: entityName });
+      if (!entity) {
+        res.locals.type = 'clientError';
+        throw new Error(`There is no entity called:${entityName}`);
+      }
+      const userInEntity = entity.users.find(userObject => userObject.email === userEmail);
+      if (userInEntity) {
+        userInEntity.isAdmin = true;
+        entity.adminCount = entity.adminCount + 1;
+        const user = await User.findOne({ email: userEmail });
+        const entityInUser = user.entities.find((entityObject) => entityObject.name === entityName);
+        entityInUser.isAdmin = true;
+        await user.save();
+        await entity.save();
+        res.send(`User: ${userEmail} successfully made admin`);
+      } else {
+        res.locals.type = 'clientError';
+        throw new Error(`There is no user called: ${userEmail}.`);
+      }
+    } catch(err) {
+      next(err);
+    }
   },
+  //expects json with {email}
   unmakeAdmin: async (req, res, next) => {
-
-  }
+    
+  },
  }

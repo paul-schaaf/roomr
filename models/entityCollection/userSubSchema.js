@@ -9,7 +9,8 @@ const userSubSchema = new Schema({
   },
   isAdmin: {
     type: Boolean,
-    default: false
+    default: false,
+    required: true
   },
   entity: {
     type: String,
