@@ -44,7 +44,7 @@ const FormList = props =>  {
               formAction={props.onDeleteRoomSubmit}
               buttonValue="▹ delete room"
               datalistName="delete"
-              deleteRoom
+              className="form--delete-room"
             />
           </div>}
           {props.showSettings &&

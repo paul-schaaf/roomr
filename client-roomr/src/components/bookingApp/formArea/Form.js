@@ -94,7 +94,7 @@ class Form extends React.Component {
     }
     
     return(
-      <form className={this.props.deleteRoom && 'form--delete-room'} onSubmit={this.onRoomFormSubmit}>
+      <form className={this.props.className} onSubmit={this.onRoomFormSubmit}>
         <input className="input-room" autoComplete="off" name="room" list={this.props.datalistName} onChange={this.onInputChange} value={this.state.room} type="text" placeholder="room..."></input>
         <DataList required={this.props.DataListRequired} id={this.props.datalistName} data={this.props.data}/>
         {this.props.select &&
