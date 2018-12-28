@@ -54,12 +54,14 @@ const FormList = props =>  {
               buttonValue="▹ add user"
               userForm
               hasPassword
+              className="form--add-user"
             />
             <Form
               data={props.data}
               formAction={props.onDeleteUserSubmit}
               buttonValue="▹ delete user" 
               userForm
+              className="form--delete-user"
             />
            </div>}
           {props.showSettings &&
@@ -69,12 +71,14 @@ const FormList = props =>  {
               formAction={props.onMakeAdminSubmit}
               buttonValue="▹ make admin"
               userForm
+              className="form--make-admin"
             />
             <Form
               data={props.data}
               formAction={props.onUnmakeAdminSubmit}
               buttonValue="▹ remove admin status"
               userForm
+              className="form--unmake-admin"
             />
           </div>}
         </div>

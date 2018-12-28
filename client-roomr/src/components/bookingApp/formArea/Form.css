@@ -91,6 +91,35 @@ padding: 1.5px 5px 1.5px 5px;
   margin-left:104px;
 }
 
+.form--add-user {
+  margin-left:-28px;
+}
+
+.form--add-user .submit-button {
+  width:100px;
+}
+
+.form--delete-user .submit-button {
+  width:100px;
+}
+.form--delete-user .input-user {
+  margin-left: 12px;
+  margin-right:64px;
+}
+
+.form--make-admin .submit-button {
+  width:100px;
+}
+
+.form--make-admin .input-user {
+  margin-right:5px;
+}
+
+.form--unmake-admin .input-user {
+  margin-left:6px;
+  margin-right:65px;
+}
+
 @media screen and (max-width: 600px) {
 
   .input-room {
