@@ -145,7 +145,7 @@ const unmakeAdmin = async (appState, reqData) => {
     email
   });
   appState.setState({ responseMessage: 'Successfully removed admin status from user: ' + email });
-}
+};
 
 const roomrapi = {
 

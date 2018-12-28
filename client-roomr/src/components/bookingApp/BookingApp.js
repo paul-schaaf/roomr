@@ -84,6 +84,12 @@ class BookingPage extends React.Component {
     roomrapi.handledSetRoomDataOnce(this);
   }
 
+  onUnmakeAdminSubmit = async (reqData) => {
+    await this.setState({ responseMessage: '', errorType: '' });
+    await roomrapi.handledUnmakeAdmin(this, reqData);
+    roomrapi.handledSetRoomDataOnce(this);
+  }
+
   onMessageButtonClick = () => {
     this.setState({ responseMessage: '', errorType: '' });
   }
