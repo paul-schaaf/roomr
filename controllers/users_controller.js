@@ -101,4 +101,10 @@ const validator = require('email-validator');
     }
 
   },
+  makeAdmin: async (req, res, next) => {
+
+  },
+  unmakeAdmin: async (req, res, next) => {
+
+  }
  }
