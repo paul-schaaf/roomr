@@ -2,15 +2,19 @@ import React from 'react';
 import Form from './Form';
 import './FormList.css';
 
-/*
+/**
 * this component renders the forms
-* the buttonValue it passes down is the text for each submit button
-* the datalistName is the identifier for each form's datalist (datalists need an identifier to link to an input)
-* so both input and the datalist are given datalistName
-* select is given to a form if it does require you to select a time
-* DataListRequired is passed down if no datalist is required: e.g. for addRoom, you need to choose a new name
-* so a datalist wouldnt make sense
-* the --users modifier is used for the forms only admins have access to
+* 
+* Forms can be given the following parameters:
+* data - contains roomData for datalists
+* formAction - contains BookingApp callback
+* buttonValue - contains the text of the submit button
+* datalistName - contains the id for the datalist
+* select - if it exists, inputs will have time selects
+* DatalistRequired - determines if input has datalist
+* className - contains class names for css
+* hasPassword - determines whether form has password input
+* userForm - determines whether form is user form or room form
 */
 
 const FormList = props =>  {
