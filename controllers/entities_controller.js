@@ -66,6 +66,10 @@ module.exports = {
       next(err);
     }
   },
+  //uses req.user.activeEntity
+  getUsers: async (req, res, next) => {
+
+  },
   //expects json with {entity, email, and password}
   createEntity: async (req, res, next) => {
     const entityProps = req.body;
