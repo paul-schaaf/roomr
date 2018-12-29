@@ -143,7 +143,7 @@ class Form extends React.Component {
           type="text"
           placeholder="room...">
         </input>
-        <DataList required={this.props.DataListRequired} id={this.props.datalistName} data={this.props.data}/>
+        {this.props.datalistName && <DataList id={this.props.datalistName} data={this.props.data}/>}
         {this.props.select &&
         <select name="start" onChange={this.onInputChange} value={this.state.start} type="text">
           <InputTimes />

@@ -1,10 +1,6 @@
 import React from 'react';
 
-const DataList = ({ data, id, required }) => {
-  if (required === "false") {
-    return <React.Fragment></React.Fragment>
-  }
-  
+const DataList = ({ data, id }) => {
   const renderedOptions = data.map(roomObject => {
     return <option key={roomObject.roomName}value={roomObject.roomName}></option>
   })

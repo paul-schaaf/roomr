@@ -45,7 +45,6 @@ const FormList = props =>  {
                 isDisabled={props.isDisabled}
                 formAction={props.onAddRoomSubmit}
                 buttonValue="▹ add room"
-                DataListRequired="false"
               />
               <Form
                 isDisabled={props.isDisabled}
