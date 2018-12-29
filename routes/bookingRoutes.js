@@ -9,7 +9,7 @@ module.exports = app => {
 
   app.post('/api/entities', entitiesController.createEntity);
 
-  app.delete('/api/entities', entitiesController.deleteEntity);
+  app.delete('/api/entities/:entity', entitiesController.deleteEntity);
 
 
   app.post('/api/entities/users', requireLogin, requireAdmin, usersController.createUser);
