@@ -119,6 +119,10 @@ padding: 1.5px 5px 1.5px 5px;
   margin-left:6px;
   margin-right:65px;
 }
+.form--delete-entity {
+  margin-left:0px;
+  margin-right:50px;
+}
 
 @media screen and (max-width: 600px) {
 

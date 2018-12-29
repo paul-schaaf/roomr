@@ -86,7 +86,7 @@ class Form extends React.Component {
     if (this.props.userForm) {
       return (
         <form className={this.props.className} onSubmit={this.onUserFormSubmit}>
-          <input className="input-user input-user--email" autoComplete="off" name="email" onChange={this.onInputChange} value={this.state.email} type="text" placeholder="email..."></input>
+          {!this.props.noEmail && <input className="input-user input-user--email" autoComplete="off" name="email" onChange={this.onInputChange} value={this.state.email} type="text" placeholder="email..."></input>}
           {this.props.hasPassword && <input className="input-user input-user--password" autoComplete="off" name="password" onChange={this.onInputChange} value={this.state.password} type="text" placeholder="password..."></input>} 
           <input className="submit-button submit-button--user" type="submit" value={this.props.buttonValue}></input>
         </form>

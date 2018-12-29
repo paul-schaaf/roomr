@@ -82,6 +82,16 @@ const FormList = props =>  {
                 className="form--unmake-admin"
               />
             </div>
+            <div className="formbox forms--entity">
+            <Form
+                data={props.data}
+                formAction={props.onDeleteEntitySubmit}
+                buttonValue="▹ delete entity"
+                userForm
+                noEmail
+                className="form--delete-entity"
+              />
+            </div>
           </React.Fragment>}
         </div>
     )
