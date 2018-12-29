@@ -52,7 +52,10 @@ const getUserDataOnce = async (appState) => {
   const admins = response.data
     .filter((user) => user.isAdmin)
     .map((user) => user.email);
-  appState.setState({ users, admins, getStatus: 'successful' });
+  const usersWithoutAdmins = response.data
+  .filter((user) => !user.isAdmin)
+  .map((user) => user.email);
+  appState.setState({ users, admins, usersWithoutAdmins, getStatus: 'successful' });
 };
 
 const getUserDataLoop = async (appState) => {
@@ -63,7 +66,10 @@ const getUserDataLoop = async (appState) => {
       const admins = response.data
         .filter((user) => user.isAdmin)
         .map((user) => user.email);
-      appState.setState({ users, admins, getStatus: 'successful' });
+      const usersWithoutAdmins = response.data
+      .filter((user) => !user.isAdmin)
+      .map((user) => user.email);
+      appState.setState({ users, admins, usersWithoutAdmins, getStatus: 'successful' });
     } catch (err) {
       if (err.response) {
         appState.setState({ responseMessage: err.response.data.message, errorType: err.response.data.type });
