@@ -139,6 +139,7 @@ class BookingPage extends React.Component {
               showSettings={this.state.showSettings}
             />}
             <FormList
+              isDisabled={(this.state.responseMessage === 'loading') ? true : false}
               showSettings={this.state.showSettings}
               data={this.state.data}
               onAddRoomSubmit={this.onAddRoomSubmit} 

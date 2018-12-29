@@ -21,7 +21,8 @@ const FormList = props =>  {
     return (
         <div className="forms">
           <div className="formbox forms--blocking">
-            <Form 
+            <Form
+              isDisabled={props.isDisabled}
               data={props.data}
               formAction={props.onBlockRoomSubmit}
               buttonValue="▹ reserve room"
@@ -29,6 +30,7 @@ const FormList = props =>  {
               select
             />
             <Form
+              isDisabled={props.isDisabled}
               data={props.data}
               formAction={props.onUnblockRoomSubmit}
               buttonValue="▹ unblock room"
@@ -40,11 +42,13 @@ const FormList = props =>  {
           <React.Fragment>
             <div className="formbox forms--rooms">
               <Form
+                isDisabled={props.isDisabled}
                 formAction={props.onAddRoomSubmit}
                 buttonValue="▹ add room"
                 DataListRequired="false"
               />
               <Form
+                isDisabled={props.isDisabled}
                 data={props.data}
                 formAction={props.onDeleteRoomSubmit}
                 buttonValue="▹ delete room"
@@ -55,6 +59,7 @@ const FormList = props =>  {
             
             <div className="formbox forms--users">
               <Form
+                isDisabled={props.isDisabled}
                 formAction={props.onAddUserSubmit}
                 buttonValue="▹ add user"
                 userForm
@@ -62,6 +67,7 @@ const FormList = props =>  {
                 className="form--add-user"
               />
               <Form
+                isDisabled={props.isDisabled}
                 data={props.data}
                 formAction={props.onDeleteUserSubmit}
                 buttonValue="▹ delete user" 
@@ -72,6 +78,7 @@ const FormList = props =>  {
             
             <div className="formbox forms--admins">
               <Form
+                isDisabled={props.isDisabled}
                 data={props.data}
                 formAction={props.onMakeAdminSubmit}
                 buttonValue="▹ make admin"
@@ -79,6 +86,7 @@ const FormList = props =>  {
                 className="form--make-admin"
               />
               <Form
+                isDisabled={props.isDisabled}
                 data={props.data}
                 formAction={props.onUnmakeAdminSubmit}
                 buttonValue="▹ remove admin status"
@@ -88,6 +96,7 @@ const FormList = props =>  {
             </div>
             <div className="formbox forms--entity">
             <Form
+                isDisabled={props.isDisabled}
                 data={props.data}
                 formAction={props.onDeleteEntitySubmit}
                 buttonValue="▹ delete entity"
