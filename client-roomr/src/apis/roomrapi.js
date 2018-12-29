@@ -1,20 +1,19 @@
 import axios from 'axios';
 import axiosErrorHandler from '../errorHandling/axiosErrorHandler';
 
-/*
+/**
 * defines axios functions that call roomrapi
 * uses baseURL defined in roomrapiConfig.js
 * exports roomrapi object that holds functions that are given to the axiosErrorHandler
 * thereby avoiding writing try-catch for each function
-* setRoomDataOnce: makes get request on first load of the app
-* setRoomDataLoop: makes get request every 10 seconds to update client
-* addRoom: adds room
-* deleteRoom: deletes room
-* blockRoom: reserves room
-* unblockRoom: "un"-reserves room
+* getRoomDataOnce: makes get request on first load of the app to get rooms
+* getRoomDataLoop: makes get request every 10 seconds to update client
+* getUserDataOnce: makes get request on first load to get user data if admin=true
+* getUserDataLoop: same as getRoomDataLoop if admin=true and for users
 */
 
 let roomInterval;
+let userInterval;
 
 const getRoomDataOnce = async (appState) => {
   const response = await axios.get('/api/entities/rooms');
@@ -30,13 +29,33 @@ const getRoomDataOnce = async (appState) => {
 * but it does not care about async/await so it will conclude there were no errors because it already
 * finished before the setInterval callback could get back onto the callstack.
 * This is why we need a try block INSIDE
-* the set interval function
+* the set interval function, the same goes for getUserDataLoop
 */
 const getRoomDataLoop = async (appState) => {
   roomInterval = setInterval(async () => {
     try {
       const response = await axios.get('/api/entities/rooms');
       appState.setState({ data: response.data, getStatus: 'successful' });
+    } catch (err) {
+      if (err.response) {
+        appState.setState({ responseMessage: err.response.data.message, errorType: err.response.data.type });
+      } else if (err.request) { // this error appears when there is no response from the server
+        appState.setState({ getStatus: 'failed', errorType: 'serverError' });
+      }
+    }
+  }, 10000);
+};
+
+const getUserDataOnce = async (appState) => {
+  const response = await axios.get('/api/entities/users');
+  appState.setState({ users: response.data, getStatus: 'successful' });
+};
+
+const getUserDataLoop = async (appState) => {
+  userInterval = setInterval(async () => {
+    try {
+      const response = await axios.get('/api/entities/users');
+      appState.setState({ users: response.data, getStatus: 'successful' });
     } catch (err) {
       if (err.response) {
         appState.setState({ responseMessage: err.response.data.message, errorType: err.response.data.type });
@@ -166,6 +185,14 @@ const roomrapi = {
     await axiosErrorHandler(getRoomDataLoop, appState);
   },
 
+  handledGetUserDataOnce: async (appState) => {
+    await axiosErrorHandler(getUserDataOnce, appState);
+  },
+
+  handledGetUserDataLoop: async (appState) => {
+    await axiosErrorHandler(getUserDataLoop, appState);
+  },
+
   handledAddRoom: async (appState, reqData) => {
     await axiosErrorHandler(addRoom, appState, reqData);
   },
@@ -201,10 +228,14 @@ const roomrapi = {
   handledDeleteEntity: async (appState, reqData) => {
     await axiosErrorHandler(deleteEntity, appState, reqData);
   },
-  //It is necessary to clear the interval. Otherwise it will try to keep running even with BookingApp Unmounted
+  //It is necessary to clear the intervals. Otherwise it will try to keep running even with BookingApp Unmounted
   clearRoomInterval: () => {
     clearInterval(roomInterval);
-  }
+  },
+
+  clearUserInterval: () => {
+    clearInterval(userInterval);
+  },
 };
 
 export default roomrapi;

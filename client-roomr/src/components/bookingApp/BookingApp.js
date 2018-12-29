@@ -31,6 +31,7 @@ class BookingPage extends React.Component {
   state = {
     getStatus: 'pending',
     data: [],
+    users: [],
     responseMessage:'',
     errorType:'',
     isAdmin: (this.props.match.params.isAdmin === 'admin') ? true : false,
@@ -41,6 +42,10 @@ class BookingPage extends React.Component {
   async componentDidMount() {
     await roomrapi.handledGetRoomDataOnce(this);
     roomrapi.handledGetRoomDataLoop(this);
+    if(this.state.isAdmin) {
+      await roomrapi.handledGetUserDataOnce(this);
+      roomrapi.handledGetUserDataLoop(this);
+    }
   };
     
   onAddRoomSubmit = async (reqData) => {
@@ -71,24 +76,28 @@ class BookingPage extends React.Component {
     await this.setState({ responseMessage: '', errorType: '' });
     await roomrapi.handledAddUser(this, reqData);
     roomrapi.handledGetRoomDataOnce(this);
+    roomrapi.handledGetUserDataOnce(this);
   }
 
   onDeleteUserSubmit = async (reqData) => {
     await this.setState({ responseMessage: '', errorType: '' });
     await roomrapi.handledDeleteUser(this, reqData);
     roomrapi.handledGetRoomDataOnce(this);
+    roomrapi.handledGetUserDataOnce(this);
   }
 
   onMakeAdminSubmit = async (reqData) => {
     await this.setState({ responseMessage: '', errorType: '' });
     await roomrapi.handledMakeAdmin(this, reqData);
     roomrapi.handledGetRoomDataOnce(this);
+    roomrapi.handledGetUserDataOnce(this);
   }
 
   onUnmakeAdminSubmit = async (reqData) => {
     await this.setState({ responseMessage: '', errorType: '' });
     await roomrapi.handledUnmakeAdmin(this, reqData);
     roomrapi.handledGetRoomDataOnce(this);
+    roomrapi.handledGetUserDataOnce(this);
   }
 
   onDeleteEntitySubmit = async (reqData) => {
