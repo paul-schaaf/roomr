@@ -14,6 +14,10 @@ form select:focus {
   outline-style:none;
 }
 
+form input {
+  color: #1E4363;
+}
+
 .input-room {
   border:none;
   border-bottom:1px solid #1E4363;
@@ -121,7 +125,17 @@ padding: 1.5px 5px 1.5px 5px;
 }
 .form--delete-entity {
   margin-left:0px;
-  margin-right:50px;
+  margin-right:10px;
+}
+
+.form--delete-entity .input-user{
+  width:200px;
+  margin-right: 10px;
+  color:#BC2D19;
+}
+
+.form--delete-entity .submit-button {
+  width:110px;
 }
 
 @media screen and (max-width: 600px) {

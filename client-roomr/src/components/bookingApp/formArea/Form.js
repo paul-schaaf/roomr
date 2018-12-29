@@ -47,7 +47,8 @@ class Form extends React.Component {
     end:'09:15',
     room: '',
     email: '',
-    password: ''
+    password: '',
+    entity: ''
   }
 
   onInputChange = (event) => {
@@ -76,10 +77,11 @@ class Form extends React.Component {
   onUserFormSubmit = event => {
     event.preventDefault();
     this.props.formAction({
+      entity: this.state.entity,
       email: this.state.email,
       password: this.state.password
     })
-    this.setState({ email: '', password: '' });
+    this.setState({ email: '', password: '', entity: '' });
   }
 
   render () {
@@ -87,6 +89,7 @@ class Form extends React.Component {
       return (
         <form className={this.props.className} onSubmit={this.onUserFormSubmit}>
           {!this.props.noEmail && <input className="input-user input-user--email" autoComplete="off" name="email" onChange={this.onInputChange} value={this.state.email} type="text" placeholder="email..."></input>}
+          {this.props.deleteEntity && <input className="input-user input-user--entity" autoComplete="off" name="entity" onChange={this.onInputChange} value={this.state.entity} type="text" placeholder="type entity name to confirm..."></input>}
           {this.props.hasPassword && <input className="input-user input-user--password" autoComplete="off" name="password" onChange={this.onInputChange} value={this.state.password} type="text" placeholder="password..."></input>} 
           <input className="submit-button submit-button--user" type="submit" value={this.props.buttonValue}></input>
         </form>

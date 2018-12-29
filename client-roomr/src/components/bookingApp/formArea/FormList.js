@@ -93,6 +93,7 @@ const FormList = props =>  {
                 buttonValue="▹ delete entity"
                 userForm
                 noEmail
+                deleteEntity
                 className="form--delete-entity"
               />
             </div>
