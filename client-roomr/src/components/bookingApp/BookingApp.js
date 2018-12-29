@@ -33,6 +33,7 @@ class BookingPage extends React.Component {
     data: [],
     users: [],
     admins: [],
+    usersWithoutAdmins: [],
     responseMessage:'',
     errorType:'',
     isAdmin: (this.props.match.params.isAdmin === 'admin') ? true : false,
@@ -151,6 +152,9 @@ class BookingPage extends React.Component {
             <FormList
               isDisabled={(this.state.responseMessage === 'loading') ? true : false}
               showSettings={this.state.showSettings}
+              users={this.state.users}
+              admins={this.state.admins}
+              usersWithoutAdmins={this.state.usersWithoutAdmins}
               data={this.state.data}
               onAddRoomSubmit={this.onAddRoomSubmit} 
               onDeleteRoomSubmit={this.onDeleteRoomSubmit}
