@@ -62,13 +62,26 @@ module.exports = {
         }
       }
       res.send(rooms);
-    } catch (err) {
+    } catch(err) {
       next(err);
     }
   },
   //uses req.user.activeEntity
   getUsers: async (req, res, next) => {
-
+    const entityName = req.user.activeEntity;
+    try {
+      const entity = await Entity.findOne({ name: entityName });
+      const users = entity.users.slice();
+      const usersSlim = users.map((userObject) => {
+        return {
+          isAdmin: userObject.isAdmin,
+          email: userObject.email
+        }
+      })
+      res.send(usersSlim);
+    } catch(err) {
+      next(err);
+    }
   },
   //expects json with {entity, email, and password}
   createEntity: async (req, res, next) => {
