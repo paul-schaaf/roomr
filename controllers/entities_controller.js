@@ -71,6 +71,10 @@ module.exports = {
     const entityName = req.user.activeEntity;
     try {
       const entity = await Entity.findOne({ name: entityName });
+      if (!entity) {
+        res.locals.type = 'clientError';
+        throw new Error(`There is no entity called:${entityName}`);
+      }
       const users = entity.users.slice();
       const usersSlim = users.map((userObject) => {
         return {
