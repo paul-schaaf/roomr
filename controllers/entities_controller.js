@@ -224,13 +224,14 @@ module.exports = {
   deleteEntity: async (req, res, next) => {
     const entityNameClient = req.params.entity;
     const entityNameServer = req.user.activeEntity;
-    res.redirect('../../../api/logout');
+    
     try{
       //User has to manually type entity name in client to confirm deletion
       if(entityNameClient !== entityNameServer) {
         res.locals.type = 'clientError';
         throw new Error(`Incorrect Entity Name`);
       }
+      
       const entity = await Entity.findOne({ name: entityNameServer });
       const usersInEntity = entity.users.slice();
       await Entity.deleteOne({ name: entityNameServer });
@@ -244,7 +245,6 @@ module.exports = {
           await User.deleteOne({ email: userObject.email });
         }
       })
-    res.send(`Entity: ${entityNameServer} successfully deleted`);
     } catch(err) {
       next(err);
     }
