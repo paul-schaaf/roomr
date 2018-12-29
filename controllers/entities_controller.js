@@ -221,4 +221,7 @@ module.exports = {
       next(err);
     }
   },
+  deleteEntity: async (req, res) => {
+
+  },
 };
