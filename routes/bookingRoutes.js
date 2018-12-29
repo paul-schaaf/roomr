@@ -6,6 +6,9 @@ const requireAdmin = require('../middlewares/requireAdmin');
 module.exports = app => {
   app.get('/api/entities/rooms', requireLogin, entitiesController.getRooms);
 
+  
+  app.get('api/entities/users', entitiesController.getUsers);
+
 
   app.post('/api/entities', entitiesController.createEntity);
 
