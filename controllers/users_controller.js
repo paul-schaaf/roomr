@@ -74,6 +74,9 @@ const validator = require('email-validator');
           res.locals.type = 'clientError';
           throw new Error('Every entity needs at least 1 admin.');
         }
+        if(userInEntity.isAdmin) {
+          entity.adminCount = entity.adminCount - 1;
+        }
         const indexOfUser = entity.users.indexOf(userInEntity);
         entity.users.splice(indexOfUser, 1);
       /**
