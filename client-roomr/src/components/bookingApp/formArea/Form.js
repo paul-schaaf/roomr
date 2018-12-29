@@ -92,20 +92,57 @@ class Form extends React.Component {
     if (this.props.userForm) {
       return (
         <form className={this.props.className} onSubmit={this.onUserFormSubmit}>
-          {!this.props.noEmail && <input className="input-user input-user--email" autoComplete="off" name="email" onChange={this.onInputChange} value={this.state.email} type="text" placeholder="email..."></input>}
-          {this.props.deleteEntity && <input className="input-user input-user--entity" autoComplete="off" name="entity" onChange={this.onInputChange} value={this.state.entity} type="text" placeholder="type entity name to confirm..."></input>}
-          {this.props.hasPassword && <input className="input-user input-user--password" autoComplete="off" name="password" onChange={this.onInputChange} value={this.state.password} type="text" placeholder="password..."></input>} 
+          {!this.props.noEmail &&
           <input
-          className={`submit-button submit-button--user ${(this.props.isDisabled) && 'submit-button--disabled'}`}
-          type="submit"
-          value={this.props.buttonValue}></input>
+            className="input-user input-user--email"
+            autoComplete="off"
+            name="email"
+            onChange={this.onInputChange}
+            value={this.state.email}
+            type="text"
+            placeholder="email...">
+          </input>}
+          {this.props.deleteEntity &&
+          <input
+            className="input-user input-user--entity"
+            autoComplete="off"
+            name="entity"
+            onChange={this.onInputChange}
+            value={this.state.entity}
+            type="text"
+            placeholder="type entity name to confirm...">
+          </input>}
+          {this.props.hasPassword &&
+          <input
+            className="input-user input-user--password"
+            autoComplete="off"
+            name="password"
+            onChange={this.onInputChange}
+            value={this.state.password}
+            type="text"
+            placeholder="password...">
+          </input>} 
+          <input
+            className={`submit-button submit-button--user ${(this.props.isDisabled) && 'submit-button--disabled'}`}
+            type="submit"
+            value={this.props.buttonValue}>
+          </input>
         </form>
       )
     }
     
     return(
       <form className={this.props.className} onSubmit={this.onRoomFormSubmit}>
-        <input className="input-room" autoComplete="off" name="room" list={this.props.datalistName} onChange={this.onInputChange} value={this.state.room} type="text" placeholder="room..."></input>
+        <input
+          className="input-room"
+          autoComplete="off"
+          name="room"
+          list={this.props.datalistName}
+          onChange={this.onInputChange}
+          value={this.state.room}
+          type="text"
+          placeholder="room...">
+        </input>
         <DataList required={this.props.DataListRequired} id={this.props.datalistName} data={this.props.data}/>
         {this.props.select &&
         <select name="start" onChange={this.onInputChange} value={this.state.start} type="text">
@@ -115,10 +152,13 @@ class Form extends React.Component {
         <select name="end" onChange={this.onInputChange} value={this.state.end} type="text">
           <InputTimes start={this.state.start}/>
         </select>}
-        <input className={`submit-button ${(this.props.isDisabled) && 'submit-button--disabled'}`} type="submit" value={this.props.buttonValue}></input>
+        <input
+          className={`submit-button ${(this.props.isDisabled) && 'submit-button--disabled'}`}
+          type="submit"
+          value={this.props.buttonValue}>
+        </input>
       </form>
     )
-    
   }
 }
 
