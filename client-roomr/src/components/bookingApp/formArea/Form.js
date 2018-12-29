@@ -99,9 +99,12 @@ class Form extends React.Component {
             name="email"
             onChange={this.onInputChange}
             value={this.state.email}
+            list={this.props.datalistName}
             type="text"
             placeholder="email...">
           </input>}
+          {this.props.datalistName &&
+          <DataList type={this.props.type} id={this.props.datalistName} data={this.props.data}/>}
           {this.props.deleteEntity &&
           <input
             className="input-user input-user--entity"
@@ -143,7 +146,8 @@ class Form extends React.Component {
           type="text"
           placeholder="room...">
         </input>
-        {this.props.datalistName && <DataList id={this.props.datalistName} data={this.props.data}/>}
+        {this.props.datalistName &&
+        <DataList type={this.props.type} id={this.props.datalistName} data={this.props.data}/>}
         {this.props.select &&
         <select name="start" onChange={this.onInputChange} value={this.state.start} type="text">
           <InputTimes />

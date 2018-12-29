@@ -27,6 +27,7 @@ const FormList = props =>  {
               formAction={props.onBlockRoomSubmit}
               buttonValue="▹ reserve room"
               datalistName="reserve"
+              type="room"
               select
             />
             <Form
@@ -35,6 +36,7 @@ const FormList = props =>  {
               formAction={props.onUnblockRoomSubmit}
               buttonValue="▹ unblock room"
               datalistName="unblock"
+              type="room"
               select
             />
           </div>
@@ -51,7 +53,8 @@ const FormList = props =>  {
                 data={props.data}
                 formAction={props.onDeleteRoomSubmit}
                 buttonValue="▹ delete room"
-                datalistName="delete"
+                datalistName="deleteRoom"
+                type="room"
                 className="form--delete-room"
               />
             </div>
@@ -67,9 +70,11 @@ const FormList = props =>  {
               />
               <Form
                 isDisabled={props.isDisabled}
-                data={props.data}
+                data={props.users}
                 formAction={props.onDeleteUserSubmit}
-                buttonValue="▹ delete user" 
+                buttonValue="▹ delete user"
+                datalistName="deleteUser"
+                type="user"
                 userForm
                 className="form--delete-user"
               />
@@ -78,18 +83,22 @@ const FormList = props =>  {
             <div className="formbox forms--admins">
               <Form
                 isDisabled={props.isDisabled}
-                data={props.data}
+                data={props.usersWithoutAdmins}
                 formAction={props.onMakeAdminSubmit}
                 buttonValue="▹ make admin"
+                datalistName="makeAdmin"
+                type="user"
                 userForm
                 className="form--make-admin"
               />
               <Form
                 isDisabled={props.isDisabled}
-                data={props.data}
+                data={props.admins}
                 formAction={props.onUnmakeAdminSubmit}
                 buttonValue="▹ remove admin status"
+                datalistName="removeAdminStatus"
                 userForm
+                type="user"
                 className="form--unmake-admin"
               />
             </div>
