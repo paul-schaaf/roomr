@@ -16,7 +16,7 @@ import axiosErrorHandler from '../errorHandling/axiosErrorHandler';
 
 let roomInterval;
 
-const setRoomDataOnce = async (appState) => {
+const getRoomDataOnce = async (appState) => {
   const response = await axios.get('/api/entities/rooms');
   appState.setState({ data: response.data, getStatus: 'successful' });
 };
@@ -32,7 +32,7 @@ const setRoomDataOnce = async (appState) => {
 * This is why we need a try block INSIDE
 * the set interval function
 */
-const setRoomDataLoop = async (appState) => {
+const getRoomDataLoop = async (appState) => {
   roomInterval = setInterval(async () => {
     try {
       const response = await axios.get('/api/entities/rooms');
@@ -158,12 +158,12 @@ const deleteEntity = async (appState, reqData) => {
 
 const roomrapi = {
 
-  handledSetRoomDataOnce: async (appState) => {
-    await axiosErrorHandler(setRoomDataOnce, appState);
+  handledGetRoomDataOnce: async (appState) => {
+    await axiosErrorHandler(getRoomDataOnce, appState);
   },
 
-  handledSetRoomDataLoop: async (appState) => {
-    await axiosErrorHandler(setRoomDataLoop, appState);
+  handledGetRoomDataLoop: async (appState) => {
+    await axiosErrorHandler(getRoomDataLoop, appState);
   },
 
   handledAddRoom: async (appState, reqData) => {

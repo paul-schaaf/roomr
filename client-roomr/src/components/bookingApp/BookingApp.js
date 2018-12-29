@@ -39,62 +39,62 @@ class BookingPage extends React.Component {
   };
 
   async componentDidMount() {
-    await roomrapi.handledSetRoomDataOnce(this);
-    roomrapi.handledSetRoomDataLoop(this);
+    await roomrapi.handledGetRoomDataOnce(this);
+    roomrapi.handledGetRoomDataLoop(this);
   };
     
   onAddRoomSubmit = async (reqData) => {
     await this.setState({ responseMessage: '', errorType: '' });
     await roomrapi.handledAddRoom(this, reqData);
-    roomrapi.handledSetRoomDataOnce(this);
+    roomrapi.handledGetRoomDataOnce(this);
   }
 
   onDeleteRoomSubmit = async (reqData) => {
     await this.setState({ responseMessage: '', errorType: '' });
     await roomrapi.handledDeleteRoom(this, reqData);
-    roomrapi.handledSetRoomDataOnce(this);
+    roomrapi.handledGetRoomDataOnce(this);
   }
 
   onBlockRoomSubmit = async (reqData) => {
     await this.setState({ responseMessage: '', errorType: '' });
     await roomrapi.handledBlockRoom(this, reqData);
-    roomrapi.handledSetRoomDataOnce(this);
+    roomrapi.handledGetRoomDataOnce(this);
   }
 
   onUnblockRoomSubmit = async (reqData) => {
     await this.setState({ responseMessage: '', errorType: '' });
     await roomrapi.handledUnblockRoom(this, reqData);
-    roomrapi.handledSetRoomDataOnce(this);
+    roomrapi.handledGetRoomDataOnce(this);
   }
 
   onAddUserSubmit = async (reqData) => {
     await this.setState({ responseMessage: '', errorType: '' });
     await roomrapi.handledAddUser(this, reqData);
-    roomrapi.handledSetRoomDataOnce(this);
+    roomrapi.handledGetRoomDataOnce(this);
   }
 
   onDeleteUserSubmit = async (reqData) => {
     await this.setState({ responseMessage: '', errorType: '' });
     await roomrapi.handledDeleteUser(this, reqData);
-    roomrapi.handledSetRoomDataOnce(this);
+    roomrapi.handledGetRoomDataOnce(this);
   }
 
   onMakeAdminSubmit = async (reqData) => {
     await this.setState({ responseMessage: '', errorType: '' });
     await roomrapi.handledMakeAdmin(this, reqData);
-    roomrapi.handledSetRoomDataOnce(this);
+    roomrapi.handledGetRoomDataOnce(this);
   }
 
   onUnmakeAdminSubmit = async (reqData) => {
     await this.setState({ responseMessage: '', errorType: '' });
     await roomrapi.handledUnmakeAdmin(this, reqData);
-    roomrapi.handledSetRoomDataOnce(this);
+    roomrapi.handledGetRoomDataOnce(this);
   }
 
   onDeleteEntitySubmit = async (reqData) => {
     await this.setState({ responseMessage: '', errorType: '' });
     await roomrapi.handledDeleteEntity(this, reqData);
-    await roomrapi.handledSetRoomDataOnce(this);
+    await roomrapi.handledGetRoomDataOnce(this);
     this.setState({ entityDeleted: true });
   }
 
