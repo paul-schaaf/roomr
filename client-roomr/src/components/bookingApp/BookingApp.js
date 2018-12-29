@@ -2,7 +2,7 @@ import React from 'react';
 import FormList from './formArea/FormList';
 import RoomList from './infoArea/RoomList';
 import TimeLine from './infoArea/TimeLine';
-import ErrorPage from './specialPages/ErrorPage';
+import ResponsePage from './specialPages/ResponsePage';
 import LoadingPage from './specialPages/LoadingPage';
 import roomrapi from '../../apis/roomrapi';
 import ResponseMessage from './ResponseMessage';
@@ -34,7 +34,8 @@ class BookingPage extends React.Component {
     responseMessage:'',
     errorType:'',
     isAdmin: (this.props.match.params.isAdmin === 'admin') ? true : false,
-    showSettings: false
+    showSettings: false,
+    entityDeleted: false
   };
 
   async componentDidMount() {
@@ -93,7 +94,8 @@ class BookingPage extends React.Component {
   onDeleteEntitySubmit = async (reqData) => {
     await this.setState({ responseMessage: '', errorType: '' });
     await roomrapi.handledDeleteEntity(this, reqData);
-    roomrapi.handledSetRoomDataOnce(this);
+    await roomrapi.handledSetRoomDataOnce(this);
+    this.setState({ entityDeleted: true });
   }
 
   onMessageButtonClick = () => {
@@ -115,12 +117,12 @@ class BookingPage extends React.Component {
     
     //the request failed because the server didnt respond
     if (this.state.getStatus === "failed" && this.state.errorType === 'serverError') {
-      return <ErrorPage />
+      return <ResponsePage />
     } 
     
     //errorPage for unauthorized access
     if(this.state.errorType === 'clientErrorUnauthorized') {
-      return <ErrorPage loginMessage={this.state.responseMessage} />
+      return <ResponsePage entityDeleted={this.state.entityDeleted}loginMessage={this.state.responseMessage} />
     }
     
     //request was successful

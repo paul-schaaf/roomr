@@ -14,14 +14,14 @@
   margin-top:-1.5px;
 }
 
-.response-button {
+.response-message-button {
   border: 1px solid white;
   background: #BC2D19;
   border-radius:5px;
   cursor: pointer;
 }
 
-.response-button:hover {
+.response-message-button:hover {
   transition: .5s ease;
 }
 

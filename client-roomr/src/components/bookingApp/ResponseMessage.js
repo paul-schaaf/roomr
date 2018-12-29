@@ -44,7 +44,7 @@ class ResponseMessage extends React.Component {
         style={{ background: this.state.buttonBackground, color: this.state.buttonColor }}
         onMouseEnter={this.onIsHovered}
         onMouseLeave={this.onIsNotHovered}
-        className="response-button"
+        className="response-message-button"
         type="button"
         onClick={this.onMessageButtonClick}>X</button>}
         {this.props.responseMessage === 'loading' &&

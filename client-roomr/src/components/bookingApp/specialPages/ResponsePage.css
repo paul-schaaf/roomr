@@ -1,4 +1,4 @@
-.error-page {
+.response-page {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,7 +6,7 @@
   width:100%;
 }
 
-.error-box {
+.response-page-box {
   display: flex;
   flex-direction: column;
   padding-left:20px;
@@ -20,17 +20,17 @@
   width:325px;
 }
 
-.error-box__heading {
+.response-page-box__heading {
   font-size:25px;
   margin-bottom:0px;
   margin-top:0px;
 }
 
-.error-box__link {
+.response-page-box__link {
   text-decoration: none;
   color: #1E4363;
 }
 
-.error-box__link:hover {
+.response-page-box__link:hover {
   transform:translateX(1px);
 }
