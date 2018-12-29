@@ -32,6 +32,7 @@ class BookingPage extends React.Component {
     getStatus: 'pending',
     data: [],
     users: [],
+    admins: [],
     responseMessage:'',
     errorType:'',
     isAdmin: (this.props.match.params.isAdmin === 'admin') ? true : false,

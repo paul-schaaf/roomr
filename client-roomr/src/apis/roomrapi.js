@@ -48,14 +48,22 @@ const getRoomDataLoop = async (appState) => {
 
 const getUserDataOnce = async (appState) => {
   const response = await axios.get('/api/entities/users');
-  appState.setState({ users: response.data, getStatus: 'successful' });
+  const users = response.data.map((user) => user.email);
+  const admins = response.data
+    .filter((user) => user.isAdmin)
+    .map((user) => user.email);
+  appState.setState({ users, admins, getStatus: 'successful' });
 };
 
 const getUserDataLoop = async (appState) => {
   userInterval = setInterval(async () => {
     try {
       const response = await axios.get('/api/entities/users');
-      appState.setState({ users: response.data, getStatus: 'successful' });
+      const users = response.data.map((user) => user.email);
+      const admins = response.data
+        .filter((user) => user.isAdmin)
+        .map((user) => user.email);
+      appState.setState({ users, admins, getStatus: 'successful' });
     } catch (err) {
       if (err.response) {
         appState.setState({ responseMessage: err.response.data.message, errorType: err.response.data.type });
