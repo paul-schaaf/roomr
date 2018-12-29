@@ -7,7 +7,7 @@ module.exports = app => {
   app.get('/api/entities/rooms', requireLogin, entitiesController.getRooms);
 
   
-  app.get('/api/entities/users', entitiesController.getUsers);
+  app.get('/api/entities/users', requireLogin, requireAdmin, entitiesController.getUsers);
 
 
   app.post('/api/entities', entitiesController.createEntity);
