@@ -122,14 +122,13 @@ module.exports = {
         throw new Error(`There is no entity called:${entityName}`);
       }
       const roomDoesNotExist = entity.rooms.every(room => room.roomName !== roomProps.roomName);
-      if (roomDoesNotExist) {
-        entity.rooms.push(roomProps);
-        await entity.save();
-        res.send(`Room: ${roomProps.roomName} successfully added`);
-      } else {
+      if(!roomDoesNotExist) {
         res.locals.type = 'clientError';
         throw new Error(`There already is a room called: ${roomProps.roomName}.`);
       }
+      entity.rooms.push(roomProps);
+      await entity.save();
+      res.send(`Room: ${roomProps.roomName} successfully added`);
     } catch (err) {
       next(err);
     }
@@ -146,15 +145,14 @@ module.exports = {
         throw new Error(`There is no entity called:${entityName}`);
       }
       const room = entity.rooms.find(roomObject => roomObject.roomName === roomProps.roomName);
-      if (room) {
-        const index = entity.rooms.indexOf(room);
-        entity.rooms.splice(index, 1);
-        await entity.save();
-        res.send(`Room: ${roomProps.roomName} successfully deleted`);
-      } else {
+      if(!room) {
         res.locals.type = 'clientError';
         throw new Error(`There is no room called: ${roomProps.roomName}.`);
-      }
+      }     
+      const index = entity.rooms.indexOf(room);
+      entity.rooms.splice(index, 1);
+      await entity.save();
+      res.send(`Room: ${roomProps.roomName} successfully deleted`);
     } catch (err) {
       next(err);
     }
@@ -170,24 +168,23 @@ module.exports = {
         throw new Error(`There is no entity called:${entityName}`);
       }
       const room = entity.rooms.find(roomObject => roomObject.roomName === roomProps.roomName);
-      if (room) {
-        const indexStart = timeArray.indexOf(roomProps.start);
-        const indexEnd = timeArray.indexOf(roomProps.end);
-        for (let i = indexStart; i < indexEnd; i += 1) {
-          if (room.times[i].availability === false) {
-            res.locals.type = 'clientError';
-            throw new Error('This room is already at least partly reserved for the timespan you selected.');
-          }
-        }
-        for (let i = indexStart; i < indexEnd; i += 1) {
-          room.times.set(i, { time: { default: timeArray[i] }, availability: false });
-        }
-        await entity.save();
-        res.send(`Selected timespan ${roomProps.start}-${roomProps.end} for room ${roomProps.roomName} successfully reserved.`);
-      } else {
+      if(!room) {
         res.locals.type = 'clientError';
         throw new Error(`There is no room called ${roomProps.roomName}.`);
       }
+      const indexStart = timeArray.indexOf(roomProps.start);
+      const indexEnd = timeArray.indexOf(roomProps.end);
+      for (let i = indexStart; i < indexEnd; i += 1) {
+        if (room.times[i].availability === false) {
+          res.locals.type = 'clientError';
+          throw new Error('This room is already at least partly reserved for the timespan you selected.');
+        }
+      }
+      for (let i = indexStart; i < indexEnd; i += 1) {
+        room.times.set(i, { time: { default: timeArray[i] }, availability: false });
+      }
+      await entity.save();
+      res.send(`Selected timespan ${roomProps.start}-${roomProps.end} for room ${roomProps.roomName} successfully reserved.`);
     } catch (err) {
       next(err);
     }
@@ -204,19 +201,17 @@ module.exports = {
         throw new Error(`There is no entity called:${entityName}`);
       }
       const room = entity.rooms.find(roomObject => roomObject.roomName === roomProps.roomName);
-      if (room) {
-        const indexStart = timeArray.indexOf(roomProps.start);
-        const indexEnd = timeArray.indexOf(roomProps.end);
-
-        for (let i = indexStart; i < indexEnd; i += 1) {
-          room.times.set(i, { time: { default: timeArray[i] }, availability: true });
-        }
-        await entity.save();
-        res.send(`Selected timespan ${roomProps.start}-${roomProps.end} for room ${roomProps.roomName} successfully unblocked.`);
-      } else {
+      if(!room) {
         res.locals.type = 'clientError';
         throw new Error(`There is no room called ${roomProps.roomName}.`);
       }
+      const indexStart = timeArray.indexOf(roomProps.start);
+      const indexEnd = timeArray.indexOf(roomProps.end);
+      for (let i = indexStart; i < indexEnd; i += 1) {
+        room.times.set(i, { time: { default: timeArray[i] }, availability: true });
+      }
+      await entity.save();
+      res.send(`Selected timespan ${roomProps.start}-${roomProps.end} for room ${roomProps.roomName} successfully unblocked.`);
     } catch (err) {
       next(err);
     }
