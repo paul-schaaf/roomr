@@ -32,55 +32,57 @@ const FormList = props =>  {
               select
             />
           </div>
-          {props.showSettings && 
-          <div className="formbox forms--rooms">
-            <Form
-              formAction={props.onAddRoomSubmit}
-              buttonValue="▹ add room"
-              DataListRequired="false"
-            />
-            <Form
-              data={props.data}
-              formAction={props.onDeleteRoomSubmit}
-              buttonValue="▹ delete room"
-              datalistName="delete"
-              className="form--delete-room"
-            />
-          </div>}
           {props.showSettings &&
-          <div className="formbox forms--users">
-            <Form
-              formAction={props.onAddUserSubmit}
-              buttonValue="▹ add user"
-              userForm
-              hasPassword
-              className="form--add-user"
-            />
-            <Form
-              data={props.data}
-              formAction={props.onDeleteUserSubmit}
-              buttonValue="▹ delete user" 
-              userForm
-              className="form--delete-user"
-            />
-           </div>}
-          {props.showSettings &&
-          <div className="formbox forms--admins">
-            <Form
-              data={props.data}
-              formAction={props.onMakeAdminSubmit}
-              buttonValue="▹ make admin"
-              userForm
-              className="form--make-admin"
-            />
-            <Form
-              data={props.data}
-              formAction={props.onUnmakeAdminSubmit}
-              buttonValue="▹ remove admin status"
-              userForm
-              className="form--unmake-admin"
-            />
-          </div>}
+          <React.Fragment>
+            <div className="formbox forms--rooms">
+              <Form
+                formAction={props.onAddRoomSubmit}
+                buttonValue="▹ add room"
+                DataListRequired="false"
+              />
+              <Form
+                data={props.data}
+                formAction={props.onDeleteRoomSubmit}
+                buttonValue="▹ delete room"
+                datalistName="delete"
+                className="form--delete-room"
+              />
+            </div>
+            
+            <div className="formbox forms--users">
+              <Form
+                formAction={props.onAddUserSubmit}
+                buttonValue="▹ add user"
+                userForm
+                hasPassword
+                className="form--add-user"
+              />
+              <Form
+                data={props.data}
+                formAction={props.onDeleteUserSubmit}
+                buttonValue="▹ delete user" 
+                userForm
+                className="form--delete-user"
+              />
+            </div>
+            
+            <div className="formbox forms--admins">
+              <Form
+                data={props.data}
+                formAction={props.onMakeAdminSubmit}
+                buttonValue="▹ make admin"
+                userForm
+                className="form--make-admin"
+              />
+              <Form
+                data={props.data}
+                formAction={props.onUnmakeAdminSubmit}
+                buttonValue="▹ remove admin status"
+                userForm
+                className="form--unmake-admin"
+              />
+            </div>
+          </React.Fragment>}
         </div>
     )
 }
