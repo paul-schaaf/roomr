@@ -241,10 +241,17 @@ module.exports = {
         const indexOfEntity = user.entities.indexOf(entityInUser);
         user.entities.splice(indexOfEntity, 1);
         await user.save();
+        
         if (user.entities.length === 0) {
           await User.deleteOne({ email: userObject.email });
         }
       })
+      const user = req.user;
+      user.activeEntity = 'none';
+      user.isAdminNow = false;
+      await user.save();
+      await req.logout();
+      res.send(`Entity successfully deleted`);
     } catch(err) {
       next(err);
     }

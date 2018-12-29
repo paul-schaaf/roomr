@@ -21,7 +21,7 @@ module.exports = app => {
       user.activeEntity = 'none';
       user.isAdminNow = false;
       await user.save();
-      req.logout();
+      await req.logout();
     }
     res.redirect('/login');
   })
