@@ -90,6 +90,11 @@ class BookingPage extends React.Component {
     roomrapi.handledSetRoomDataOnce(this);
   }
 
+  onDeleteEntitySubmit = async (reqData) => {
+    await this.setState({ responseMessage: '', errorType: '' });
+    await roomrapi.handledDeleteEntity(this, reqData);
+  }
+
   onMessageButtonClick = () => {
     this.setState({ responseMessage: '', errorType: '' });
   }
@@ -141,6 +146,7 @@ class BookingPage extends React.Component {
               onDeleteUserSubmit={this.onDeleteUserSubmit}
               onMakeAdminSubmit={this.onMakeAdminSubmit}
               onUnmakeAdminSubmit={this.onUnmakeAdminSubmit}
+              onDeleteEntitySubmit={this.onDeleteEntitySubmit}
             />
           </div>
            {/**
