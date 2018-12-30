@@ -3,12 +3,12 @@ const usersController = require('../controllers/users_controller');
 const requireLogin = require('../middlewares/requireLogin');
 const requireAdmin = require('../middlewares/requireAdmin');
 
-//Routes not handled here are handled in react router
+// Routes not handled here are handled in react router
 
-module.exports = app => {
+module.exports = (app) => {
   app.get('/api/entities/rooms', requireLogin, entitiesController.getRooms);
 
-  
+
   app.get('/api/entities/users', requireLogin, requireAdmin, entitiesController.getUsers);
 
 
@@ -30,7 +30,7 @@ module.exports = app => {
   app.post('/api/entities/rooms', requireLogin, requireAdmin, entitiesController.createRoom);
 
   app.delete('/api/entities/rooms/:roomName', requireLogin, requireAdmin, entitiesController.deleteRoom);
-  
+
 
   app.post('/api/entities/rooms/times-block', requireLogin, entitiesController.blockRoom);
 
