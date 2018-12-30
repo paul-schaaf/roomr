@@ -3,6 +3,8 @@ const usersController = require('../controllers/users_controller');
 const requireLogin = require('../middlewares/requireLogin');
 const requireAdmin = require('../middlewares/requireAdmin');
 
+//Routes not handled here are handled in react router
+
 module.exports = app => {
   app.get('/api/entities/rooms', requireLogin, entitiesController.getRooms);
 
