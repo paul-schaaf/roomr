@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
+
 const Entity = mongoose.model('entities');
 const User = mongoose.model('users');
 const validator = require('email-validator');
 const bcrypt = require('bcrypt');
+
 const saltRounds = 10;
 
 /**
@@ -12,52 +14,55 @@ const saltRounds = 10;
  * controller file edits BOTH collections
  */
 
- module.exports = {
+module.exports = {
 
- createUser: async (req, res, next) => {
-   const userProps = req.body;
-   const entityName = req.user.activeEntity;
-   try {
-      if(!validator.validate(userProps.email)) {
+  createUser: async (req, res, next) => {
+    const userProps = req.body;
+    const entityName = req.user.activeEntity;
+    try {
+      if (!validator.validate(userProps.email)) {
         res.locals.type = 'clientError';
-        throw new Error(`Please enter a valid email.`);
+        throw new Error('Please enter a valid email.');
       }
 
       const entity = await Entity.findOne({ name: entityName });
-      if(!entity) {
+      if (!entity) {
         res.locals.type = 'clientError';
         throw new Error(`There is no entity called:${entityName}`);
       }
 
       const userDoesNotExist = entity.users.every(user => user.email !== userProps.email);
-      if(!userDoesNotExist) {
-       res.locals.type = 'clientError';
-       throw new Error(`There already is a user called: ${userProps.email}.`);
+      if (!userDoesNotExist) {
+        res.locals.type = 'clientError';
+        throw new Error(`There already is a user called: ${userProps.email}.`);
       }
       const passwordHash = await bcrypt.hash(userProps.password, saltRounds);
-      await entity.users.push({email: userProps.email, password: passwordHash, entity: entityName});
-      const user = await User.findOne({ email: userProps.email });
-      if(user) {
+      await entity.users.push({
+        email: userProps.email,
+        password: passwordHash,
+        entity: entityName,
+      });
+      let user = await User.findOne({ email: userProps.email });
+      if (user) {
         await user.entities.push({ name: entityName });
         await user.save();
       } else {
         await User.create({ email: userProps.email });
-        const user = await User.findOne({ email: userProps.email });
+        user = await User.findOne({ email: userProps.email });
         await user.entities.push({ name: entityName });
         await user.save();
       }
-    await entity.save();
-    res.send(`User: ${userProps.email} successfully added`);
-     
-  } catch (err) {
-    next(err);
-  }
- },
+      await entity.save();
+      res.send(`User: ${userProps.email} successfully added`);
+    } catch (err) {
+      next(err);
+    }
+  },
 
   deleteUser: async (req, res, next) => {
     const entityName = req.user.activeEntity;
     const userEmail = req.params.email;
-    try{
+    try {
       const entity = await Entity.findOne({ name: entityName });
       if (!entity) {
         res.locals.type = 'clientError';
@@ -69,21 +74,21 @@ const saltRounds = 10;
        * entityInUser works vice-versa
        */
       const userInEntity = entity.users.find(userObject => userObject.email === userEmail);
-      if(!userInEntity) {
+      if (!userInEntity) {
         res.locals.type = 'clientError';
         throw new Error(`There is no user called: ${userEmail}.`);
       }
-      
-        /**
+
+      /**
         * any entity needs at least 1 admin to add or delete users,
         * make others admins and delete the entity
         */
-      if(userInEntity.isAdmin && entity.adminCount === 1) {
+      if (userInEntity.isAdmin && entity.adminCount === 1) {
         res.locals.type = 'clientError';
         throw new Error('Every entity needs at least 1 admin.');
       }
-      if(userInEntity.isAdmin) {
-        entity.adminCount = entity.adminCount - 1;
+      if (userInEntity.isAdmin) {
+        entity.adminCount -= 1;
       }
       const indexOfUser = entity.users.indexOf(userInEntity);
       entity.users.splice(indexOfUser, 1);
@@ -104,41 +109,40 @@ const saltRounds = 10;
       }
       await entity.save();
       res.send(`User: ${userEmail} successfully deleted`);
-    } catch(err) {
+    } catch (err) {
       next(err);
     }
-
   },
 
   makeAdmin: async (req, res, next) => {
     const entityName = req.user.activeEntity;
     const userEmail = req.body.email;
-    try{
+    try {
       const entity = await Entity.findOne({ name: entityName });
       if (!entity) {
         res.locals.type = 'clientError';
         throw new Error(`There is no entity called:${entityName}`);
       }
       const userInEntity = entity.users.find(userObject => userObject.email === userEmail);
-      if(!userInEntity) {
+      if (!userInEntity) {
         res.locals.type = 'clientError';
         throw new Error(`There is no user called: ${userEmail}.`);
       }
-      if(userInEntity.isAdmin === true) {
+      if (userInEntity.isAdmin === true) {
         res.locals.type = 'clientError';
         throw new Error(`User: ${userEmail} is already admin.`);
       }
-      //make user admin in entities collection
+      // make user admin in entities collection
       userInEntity.isAdmin = true;
-      entity.adminCount = entity.adminCount + 1;
-      //make user admin in users collection
+      entity.adminCount += 1;
+      // make user admin in users collection
       const user = await User.findOne({ email: userEmail });
-      const entityInUser = user.entities.find((entityObject) => entityObject.name === entityName);
+      const entityInUser = user.entities.find(entityObject => entityObject.name === entityName);
       entityInUser.isAdmin = true;
       await user.save();
       await entity.save();
       res.send(`User: ${userEmail} successfully made admin`);
-    } catch(err) {
+    } catch (err) {
       next(err);
     }
   },
@@ -146,37 +150,37 @@ const saltRounds = 10;
   unmakeAdmin: async (req, res, next) => {
     const entityName = req.user.activeEntity;
     const userEmail = req.body.email;
-    try{
+    try {
       const entity = await Entity.findOne({ name: entityName });
       if (!entity) {
         res.locals.type = 'clientError';
         throw new Error(`There is no entity called:${entityName}`);
       }
       const userInEntity = entity.users.find(userObject => userObject.email === userEmail);
-      if(!userInEntity) {
+      if (!userInEntity) {
         res.locals.type = 'clientError';
         throw new Error(`There is no user called: ${userEmail}.`);
       }
-      if(userInEntity.isAdmin === false) {
+      if (userInEntity.isAdmin === false) {
         res.locals.type = 'clientError';
         throw new Error(`User: ${userEmail} is not an admin.`);
       }
-      if(userInEntity.isAdmin && entity.adminCount === 1) {
+      if (userInEntity.isAdmin && entity.adminCount === 1) {
         res.locals.type = 'clientError';
         throw new Error('Every entity needs at least 1 admin.');
       }
-      //set isAdmin to false in entities collection
+      // set isAdmin to false in entities collection
       userInEntity.isAdmin = false;
-      entity.adminCount = entity.adminCount - 1;
-      //set isAdmin to false in users collection
+      entity.adminCount -= 1;
+      // set isAdmin to false in users collection
       const user = await User.findOne({ email: userEmail });
-      const entityInUser = user.entities.find((entityObject) => entityObject.name === entityName);
+      const entityInUser = user.entities.find(entityObject => entityObject.name === entityName);
       entityInUser.isAdmin = false;
       await user.save();
       await entity.save();
-      res.send(`User: ${userEmail} successfully unmade admin`);   
-    } catch(err) {
+      res.send(`User: ${userEmail} successfully unmade admin`);
+    } catch (err) {
       next(err);
     }
   },
- }
+};

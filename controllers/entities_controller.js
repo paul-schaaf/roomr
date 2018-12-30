@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
+
 const Entity = mongoose.model('entities');
 const User = mongoose.model('users');
 const validator = require('email-validator');
 const bcrypt = require('bcrypt');
+
 const saltRounds = 10;
 
 /**
@@ -67,7 +69,7 @@ module.exports = {
         }
       }
       res.send(rooms);
-    } catch(err) {
+    } catch (err) {
       next(err);
     }
   },
@@ -81,22 +83,20 @@ module.exports = {
         throw new Error(`There is no entity called:${entityName}`);
       }
       const users = entity.users.slice();
-      //only email and isAdmin should be sent to the client
-      const usersSlim = users.map((userObject) => {
-        return {
-          isAdmin: userObject.isAdmin,
-          email: userObject.email
-        }
-      })
+      // only email and isAdmin should be sent to the client
+      const usersSlim = users.map(userObject => ({
+        isAdmin: userObject.isAdmin,
+        email: userObject.email,
+      }));
       res.send(usersSlim);
-    } catch(err) {
+    } catch (err) {
       next(err);
     }
   },
 
   createEntity: async (req, res, next) => {
     const entityProps = req.body;
-    if(entityProps.entity === '') {
+    if (entityProps.entity === '') {
       /*
       * 'return' is required here or node will throw an error
       * this is because it runs the rest of the code below the redirect
@@ -110,10 +110,10 @@ module.exports = {
     }
     try {
       const entityExists = await Entity.findOne({ name: entityProps.entity });
-      if(entityExists) {
+      if (entityExists) {
         throw new Error();
       }
-      //store user info in Entity collection
+      // store user info in Entity collection
       await Entity.create({ name: entityProps.entity });
       const entity = await Entity.findOne({ name: entityProps.entity });
       const passwordHash = await bcrypt.hash(entityProps.password, saltRounds);
@@ -121,26 +121,26 @@ module.exports = {
         email: entityProps.email,
         password: passwordHash,
         entity: entityProps.entity,
-        isAdmin: true
+        isAdmin: true,
       });
-      //store user info in User collection
-      const user = await User.findOne({ email: entityProps.email });
-      if(user) {
+      // store user info in User collection
+      let user = await User.findOne({ email: entityProps.email });
+      if (user) {
         await user.entities.push({ name: entityProps.entity, isAdmin: true });
         await user.save();
       } else {
         await User.create({ email: entityProps.email });
-        const user = await User.findOne({ email: entityProps.email });
+        user = await User.findOne({ email: entityProps.email });
         await user.entities.push({ name: entityProps.entity, isAdmin: true });
         await user.save();
       }
       await entity.save();
-      res.redirect('../../login/createSuccess');
-    } catch(err) {
-      res.redirect('../../login/createFail');
+      return res.redirect('../../login/createSuccess');
+    } catch (err) {
+      return res.redirect('../../login/createFail');
     }
   },
-  
+
   createRoom: async (req, res, next) => {
     const entityName = req.user.activeEntity;
     const roomProps = req.body;
@@ -151,7 +151,7 @@ module.exports = {
         throw new Error(`There is no entity called:${entityName}`);
       }
       const roomDoesNotExist = entity.rooms.every(room => room.roomName !== roomProps.roomName);
-      if(!roomDoesNotExist) {
+      if (!roomDoesNotExist) {
         res.locals.type = 'clientError';
         throw new Error(`There already is a room called: ${roomProps.roomName}.`);
       }
@@ -173,10 +173,10 @@ module.exports = {
         throw new Error(`There is no entity called:${entityName}`);
       }
       const room = entity.rooms.find(roomObject => roomObject.roomName === roomProps.roomName);
-      if(!room) {
+      if (!room) {
         res.locals.type = 'clientError';
         throw new Error(`There is no room called: ${roomProps.roomName}.`);
-      }     
+      }
       const index = entity.rooms.indexOf(room);
       entity.rooms.splice(index, 1);
       await entity.save();
@@ -185,7 +185,7 @@ module.exports = {
       next(err);
     }
   },
-  
+
   blockRoom: async (req, res, next) => {
     const entityName = req.user.activeEntity;
     const roomProps = req.body;
@@ -196,7 +196,7 @@ module.exports = {
         throw new Error(`There is no entity called:${entityName}`);
       }
       const room = entity.rooms.find(roomObject => roomObject.roomName === roomProps.roomName);
-      if(!room) {
+      if (!room) {
         res.locals.type = 'clientError';
         throw new Error(`There is no room called ${roomProps.roomName}.`);
       }
@@ -228,7 +228,7 @@ module.exports = {
         throw new Error(`There is no entity called:${entityName}`);
       }
       const room = entity.rooms.find(roomObject => roomObject.roomName === roomProps.roomName);
-      if(!room) {
+      if (!room) {
         res.locals.type = 'clientError';
         throw new Error(`There is no room called ${roomProps.roomName}.`);
       }
@@ -247,38 +247,39 @@ module.exports = {
   deleteEntity: async (req, res, next) => {
     const entityNameClient = req.params.entity;
     const entityNameServer = req.user.activeEntity;
-    
-    try{
-      //User has to manually type entity name in client to confirm deletion
-      if(entityNameClient !== entityNameServer) {
+
+    try {
+      // User has to manually type entity name in client to confirm deletion
+      if (entityNameClient !== entityNameServer) {
         res.locals.type = 'clientError';
-        throw new Error(`Incorrect Entity Name`);
+        throw new Error('Incorrect Entity Name');
       }
-      
+
       const entity = await Entity.findOne({ name: entityNameServer });
       const usersInEntity = entity.users.slice();
-      //delete Entity in entityiescollection
+      // delete Entity in entityiescollection
       await Entity.deleteOne({ name: entityNameServer });
-      //delete entity in entityArray of User in users collection
+      // delete entity in entityArray of User in users collection
       await usersInEntity.map(async (userObject) => {
         const user = await User.findOne({ email: userObject.email });
-        const entityInUser = user.entities.find(entityObject => entityObject.name === entityNameServer);
+        const entityInUser = user.entities
+          .find(entityObject => entityObject.name === entityNameServer);
         const indexOfEntity = user.entities.indexOf(entityInUser);
         user.entities.splice(indexOfEntity, 1);
         await user.save();
-        //if entityArray is empty, the user in users collection can be deleted too
+        // if entityArray is empty, the user in users collection can be deleted too
         if (user.entities.length === 0) {
           await User.deleteOne({ email: userObject.email });
         }
-      })
-      //log out user after entity is deleted
+      });
+      // log out user after entity is deleted
       const user = req.user;
       user.activeEntity = 'none';
       user.isAdminNow = false;
       await user.save();
       await req.logout();
-      res.send(`Entity successfully deleted`);
-    } catch(err) {
+      res.send('Entity successfully deleted');
+    } catch (err) {
       next(err);
     }
   },
