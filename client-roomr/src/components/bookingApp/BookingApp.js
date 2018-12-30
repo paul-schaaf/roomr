@@ -19,8 +19,8 @@ import './BookingApp.css';
 * state.errorType shows the type of error in a shorter format
 *
 * state.responseMessage saves whether all other requests(post, delete)
-* were successful and renders dynamic error messages
-* depending for example on the server response using ResponseMessage.js
+* were successful and renders dynamic responses
+* using ResponseMessage.js
 *
 * state.data, users, admins, and usersWithoutAdmins hold all data received
 * through the get requests and BookingApp.js passes that data down to the individual components
