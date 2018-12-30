@@ -56,7 +56,7 @@ class Form extends React.Component {
   }
 
   //see InputTimes.js for explanation for this function
-  componentDidUpdate (prevProps) {
+  componentDidUpdate () {
     const indexStart = timeArray.indexOf(this.state.start);
     const indexEnd = timeArray.indexOf(this.state.end);
     if (indexEnd < indexStart) {
