@@ -1,17 +1,15 @@
 const passport = require('passport');
-const mongoose = require('mongoose');
 
-module.exports = app => {
+module.exports = (app) => {
   app.post('/api/login',
     passport.authenticate('local', { failureRedirect: '/login/loginFail' }),
-      (req, res) => {
-        if(req.user.isAdminNow){
-          res.redirect('/app/' + req.user.activeEntity + '/admin');
-        } else {
-          res.redirect('/app/' + req.user.activeEntity);
-        }
+    (req, res) => {
+      if (req.user.isAdminNow) {
+        res.redirect(`/app/${req.user.activeEntity}/admin`);
+      } else {
+        res.redirect(`/app/${req.user.activeEntity}`);
       }
-  );
+    });
 
   app.get('/api/logout', async (req, res) => {
     if (req.user) {
@@ -22,5 +20,5 @@ module.exports = app => {
       await req.logout();
     }
     res.redirect('/login');
-  })
+  });
 };
