@@ -27,6 +27,12 @@ class LoginMessage extends React.Component{
     this.setState({ buttonBackground: this.state.background });
   }
 
+  /**
+   * normal css hover isn't possible for this component since
+   * its background is either blue or red
+   * hence the button's background needs to change dynamically
+   * with the background of the LoginMessage
+   */
   onIsHovered = () => {
     this.setState({ buttonBackground: 'white' });
   }
