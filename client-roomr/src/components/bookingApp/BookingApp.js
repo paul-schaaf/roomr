@@ -18,13 +18,15 @@ import './BookingApp.css';
 *
 * state.errorType shows the type of error in a shorter format
 *
-* state.responseMessage saves whether all other requests(post, delete) were successful and renders dynamic error messages
+* state.responseMessage saves whether all other requests(post, delete)
+* were successful and renders dynamic error messages
 * depending for example on the server response using ResponseMessage.js
 *
-* state.data holds all data received through the get requests and BookingApp.js passes that data down to the individual components
-* in the case where
+* state.data, users, admins, and usersWithoutAdmins hold all data received
+* through the get requests and BookingApp.js passes that data down to the individual components
 *
-* in the case that the get request was successful but the database is empty BookingApp.js will only render the FormList component but not
+* in the case that the get request was successful but the database is empty BookingApp.js
+* will only render the FormList component but not
 * the RoomList component
 */
 class BookingPage extends React.Component {
@@ -178,7 +180,6 @@ class BookingPage extends React.Component {
               <TimeLine />
             <div className="room-area">
               <RoomList data={this.state.data}/>
-              
             </div>
           </div>}
         </React.Fragment>
