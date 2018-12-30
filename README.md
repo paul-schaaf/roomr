@@ -8,27 +8,27 @@ Roomr allows everyone in a building (or any kind of entity) to see which rooms a
 - [Using the demo](#Using-the-demo)
 - [Technologies used](#Technologies-used)
 - [Possible Additions](#Possible-Additions)
-### Using the demo
+## Using the demo
 First go to roomr-demo.herokuapp.com
 
-#### Using the premade account
+### Using the premade account
   You can log into an existing entity with {Ecorp, rick@demo.com, 123 or Ecorp, morty@demo.com, 123}
-#### Creating an account yourself
+### Creating an account yourself
   You can create your own entity by going to the create tab and putting in your desired info. You will then be able to log in as an admin, which gives you additional rights (to avoid mobile screen cluttering, you need to be on a >1000px screen for additional rights button to appear).
-#### Using the forms
+### Using the forms
   The forms are all self evident but you can also intentionally make errors to see what happens e.g.
   - type in an invalid email for add user
   - delete yourself if you are the only admin
   - add a user that is already there
   - block a timespan that is already blocked
   Finally, once you are done, type in your entity name to delete your entity again.
-### Technologies used
+## Technologies used
 I have used the airbnb styleguide for linting this project.
 #### Frontend
 The frontend is built with Html, CSS, JS, and React and using the newest JS such as import statements and export default with babel.
 #### Backend
 The backend is built with JS, node, and express. The data is stored in a MongoDB database and handled with Mongoose. Authentication is done with passport.js (passport-local) and passwords are hashed/compared with bcrypt.
-### Possible Additions
+## Possible Additions
 - allow custom time ranges for rooms instead of 09-00 to 17:00
 - night and day mode
 - room ordering according to space available, alphabetic, custom ordering
