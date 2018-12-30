@@ -34,7 +34,6 @@ passport.use(new LocalStrategy({
       if (!entity) return done(null, false);
       const userInEntity = entity.users.find((user) => user.email === username);
       if (!userInEntity) return done(null, false);
-      console.log(userInEntity);
       const match = await bcrypt.compare(password, userInEntity.password);
       if(!match) return done(null, false);
       let user = await User.findOne({ email: username });
