@@ -5,21 +5,21 @@ const { Schema } = mongoose;
 const userSubSchema = new Schema({
   email: {
     type: String,
-    required: true
+    required: true,
   },
   isAdmin: {
     type: Boolean,
     default: false,
-    required: true
+    required: true,
   },
   entity: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
 module.exports = userSubSchema;
