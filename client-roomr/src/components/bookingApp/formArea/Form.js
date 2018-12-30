@@ -91,8 +91,22 @@ class Form extends React.Component {
   render () {
     if (this.props.adminForm) {
       return (
-        <form className={this.props.className} onSubmit={this.onUserFormSubmit}>
-          {!this.props.noEmail &&
+        <form
+          className={this.props.className}
+          onSubmit={(this.props.hasRoom) ? this.onRoomFormSubmit : this.onUserFormSubmit}
+        >
+          {this.props.hasRoom && 
+          <input
+            className="input-room"
+            autoComplete="off"
+            name="room"
+            list={this.props.datalistName}
+            onChange={this.onInputChange}
+            value={this.state.room}
+            type="text"
+            placeholder="room...">
+           </input>}
+          {this.props.hasEmail &&
           <input
             className="input-user input-user--email"
             autoComplete="off"
@@ -104,7 +118,7 @@ class Form extends React.Component {
             placeholder="email...">
           </input>}
           {this.props.datalistName &&
-          <DataList type={this.props.type} id={this.props.datalistName} data={this.props.data}/>}
+          <DataList type={this.props.datalistType} id={this.props.datalistName} data={this.props.data}/>}
           {this.props.hasPassword &&
           <input
             className="input-user input-user--password"
@@ -114,7 +128,7 @@ class Form extends React.Component {
             value={this.state.password}
             type="text"
             placeholder="password...">
-          </input>} 
+          </input>}
           {this.props.deleteEntity &&
           <input
             className="input-user input-user--entity"
@@ -126,7 +140,7 @@ class Form extends React.Component {
             placeholder="type entity name to confirm...">
           </input>}
           <input
-            className={`submit-button submit-button--user ${(this.props.isDisabled) && 'submit-button--disabled'}`}
+            className={`submit-button ${(this.props.isDisabled) && 'submit-button--disabled'}`}
             type="submit"
             value={this.props.buttonValue}>
           </input>
@@ -146,17 +160,13 @@ class Form extends React.Component {
           type="text"
           placeholder="room...">
         </input>
-        {this.props.datalistName &&
-        <DataList type={this.props.type} id={this.props.datalistName} data={this.props.data}/>}
-        {this.props.selectTime &&
-        <React.Fragment>
+        <DataList type={this.props.datalistType} id={this.props.datalistName} data={this.props.data}/>
         <select name="start" onChange={this.onInputChange} value={this.state.start} type="text">
           <InputTimes />
         </select>
         <select name="end" onChange={this.onInputChange} value={this.state.end} type="text">
           <InputTimes start={this.state.start}/>
         </select>
-        </React.Fragment>}
         <input
           className={`submit-button ${(this.props.isDisabled) && 'submit-button--disabled'}`}
           type="submit"

@@ -6,15 +6,18 @@ import './FormList.css';
 * this component renders the forms
 * 
 * Forms can be given the following parameters:
-* data - contains roomData for datalists
+* className - contains class name for css
+* isDisabled - determines whether Form should be disabled
+* data - contains data for datalists
 * formAction - contains BookingApp callback
-* buttonValue - contains the text of the submit button
-* datalistName - contains the id for the datalist
-* select - if it exists, inputs will have time selects
-* DatalistRequired - determines if input has datalist
-* className - contains class names for css
+* buttonValue - contains the text for the submit button
+* datalistType - contains the type for Datalist (room or user)
+* datalistName - contains the id for the datalist if required
+* adminForm - determines whether form is member form or admin form
 * hasPassword - determines whether form has password input
-* adminForm - determines whether form is user form or room form
+* hasEmail - determines whether form has email input
+* hasRoom - determines whether form has room input
+* deleteEntity - determines whether form has deleteEntity input 
 */
 
 const FormList = props =>  {
@@ -26,18 +29,16 @@ const FormList = props =>  {
               data={props.data}
               formAction={props.onBlockRoomSubmit}
               buttonValue="▹ reserve room"
+              datalistType="room"
               datalistName="reserve"
-              type="room"
-              selectTime
             />
             <Form
               isDisabled={props.isDisabled}
               data={props.data}
               formAction={props.onUnblockRoomSubmit}
               buttonValue="▹ unblock room"
+              datalistType="room"
               datalistName="unblock"
-              type="room"
-              selectTime
             />
           </div>
           {props.showSettings &&
@@ -47,72 +48,80 @@ const FormList = props =>  {
                 isDisabled={props.isDisabled}
                 formAction={props.onAddRoomSubmit}
                 buttonValue="▹ add room"
+                adminForm
+                hasRoom
               />
               <Form
+                className="form--delete-room"
                 isDisabled={props.isDisabled}
                 data={props.data}
                 formAction={props.onDeleteRoomSubmit}
                 buttonValue="▹ delete room"
+                adminForm
+                hasRoom
+                datalistType="room"
                 datalistName="deleteRoom"
-                type="room"
-                className="form--delete-room"
+                
               />
             </div>
             
             <div className="formbox forms--users">
               <Form
+                className="form--add-user"
                 isDisabled={props.isDisabled}
                 formAction={props.onAddUserSubmit}
                 buttonValue="▹ add user"
                 adminForm
+                hasEmail
                 hasPassword
-                className="form--add-user"
               />
               <Form
+                className="form--delete-user"
                 isDisabled={props.isDisabled}
                 data={props.users}
                 formAction={props.onDeleteUserSubmit}
                 buttonValue="▹ delete user"
-                datalistName="deleteUser"
-                type="user"
                 adminForm
-                className="form--delete-user"
+                hasEmail
+                datalistName="deleteUser"
+                datalistType="user"
               />
             </div>
             
             <div className="formbox forms--admins">
               <Form
+                className="form--make-admin"
                 isDisabled={props.isDisabled}
                 data={props.usersWithoutAdmins}
                 formAction={props.onMakeAdminSubmit}
                 buttonValue="▹ make admin"
-                datalistName="makeAdmin"
-                type="user"
                 adminForm
-                className="form--make-admin"
+                hasEmail
+                datalistName="makeAdmin"
+                datalistType="user"
               />
               <Form
+                className="form--unmake-admin"
                 isDisabled={props.isDisabled}
                 data={props.admins}
                 formAction={props.onUnmakeAdminSubmit}
                 buttonValue="▹ remove admin status"
-                datalistName="removeAdminStatus"
                 adminForm
-                type="user"
-                className="form--unmake-admin"
+                hasEmail
+                datalistName="removeAdminStatus"
+                datalistType="user"
               />
             </div>
             <div className="formbox forms--entity">
-            <Form
+              <Form
+                className="form--delete-entity"
                 isDisabled={props.isDisabled}
                 data={props.data}
                 formAction={props.onDeleteEntitySubmit}
                 buttonValue="▹ delete entity"
                 adminForm
-                noEmail
                 deleteEntity
-                className="form--delete-entity"
-              />
+                />
             </div>
           </React.Fragment>}
         </div>

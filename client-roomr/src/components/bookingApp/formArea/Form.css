@@ -83,10 +83,6 @@ padding: 1.5px 5px 1.5px 5px;
   transform:translateX(1px);
 }
 
-.submit-button--user {
-  width:150px;
-}
-
 .form--delete-room{
   margin-left:32px;
 }
@@ -122,6 +118,10 @@ padding: 1.5px 5px 1.5px 5px;
 .form--unmake-admin .input-user {
   margin-left:6px;
   margin-right:65px;
+}
+
+.form--unmake-admin .submit-button {
+  width:150px;
 }
 .form--delete-entity {
   margin-left:0px;
