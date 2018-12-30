@@ -105,6 +105,16 @@ class Form extends React.Component {
           </input>}
           {this.props.datalistName &&
           <DataList type={this.props.type} id={this.props.datalistName} data={this.props.data}/>}
+          {this.props.hasPassword &&
+          <input
+            className="input-user input-user--password"
+            autoComplete="off"
+            name="password"
+            onChange={this.onInputChange}
+            value={this.state.password}
+            type="text"
+            placeholder="password...">
+          </input>} 
           {this.props.deleteEntity &&
           <input
             className="input-user input-user--entity"
