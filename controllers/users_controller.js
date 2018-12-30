@@ -13,7 +13,7 @@ const saltRounds = 10;
  */
 
  module.exports = {
-  //expects json with {email, and password}
+
  createUser: async (req, res, next) => {
    const userProps = req.body;
    const entityName = req.user.activeEntity;
@@ -53,7 +53,7 @@ const saltRounds = 10;
     next(err);
   }
  },
-   //expects params with {user}
+
   deleteUser: async (req, res, next) => {
     const entityName = req.user.activeEntity;
     const userEmail = req.params.email;
@@ -109,7 +109,7 @@ const saltRounds = 10;
     }
 
   },
-  //expects json with {email}
+
   makeAdmin: async (req, res, next) => {
     const entityName = req.user.activeEntity;
     const userEmail = req.body.email;
@@ -128,8 +128,10 @@ const saltRounds = 10;
         res.locals.type = 'clientError';
         throw new Error(`User: ${userEmail} is already admin.`);
       }
+      //make user admin in entities collection
       userInEntity.isAdmin = true;
       entity.adminCount = entity.adminCount + 1;
+      //make user admin in users collection
       const user = await User.findOne({ email: userEmail });
       const entityInUser = user.entities.find((entityObject) => entityObject.name === entityName);
       entityInUser.isAdmin = true;
@@ -140,7 +142,7 @@ const saltRounds = 10;
       next(err);
     }
   },
-  //expects json with {email}
+
   unmakeAdmin: async (req, res, next) => {
     const entityName = req.user.activeEntity;
     const userEmail = req.body.email;
@@ -163,8 +165,10 @@ const saltRounds = 10;
         res.locals.type = 'clientError';
         throw new Error('Every entity needs at least 1 admin.');
       }
+      //set isAdmin to false in entities collection
       userInEntity.isAdmin = false;
       entity.adminCount = entity.adminCount - 1;
+      //set isAdmin to false in users collection
       const user = await User.findOne({ email: userEmail });
       const entityInUser = user.entities.find((entityObject) => entityObject.name === entityName);
       entityInUser.isAdmin = false;
