@@ -89,7 +89,7 @@ class Form extends React.Component {
   }
 
   render () {
-    if (this.props.userForm) {
+    if (this.props.adminForm) {
       return (
         <form className={this.props.className} onSubmit={this.onUserFormSubmit}>
           {!this.props.noEmail &&
@@ -125,16 +125,6 @@ class Form extends React.Component {
             type="text"
             placeholder="type entity name to confirm...">
           </input>}
-          {this.props.hasPassword &&
-          <input
-            className="input-user input-user--password"
-            autoComplete="off"
-            name="password"
-            onChange={this.onInputChange}
-            value={this.state.password}
-            type="text"
-            placeholder="password...">
-          </input>} 
           <input
             className={`submit-button submit-button--user ${(this.props.isDisabled) && 'submit-button--disabled'}`}
             type="submit"

@@ -14,7 +14,7 @@ import './FormList.css';
 * DatalistRequired - determines if input has datalist
 * className - contains class names for css
 * hasPassword - determines whether form has password input
-* userForm - determines whether form is user form or room form
+* adminForm - determines whether form is user form or room form
 */
 
 const FormList = props =>  {
@@ -64,7 +64,7 @@ const FormList = props =>  {
                 isDisabled={props.isDisabled}
                 formAction={props.onAddUserSubmit}
                 buttonValue="▹ add user"
-                userForm
+                adminForm
                 hasPassword
                 className="form--add-user"
               />
@@ -75,7 +75,7 @@ const FormList = props =>  {
                 buttonValue="▹ delete user"
                 datalistName="deleteUser"
                 type="user"
-                userForm
+                adminForm
                 className="form--delete-user"
               />
             </div>
@@ -88,7 +88,7 @@ const FormList = props =>  {
                 buttonValue="▹ make admin"
                 datalistName="makeAdmin"
                 type="user"
-                userForm
+                adminForm
                 className="form--make-admin"
               />
               <Form
@@ -97,7 +97,7 @@ const FormList = props =>  {
                 formAction={props.onUnmakeAdminSubmit}
                 buttonValue="▹ remove admin status"
                 datalistName="removeAdminStatus"
-                userForm
+                adminForm
                 type="user"
                 className="form--unmake-admin"
               />
@@ -108,7 +108,7 @@ const FormList = props =>  {
                 data={props.data}
                 formAction={props.onDeleteEntitySubmit}
                 buttonValue="▹ delete entity"
-                userForm
+                adminForm
                 noEmail
                 deleteEntity
                 className="form--delete-entity"
