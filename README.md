@@ -2,7 +2,7 @@
 a (meeting) room management app
 
 ## Motivation
-Roomr allows everyone in a building (or any kind of entity) to see which rooms are available at what times. It lets users add and delete rooms and reserve rooms for specific times.
+Roomr allows everyone in a building (or any kind of entity) to see which rooms are available at what times, so workers don't have to spend valuable time looking for available space. It lets users add and delete rooms and reserve rooms for specific times.
 
 ## List of Contents
 - [Using the demo](#Using-the-demo)
@@ -10,6 +10,18 @@ Roomr allows everyone in a building (or any kind of entity) to see which rooms a
 - [Possible Additions](#Possible-Additions)
 ### Using the demo
 First go to roomr-demo.herokuapp.com
+
+## Using the premade account
+  You can log into an existing entity with {Ecorp, rick@demo.com, 123 or Ecorp, morty@demo.com, 123}
+## Creating an account yourself
+  You can create your own entity by going to the create tab and putting in your desired info. You will then be able to log in as an admin, which gives you additional rights (to avoid mobile screen cluttering, you need to be on a >1000px screen for additional rights button to appear).
+## Using the forms
+  The forms are all self evident but you can also intentionally make errors to see what happens e.g.
+  - type in an invalid email for add user
+  - delete yourself if you are the only admin
+  - add a user that is already there
+  - block a timespan that is already blocked
+  Finally, once you are done, type in your entity name to delete your entity again.
 ### Technologies used
 I have used the airbnb styleguide for linting this project.
 #### Frontend
@@ -18,10 +30,8 @@ The frontend is built with Html, CSS, JS, and React and using the newest JS such
 The backend is built with JS, node, and express. The data is stored in a MongoDB database and handled with Mongoose. Authentication is done with passport.js (passport-local) and passwords are hashed/compared with bcrypt.
 ### Possible Additions
 - allow custom time ranges for rooms instead of 09-00 to 17:00
-- add an authorisation system (I already thought of this while writing the app so the database is already structured in a way that allows for such a system)
 - night and day mode
 - room ordering according to space available, alphabetic, custom ordering
-- better loading screen (currently only says "loading...")
 - attach tags to rooms that allow for better searches (e.g. find rooms with a coffee machine that are free from 10:15-to 10:30)
   - possible tags:
     - wifi
