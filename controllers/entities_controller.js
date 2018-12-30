@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const Entity = mongoose.model('entities');
 const User = mongoose.model('users');
 const validator = require('email-validator');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 /**
  * There are two controller files for the two separate
@@ -113,9 +115,10 @@ module.exports = {
       }
       await Entity.create({ name: entityProps.entity });
       const entity = await Entity.findOne({ name: entityProps.entity });
+      const passwordHash = await bcrypt.hash(entityProps.password, saltRounds);
       await entity.users.push({
         email: entityProps.email,
-        password: entityProps.password,
+        password: passwordHash,
         entity: entityProps.entity,
         isAdmin: true
       });
