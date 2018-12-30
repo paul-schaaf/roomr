@@ -28,7 +28,7 @@ const FormList = props =>  {
               buttonValue="▹ reserve room"
               datalistName="reserve"
               type="room"
-              select
+              selectTime
             />
             <Form
               isDisabled={props.isDisabled}
@@ -37,7 +37,7 @@ const FormList = props =>  {
               buttonValue="▹ unblock room"
               datalistName="unblock"
               type="room"
-              select
+              selectTime
             />
           </div>
           {props.showSettings &&
