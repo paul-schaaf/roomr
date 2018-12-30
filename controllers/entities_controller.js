@@ -52,6 +52,10 @@ module.exports = {
     const entityName = req.user.activeEntity;
     try {
       const entity = await Entity.findOne({ name: entityName });
+      if (!entity) {
+        res.locals.type = 'clientError';
+        throw new Error(`There is no entity called:${entityName}`);
+      }
       const rooms = entity.rooms.slice();
       // removes default property and just puts it into times[i].availability if not already done
       for (let i = 0; i < rooms.length; i += 1) {
