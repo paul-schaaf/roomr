@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 const roomSchema = new Schema({
   roomName: {
     type: String,
-    required: true
+    required: true,
   },
   entity: String,
   times: {
