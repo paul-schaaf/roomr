@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const Entity = mongoose.model('entities');
 const User = mongoose.model('users');
 const validator = require('email-validator');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 /**
  * There are two controller files for the two separate
@@ -32,8 +34,8 @@ const validator = require('email-validator');
        res.locals.type = 'clientError';
        throw new Error(`There already is a user called: ${userProps.email}.`);
       }
-     
-      await entity.users.push({email: userProps.email, password: userProps.password, entity: entityName});
+      const passwordHash = await bcrypt.hash(userProps.password, saltRounds);
+      await entity.users.push({email: userProps.email, password: passwordHash, entity: entityName});
       const user = await User.findOne({ email: userProps.email });
       if(user) {
         await user.entities.push({ name: entityName });
