@@ -1,23 +1,24 @@
 const mongoose = require('mongoose');
+
 const { Schema } = mongoose;
 const entities = require('./entitySubSchema');
 
-const userSchema = new Schema ({
+const userSchema = new Schema({
   email: {
     type: String,
-    required: true
+    required: true,
   },
   activeEntity: {
     type: String,
     default: 'none',
-    required:true
+    required: true,
   },
   isAdminNow: {
     type: Boolean,
     default: false,
-    required:true
+    required: true,
   },
-  entities: [entities]
+  entities: [entities],
 });
 
 mongoose.model('users', userSchema);
