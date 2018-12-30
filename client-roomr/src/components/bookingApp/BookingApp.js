@@ -127,7 +127,7 @@ class BookingPage extends React.Component {
     } 
     
     //the request failed because the server didnt respond
-    if (this.state.getStatus === "failed" && this.state.errorType === 'serverError') {
+    if (this.state.getStatus === "failed") {
       return <ResponsePage />
     } 
     
@@ -180,6 +180,7 @@ class BookingPage extends React.Component {
         </React.Fragment>
       )
     } 
+    return <div></div>
   }
 }
 

@@ -22,27 +22,29 @@ const getRoomDataOnce = async (appState) => {
 
 
 /**
-* this axios function requires a separate try-catch because
+* this axios function requires a separate catch because
 * the function is inside a setInterval function
 * so the axiosErrorHandler.js handler will not work on it.
-* The try block outside setInterval executes setRoomDataLoop
+* The try block outside setInterval (from axiosErrorHandler) executes setRoomDataLoop
 * but it does not care about async/await so it will conclude there were no errors because it already
 * finished before the setInterval callback could get back onto the callstack.
-* This is why we need a try block INSIDE
+* This is why we need a catch INSIDE
 * the set interval function, the same goes for getUserDataLoop
+* this is the only place I used then/catch, not async/await
+* because the latter does not set errors correctly for some reason
 */
-const getRoomDataLoop = async (appState) => {
-  roomInterval = setInterval(async () => {
-    try {
-      const response = await axios.get('/api/entities/rooms');
-      appState.setState({ data: response.data, getStatus: 'successful' });
-    } catch (err) {
-      if (err.response) {
-        appState.setState({ responseMessage: err.response.data.message, errorType: err.response.data.type });
-      } else if (err.request) { // this error appears when there is no response from the server
-        appState.setState({ getStatus: 'failed', errorType: 'serverError' });
-      }
-    }
+const getRoomDataLoop = (appState) => {
+  roomInterval = setInterval(() => {
+      axios.get('/api/entities/rooms')
+        .then((response) => appState.setState({ data: response.data, getStatus: 'successful' }))
+        .catch((err) => {
+          if(err.request) {
+            appState.setState({ getStatus: 'failed', errorType: 'serverError' });
+          }
+          if(err.response) {
+            appState.setState({ responseMessage: err.response.data.message, errorType: err.response.data.type });
+          }
+        });
   }, 10000);
 };
 
@@ -53,30 +55,31 @@ const getUserDataOnce = async (appState) => {
     .filter((user) => user.isAdmin)
     .map((user) => user.email);
   const usersWithoutAdmins = response.data
-  .filter((user) => !user.isAdmin)
-  .map((user) => user.email);
+    .filter((user) => !user.isAdmin)
+    .map((user) => user.email);
   appState.setState({ users, admins, usersWithoutAdmins, getStatus: 'successful' });
 };
 
-const getUserDataLoop = async (appState) => {
-  userInterval = setInterval(async () => {
-    try {
-      const response = await axios.get('/api/entities/users');
-      const users = response.data.map((user) => user.email);
-      const admins = response.data
-        .filter((user) => user.isAdmin)
-        .map((user) => user.email);
-      const usersWithoutAdmins = response.data
-      .filter((user) => !user.isAdmin)
-      .map((user) => user.email);
-      appState.setState({ users, admins, usersWithoutAdmins, getStatus: 'successful' });
-    } catch (err) {
-      if (err.response) {
-        appState.setState({ responseMessage: err.response.data.message, errorType: err.response.data.type });
-      } else if (err.request) { // this error appears when there is no response from the server
-        appState.setState({ getStatus: 'failed', errorType: 'serverError' });
-      }
-    }
+const getUserDataLoop = (appState) => {
+  userInterval = setInterval(() => {
+      axios.get('/api/entities/users')
+        .then((response) => {
+          const users = response.data.map((user) => user.email);
+          const admins = response.data
+            .filter((user) => user.isAdmin)
+            .map((user) => user.email);
+          const usersWithoutAdmins = response.data
+            .filter((user) => !user.isAdmin)
+            .map((user) => user.email);
+           appState.setState({ users, admins, usersWithoutAdmins, getStatus: 'successful' });
+        })
+        .catch((err) => {
+          if (err.response) {
+            appState.setState({ responseMessage: err.response.data.message, errorType: err.response.data.type });
+          } else if (err.request) { // this error appears when there is no response from the server
+            appState.setState({ getStatus: 'failed', errorType: 'serverError' });
+          }
+        })
   }, 10000);
 };
 
