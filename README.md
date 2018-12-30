@@ -24,6 +24,8 @@ First go to roomr-demo.herokuapp.com
 
   You can also create users, log out and log in with their accounts. If you have created one more admin by adding them and then making them admin, you can even delete yourself and see what happens (spoiler: you'll be kicked).
 
+  Note: the server will always let you unblock rooms even if they are already unblocked.
+
   Finally, once you are done, type in your entity name to delete your entity again.
 ## Technologies used
 I have used the airbnb styleguide for linting this project.
