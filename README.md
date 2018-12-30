@@ -17,10 +17,10 @@ First go to roomr-demo.herokuapp.com
   You can create your own entity by going to the create tab and putting in your desired info. You will then be able to log in as an admin, which gives you additional rights (to avoid mobile screen cluttering, you need to be on a >1000px screen for additional rights button to appear).
 ### Using the forms
   The forms are all self evident but you can also intentionally make errors to see what happens e.g.
-  - type in an invalid email for add user
-  - delete yourself if you are the only admin
-  - add a user that is already there
-  - block a timespan that is already blocked
+    - type in an invalid email for add user
+    - delete yourself if you are the only admin
+    - add a user that is already there
+    - block a timespan that is already blocked
   Finally, once you are done, type in your entity name to delete your entity again.
 ## Technologies used
 I have used the airbnb styleguide for linting this project.
