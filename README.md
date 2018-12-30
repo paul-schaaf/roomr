@@ -11,11 +11,11 @@ Roomr allows everyone in a building (or any kind of entity) to see which rooms a
 ### Using the demo
 First go to roomr-demo.herokuapp.com
 
-## Using the premade account
+#### Using the premade account
   You can log into an existing entity with {Ecorp, rick@demo.com, 123 or Ecorp, morty@demo.com, 123}
-## Creating an account yourself
+#### Creating an account yourself
   You can create your own entity by going to the create tab and putting in your desired info. You will then be able to log in as an admin, which gives you additional rights (to avoid mobile screen cluttering, you need to be on a >1000px screen for additional rights button to appear).
-## Using the forms
+#### Using the forms
   The forms are all self evident but you can also intentionally make errors to see what happens e.g.
   - type in an invalid email for add user
   - delete yourself if you are the only admin
