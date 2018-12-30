@@ -34,6 +34,7 @@ The frontend is built with Html, CSS, JS, and React and using the newest JS such
 #### Backend
 The backend is built with JS, node, and express. The data is stored in a MongoDB database and handled with Mongoose. Authentication is done with passport.js (passport-local) and passwords are hashed/compared with bcrypt.
 ## Possible Additions
+- add more days to app, currently the app only shows one day, it would be good if you could plan and reserve some days ahead
 - allow custom time ranges for rooms instead of 09-00 to 17:00
 - night and day mode
 - room ordering according to space available, alphabetic, custom ordering
@@ -45,7 +46,6 @@ The backend is built with JS, node, and express. The data is stored in a MongoDB
     - projector
     - big, medium, small room sizes
     - add custom tags
-- add more days to app, currently the app only shows the one day
 - ability to integrate with calendar
 - ability to add info to room blockings (e.g. who the people who blocked this room are, what they are doing etc.)
 - ability to block rooms by clicking on them instead of using the form
