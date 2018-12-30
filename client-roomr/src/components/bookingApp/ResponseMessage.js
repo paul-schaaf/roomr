@@ -11,8 +11,6 @@ class ResponseMessage extends React.Component {
     buttonColor: 'white'
   }
 
-
-
   componentDidMount = async () => {
     if (this.props.clientError) {
       await this.setState({ background: '#BC2D19' });
@@ -25,6 +23,12 @@ class ResponseMessage extends React.Component {
     this.props.onMessageButtonClick();
   }
 
+    /**
+   * normal css hover isn't possible for this component since
+   * its background is either blue or red
+   * hence the button's background needs to change dynamically
+   * with the background of the LoginMessage
+   */
   onIsHovered = () => {
     this.setState({ buttonBackground: 'white' });
     this.setState({ buttonColor: this.state.background });
