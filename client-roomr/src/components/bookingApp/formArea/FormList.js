@@ -26,7 +26,7 @@ const FormList = props =>  {
           <div className="formbox forms--blocking">
             <Form
               isDisabled={props.isDisabled}
-              data={props.data}
+              data={props.rooms}
               formAction={props.onBlockRoomSubmit}
               buttonValue="▹ reserve room"
               datalistType="room"
@@ -34,7 +34,7 @@ const FormList = props =>  {
             />
             <Form
               isDisabled={props.isDisabled}
-              data={props.data}
+              data={props.rooms}
               formAction={props.onUnblockRoomSubmit}
               buttonValue="▹ unblock room"
               datalistType="room"
@@ -54,7 +54,7 @@ const FormList = props =>  {
               <Form
                 className="form--delete-room"
                 isDisabled={props.isDisabled}
-                data={props.data}
+                data={props.rooms}
                 formAction={props.onDeleteRoomSubmit}
                 buttonValue="▹ delete room"
                 adminForm
@@ -116,7 +116,6 @@ const FormList = props =>  {
               <Form
                 className="form--delete-entity"
                 isDisabled={props.isDisabled}
-                data={props.data}
                 formAction={props.onDeleteEntitySubmit}
                 buttonValue="▹ delete entity"
                 adminForm

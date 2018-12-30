@@ -2,7 +2,7 @@ import React from 'react';
 import Room from './Room';
 
 /*
-* state.data that is passed down into this component holds the array of rooms in our database
+* state.rooms that is passed down into this component as data holds the array of rooms in the database
 * we loop over the array to create and render rooms
 */
 

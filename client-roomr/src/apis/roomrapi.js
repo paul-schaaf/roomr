@@ -17,7 +17,7 @@ let userInterval;
 
 const getRoomDataOnce = async (appState) => {
   const response = await axios.get('/api/entities/rooms');
-  appState.setState({ data: response.data, getStatus: 'successful' });
+  appState.setState({ rooms: response.data, getStatus: 'successful' });
 };
 
 
@@ -36,13 +36,13 @@ const getRoomDataOnce = async (appState) => {
 const getRoomDataLoop = (appState) => {
   roomInterval = setInterval(() => {
       axios.get('/api/entities/rooms')
-        .then((response) => appState.setState({ data: response.data, getStatus: 'successful' }))
+        .then((response) => appState.setState({ rooms: response.data, getStatus: 'successful' }))
         .catch((err) => {
           if(err.request) {
             appState.setState({ getStatus: 'failed', errorType: 'serverError' });
           }
           if(err.response) {
-            appState.setState({ responseMessage: err.response.data.message, errorType: err.response.data.type });
+            appState.setState({ responseMessage: err.response.data.message, errorType: err.response.type });
           }
         });
   }, 10000);

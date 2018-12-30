@@ -22,7 +22,7 @@ import './BookingApp.css';
 * were successful and renders dynamic responses
 * using ResponseMessage.js
 *
-* state.data, users, admins, and usersWithoutAdmins hold all data received
+* state.rooms, users, admins, and usersWithoutAdmins hold all data received
 * through the get requests and BookingApp.js passes that data down to the individual components
 *
 * in the case that the get request was successful but the database is empty BookingApp.js
@@ -32,7 +32,7 @@ import './BookingApp.css';
 class BookingPage extends React.Component {
   state = {
     getStatus: 'pending',
-    data: [],
+    rooms: [],
     users: [],
     admins: [],
     usersWithoutAdmins: [],
@@ -161,7 +161,7 @@ class BookingPage extends React.Component {
               users={this.state.users}
               admins={this.state.admins}
               usersWithoutAdmins={this.state.usersWithoutAdmins}
-              data={this.state.data}
+              rooms={this.state.rooms}
               onAddRoomSubmit={this.onAddRoomSubmit} 
               onDeleteRoomSubmit={this.onDeleteRoomSubmit}
               onBlockRoomSubmit={this.onBlockRoomSubmit}
@@ -176,10 +176,10 @@ class BookingPage extends React.Component {
            {/**
             * only show info-area if there are rooms in the database
             */}
-          {this.state.data.length > 0 && <div className="info-area">
+          {this.state.rooms.length > 0 && <div className="info-area">
               <TimeLine />
             <div className="room-area">
-              <RoomList data={this.state.data}/>
+              <RoomList data={this.state.rooms}/>
             </div>
           </div>}
         </React.Fragment>
