@@ -1,3 +1,6 @@
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import FormList from './formArea/FormList';
 import RoomList from './infoArea/RoomList';
@@ -13,7 +16,8 @@ import './BookingApp.css';
 
 /**
 * this component is responsible for rendering the booking app
-* state.getStatus saves whether the get requests for the data in roomrapi.js were successful. If not BookingApp.js
+* state.getStatus saves whether the get requests for the data in
+* roomrapi.js were successful. If not BookingApp.js
 * renders the ErrorPage.js
 *
 * state.errorType shows the type of error in a shorter format
@@ -36,22 +40,22 @@ class BookingPage extends React.Component {
     users: [],
     admins: [],
     usersWithoutAdmins: [],
-    responseMessage:'',
-    errorType:'',
-    isAdmin: (this.props.match.params.isAdmin === 'admin') ? true : false,
+    responseMessage: '',
+    errorType: '',
+    isAdmin: (this.props.match.params.isAdmin === 'admin'),
     showSettings: false,
-    entityDeleted: false
+    entityDeleted: false,
   };
 
   async componentDidMount() {
     await roomrapi.handledGetRoomDataOnce(this);
     roomrapi.handledGetRoomDataLoop(this);
-    if(this.state.isAdmin) {
+    if (this.state.isAdmin) {
       await roomrapi.handledGetUserDataOnce(this);
       roomrapi.handledGetUserDataLoop(this);
     }
-  };
-    
+  }
+
   onAddRoomSubmit = async (reqData) => {
     await this.setState({ responseMessage: '', errorType: '' });
     await roomrapi.handledAddRoom(this, reqData);
@@ -118,7 +122,7 @@ class BookingPage extends React.Component {
   }
 
   onSettingsButtonClick = () => {
-    this.setState({ showSettings: !this.state.showSettings });
+    this.setState(prevState => ({ showSettings: !prevState.showSettings }));
   }
 
   componentWillUnmount = () => {
@@ -126,43 +130,56 @@ class BookingPage extends React.Component {
     roomrapi.clearUserInterval();
   }
 
-  render() { //app is awaiting server response
-    if (this.state.getStatus === "pending" && this.state.errorType === '') {
-      return <LoadingPage />
-    } 
-    
-    //the request failed because the server didnt respond
-    if (this.state.getStatus === "failed") {
-      return <ResponsePage />
-    } 
-    
-    //errorPage for unauthorized access
-    if(this.state.errorType === 'clientErrorUnauthorized') {
-      return <ResponsePage entityDeleted={this.state.entityDeleted}loginMessage={this.state.responseMessage} />
+  render() { // app is awaiting server response
+    if (this.state.getStatus === 'pending' && this.state.errorType === '') {
+      return <LoadingPage />;
     }
-    
-    //request was successful
-    if (this.state.getStatus === "successful"){
+
+    // the request failed because the server didnt respond
+    if (this.state.getStatus === 'failed') {
+      return <ResponsePage />;
+    }
+
+    // errorPage for unauthorized access
+    if (this.state.errorType === 'clientErrorUnauthorized') {
+      return (
+        <ResponsePage
+          entityDeleted={this.state.entityDeleted}
+          loginMessage={this.state.responseMessage}
+        />
+      );
+    }
+
+    // request was successful
+    if (this.state.getStatus === 'successful') {
       return (
         <React.Fragment>
-          {this.state.errorType === 'clientError' && <ResponseMessage clientError responseMessage={this.state.responseMessage} onMessageButtonClick={this.onMessageButtonClick}/>}
-          {!this.state.errorType && this.state.responseMessage && <ResponseMessage responseMessage={this.state.responseMessage} onMessageButtonClick={this.onMessageButtonClick}/>}
+          {this.state.errorType === 'clientError' && <ResponseMessage clientError responseMessage={this.state.responseMessage} onMessageButtonClick={this.onMessageButtonClick} />}
+          {!this.state.errorType && this.state.responseMessage
+            && (
+            <ResponseMessage
+              responseMessage={this.state.responseMessage}
+              onMessageButtonClick={this.onMessageButtonClick}
+            />
+            )}
           <div className="form-area">
             <LogoutButton />
-            {this.props.match.params.isAdmin &&
+            {this.props.match.params.isAdmin
+            && (
             <SettingsButton
               onSettingsButtonClick={this.onSettingsButtonClick}
               showSettings={this.state.showSettings}
-            />}
+            />
+            )}
             <FormList
-              isDisabled={(this.state.responseMessage === 'loading') ? true : false}
+              isDisabled={(this.state.responseMessage === 'loading')}
               showSettings={this.state.showSettings}
 
               users={this.state.users}
               admins={this.state.admins}
               usersWithoutAdmins={this.state.usersWithoutAdmins}
               rooms={this.state.rooms}
-              onAddRoomSubmit={this.onAddRoomSubmit} 
+              onAddRoomSubmit={this.onAddRoomSubmit}
               onDeleteRoomSubmit={this.onDeleteRoomSubmit}
               onBlockRoomSubmit={this.onBlockRoomSubmit}
               onUnblockRoomSubmit={this.onUnblockRoomSubmit}
@@ -173,19 +190,21 @@ class BookingPage extends React.Component {
               onDeleteEntitySubmit={this.onDeleteEntitySubmit}
             />
           </div>
-           {/**
+          {/**
             * only show info-area if there are rooms in the database
             */}
-          {this.state.rooms.length > 0 && <div className="info-area">
-              <TimeLine />
+          {this.state.rooms.length > 0 && (
+          <div className="info-area">
+            <TimeLine />
             <div className="room-area">
-              <RoomList data={this.state.rooms}/>
+              <RoomList data={this.state.rooms} />
             </div>
-          </div>}
+          </div>
+          )}
         </React.Fragment>
-      )
-    } 
-    return <div></div>
+      );
+    }
+    return <div />;
   }
 }
 
