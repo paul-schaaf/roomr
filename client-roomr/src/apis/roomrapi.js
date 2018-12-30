@@ -35,51 +35,61 @@ const getRoomDataOnce = async (appState) => {
 */
 const getRoomDataLoop = (appState) => {
   roomInterval = setInterval(() => {
-      axios.get('/api/entities/rooms')
-        .then((response) => appState.setState({ rooms: response.data, getStatus: 'successful' }))
-        .catch((err) => {
-          if(err.request) {
-            appState.setState({ getStatus: 'failed', errorType: 'serverError' });
-          }
-          if(err.response) {
-            appState.setState({ responseMessage: err.response.data.message, errorType: err.response.type });
-          }
-        });
+    axios.get('/api/entities/rooms')
+      .then(response => appState.setState({ rooms: response.data, getStatus: 'successful' }))
+      .catch((err) => {
+        if (err.request) {
+          appState.setState({ getStatus: 'failed', errorType: 'serverError' });
+        }
+        if (err.response) {
+          appState.setState({
+            responseMessage: err.response.data.message,
+            errorType: err.response.type,
+          });
+        }
+      });
   }, 10000);
 };
 
 const getUserDataOnce = async (appState) => {
   const response = await axios.get('/api/entities/users');
-  const users = response.data.map((user) => user.email);
+  const users = response.data.map(user => user.email);
   const admins = response.data
-    .filter((user) => user.isAdmin)
-    .map((user) => user.email);
+    .filter(user => user.isAdmin)
+    .map(user => user.email);
   const usersWithoutAdmins = response.data
-    .filter((user) => !user.isAdmin)
-    .map((user) => user.email);
-  appState.setState({ users, admins, usersWithoutAdmins, getStatus: 'successful' });
+    .filter(user => !user.isAdmin)
+    .map(user => user.email);
+  appState.setState({
+    users, admins, usersWithoutAdmins, getStatus: 'successful',
+  });
 };
 
 const getUserDataLoop = (appState) => {
   userInterval = setInterval(() => {
-      axios.get('/api/entities/users')
-        .then((response) => {
-          const users = response.data.map((user) => user.email);
-          const admins = response.data
-            .filter((user) => user.isAdmin)
-            .map((user) => user.email);
-          const usersWithoutAdmins = response.data
-            .filter((user) => !user.isAdmin)
-            .map((user) => user.email);
-           appState.setState({ users, admins, usersWithoutAdmins, getStatus: 'successful' });
-        })
-        .catch((err) => {
-          if (err.response) {
-            appState.setState({ responseMessage: err.response.data.message, errorType: err.response.data.type });
-          } else if (err.request) { // this error appears when there is no response from the server
-            appState.setState({ getStatus: 'failed', errorType: 'serverError' });
-          }
-        })
+    axios.get('/api/entities/users')
+      .then((response) => {
+        const users = response.data.map(user => user.email);
+        const admins = response.data
+          .filter(user => user.isAdmin)
+          .map(user => user.email);
+        const usersWithoutAdmins = response.data
+          .filter(user => !user.isAdmin)
+          .map(user => user.email);
+        appState.setState({
+          users, admins, usersWithoutAdmins, getStatus: 'successful',
+        });
+      })
+      .catch((err) => {
+        if (err.response) {
+          appState.setState({
+            responseMessage: err.response.data.message,
+            errorType: err.response.data.type,
+          });
+        } else if (err.request) { // this error appears when there is no response from the server
+          appState.setState({ getStatus: 'failed', errorType: 'serverError' });
+        }
+      });
   }, 10000);
 };
 
@@ -90,7 +100,7 @@ const addRoom = async (appState, reqData) => {
   }
   appState.setState({ responseMessage: 'loading' });
   await axios.post('/api/entities/rooms', { roomName });
-  appState.setState({ responseMessage: 'Successfully added room: ' + roomName});
+  appState.setState({ responseMessage: `Successfully added room: ${roomName}` });
 };
 
 const deleteRoom = async (appState, reqData) => {
@@ -100,7 +110,7 @@ const deleteRoom = async (appState, reqData) => {
   }
   appState.setState({ responseMessage: 'loading' });
   await axios.delete(`/api/entities/rooms/${roomName}`);
-  appState.setState({ responseMessage: 'Successfully deleted room: ' + roomName});
+  appState.setState({ responseMessage: `Successfully deleted room: ${roomName}` });
 };
 
 const blockRoom = async (appState, reqData) => {
@@ -114,7 +124,7 @@ const blockRoom = async (appState, reqData) => {
     start,
     end,
   });
-  appState.setState({ responseMessage: 'Successfully blocked room: ' + roomName});
+  appState.setState({ responseMessage: `Successfully blocked room: ${roomName}` });
 };
 
 
@@ -129,7 +139,7 @@ const unblockRoom = async (appState, reqData) => {
     start,
     end,
   });
-  appState.setState({ responseMessage: 'Successfully unblocked room: ' + roomName});
+  appState.setState({ responseMessage: `Successfully unblocked room: ${roomName}` });
 };
 
 const addUser = async (appState, reqData) => {
@@ -146,7 +156,7 @@ const addUser = async (appState, reqData) => {
     password,
   });
 
-  appState.setState({ responseMessage: 'Successfully added user: ' + email });
+  appState.setState({ responseMessage: `Successfully added user: ${email}` });
 };
 
 const deleteUser = async (appState, reqData) => {
@@ -156,7 +166,7 @@ const deleteUser = async (appState, reqData) => {
   }
   appState.setState({ responseMessage: 'loading' });
   await axios.delete(`/api/entities/users/${email}`);
-  appState.setState({ responseMessage: 'Successfully deleted user: ' + email });
+  appState.setState({ responseMessage: `Successfully deleted user: ${email}` });
 };
 
 const makeAdmin = async (appState, reqData) => {
@@ -165,11 +175,11 @@ const makeAdmin = async (appState, reqData) => {
     throw new Error('Please enter an email before submitting!');
   }
   appState.setState({ responseMessage: 'loading' });
-  await axios.post(`/api/entities/admins-add`, {
-    email
+  await axios.post('/api/entities/admins-add', {
+    email,
   });
-  appState.setState({ responseMessage: 'Successfully made user: ' + email + ' admin.'});
-}
+  appState.setState({ responseMessage: `Successfully made user: ${email} admin.` });
+};
 
 const unmakeAdmin = async (appState, reqData) => {
   const { email } = reqData;
@@ -177,10 +187,10 @@ const unmakeAdmin = async (appState, reqData) => {
     throw new Error('Please enter an email before submitting!');
   }
   appState.setState({ responseMessage: 'loading' });
-  await axios.post(`/api/entities/admins-remove`, {
-    email
+  await axios.post('/api/entities/admins-remove', {
+    email,
   });
-  appState.setState({ responseMessage: 'Successfully removed admin status from user: ' + email });
+  appState.setState({ responseMessage: `Successfully removed admin status from user: ${email}` });
 };
 
 const deleteEntity = async (appState, reqData) => {
@@ -245,7 +255,10 @@ const roomrapi = {
   handledDeleteEntity: async (appState, reqData) => {
     await axiosErrorHandler(deleteEntity, appState, reqData);
   },
-  //It is necessary to clear the intervals. Otherwise it will try to keep running even with BookingApp Unmounted
+  /*
+  * It is necessary to clear the intervals. Otherwise
+  * it will try to keep running even with BookingApp Unmounted
+  */
   clearRoomInterval: () => {
     clearInterval(roomInterval);
   },
