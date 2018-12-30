@@ -49,7 +49,6 @@ const timeArray = [
 ];
 
 module.exports = {
-  //uses req.user.activeEntity 
   getRooms: async (req, res, next) => {
     const entityName = req.user.activeEntity;
     try {
@@ -72,7 +71,7 @@ module.exports = {
       next(err);
     }
   },
-  //uses req.user.activeEntity
+
   getUsers: async (req, res, next) => {
     const entityName = req.user.activeEntity;
     try {
@@ -82,6 +81,7 @@ module.exports = {
         throw new Error(`There is no entity called:${entityName}`);
       }
       const users = entity.users.slice();
+      //only email and isAdmin should be sent to the client
       const usersSlim = users.map((userObject) => {
         return {
           isAdmin: userObject.isAdmin,
@@ -93,7 +93,7 @@ module.exports = {
       next(err);
     }
   },
-  //expects json with {entity, email, and password}
+
   createEntity: async (req, res, next) => {
     const entityProps = req.body;
     if(entityProps.entity === '') {
@@ -113,6 +113,7 @@ module.exports = {
       if(entityExists) {
         throw new Error();
       }
+      //store user info in Entity collection
       await Entity.create({ name: entityProps.entity });
       const entity = await Entity.findOne({ name: entityProps.entity });
       const passwordHash = await bcrypt.hash(entityProps.password, saltRounds);
@@ -122,6 +123,7 @@ module.exports = {
         entity: entityProps.entity,
         isAdmin: true
       });
+      //store user info in User collection
       const user = await User.findOne({ email: entityProps.email });
       if(user) {
         await user.entities.push({ name: entityProps.entity, isAdmin: true });
@@ -139,7 +141,6 @@ module.exports = {
     }
   },
   
-  // expects json with {roomName}, uses req.user.activeEntity for {entity}
   createRoom: async (req, res, next) => {
     const entityName = req.user.activeEntity;
     const roomProps = req.body;
@@ -162,7 +163,6 @@ module.exports = {
     }
   },
 
-  //expects params with {roomName}, uses req.user.activeEntity for {entity}
   deleteRoom: async (req, res, next) => {
     const entityName = req.user.activeEntity;
     const roomProps = req.params;
@@ -185,7 +185,7 @@ module.exports = {
       next(err);
     }
   },
-  //expects json with {roomName, start, end}, uses req.user.activeEntity for {entity}
+  
   blockRoom: async (req, res, next) => {
     const entityName = req.user.activeEntity;
     const roomProps = req.body;
@@ -218,7 +218,6 @@ module.exports = {
     }
   },
 
-  //expects json with {roomName, start, end}, uses req.user.activeEntity for {entity}
   unblockRoom: async (req, res, next) => {
     const entityName = req.user.activeEntity;
     const roomProps = req.body;
@@ -244,6 +243,7 @@ module.exports = {
       next(err);
     }
   },
+
   deleteEntity: async (req, res, next) => {
     const entityNameClient = req.params.entity;
     const entityNameServer = req.user.activeEntity;
@@ -257,18 +257,21 @@ module.exports = {
       
       const entity = await Entity.findOne({ name: entityNameServer });
       const usersInEntity = entity.users.slice();
+      //delete Entity in entityiescollection
       await Entity.deleteOne({ name: entityNameServer });
+      //delete entity in entityArray of User in users collection
       await usersInEntity.map(async (userObject) => {
         const user = await User.findOne({ email: userObject.email });
         const entityInUser = user.entities.find(entityObject => entityObject.name === entityNameServer);
         const indexOfEntity = user.entities.indexOf(entityInUser);
         user.entities.splice(indexOfEntity, 1);
         await user.save();
-        
+        //if entityArray is empty, the user in users collection can be deleted too
         if (user.entities.length === 0) {
           await User.deleteOne({ email: userObject.email });
         }
       })
+      //log out user after entity is deleted
       const user = req.user;
       user.activeEntity = 'none';
       user.isAdminNow = false;
