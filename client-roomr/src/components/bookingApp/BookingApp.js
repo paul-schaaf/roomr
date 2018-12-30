@@ -115,7 +115,6 @@ class BookingPage extends React.Component {
     await roomrapi.handledDeleteEntity(this, reqData);
     await roomrapi.handledGetRoomDataOnce(this);
     this.setState({ entityDeleted: true });
-    
   }
 
   onMessageButtonClick = () => {
