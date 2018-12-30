@@ -50,4 +50,4 @@ The backend is built with JS, node, and express. The data is stored in a MongoDB
 - ability to add info to room blockings (e.g. who the people who blocked this room are, what they are doing etc.)
 - ability to block rooms by clicking on them instead of using the form
 - add feature to bulk add rooms
-- better UI/UX. On the browser it looks a little clunky because there is so much space next to the form. On mobile,the form at the top is a little difficult to reach and use
+- better UI/UX. The admin forms still look a bit clunky and chaotic.
