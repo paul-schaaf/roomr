@@ -38,7 +38,8 @@ class BookingPage extends React.Component {
     errorType:'',
     isAdmin: (this.props.match.params.isAdmin === 'admin') ? true : false,
     showSettings: false,
-    entityDeleted: false
+    entityDeleted: false,
+    shouldClearIntervals: true,
   };
 
   async componentDidMount() {
@@ -119,6 +120,15 @@ class BookingPage extends React.Component {
 
   componentWillUnmount = () => {
     roomrapi.clearRoomInterval();
+    roomrapi.clearUserInterval();
+  }
+
+  componentDidUpdate = () => {
+    if(this.state.entityDeleted && this.state.shouldClearIntervals) {
+      roomrapi.clearRoomInterval();
+      roomrapi.clearUserInterval();
+      this.setState({ shouldClearIntervals: false });
+    }
   }
   
   render() { //app is awaiting server response
