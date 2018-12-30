@@ -148,14 +148,15 @@ class Form extends React.Component {
         </input>
         {this.props.datalistName &&
         <DataList type={this.props.type} id={this.props.datalistName} data={this.props.data}/>}
-        {this.props.select &&
+        {this.props.selectTime &&
+        <React.Fragment>
         <select name="start" onChange={this.onInputChange} value={this.state.start} type="text">
           <InputTimes />
-        </select>}
-        {this.props.select &&
+        </select>
         <select name="end" onChange={this.onInputChange} value={this.state.end} type="text">
           <InputTimes start={this.state.start}/>
-        </select>}
+        </select>
+        </React.Fragment>}
         <input
           className={`submit-button ${(this.props.isDisabled) && 'submit-button--disabled'}`}
           type="submit"
