@@ -38,6 +38,7 @@ passport.use(new LocalStrategy({
       if(!match) return done(null, false);
       let user = await User.findOne({ email: username });
       user.activeEntity = req.body.entity;
+      //user.isAdminNow will be used for requireAdmin middleware
       user.isAdminNow = userInEntity.isAdmin;
       await user.save();
       user = await User.findOne({ email: username });
