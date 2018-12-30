@@ -32,7 +32,7 @@ I have used the airbnb styleguide for linting this project.
 #### Frontend
 The frontend is built with Html, CSS, JS, and React and using the newest JS such as import statements and export default with babel.
 #### Backend
-The backend is built with JS, node, and express. The data is stored in a MongoDB database and handled with Mongoose. Authentication is done with passport.js (passport-local) and passwords are hashed/compared with bcrypt.
+The backend is built with JS, node, and express. The data is stored in a MongoDB database and handled with Mongoose. Authentication is done with passport.js (passport-local), passwords are hashed/compared with bcrypt and emails are validated with email-validator.
 ## Possible Additions
 - add more days to app, currently the app only shows one day, it would be good if you could plan and reserve some days ahead
 - allow custom time ranges for rooms instead of 09-00 to 17:00
