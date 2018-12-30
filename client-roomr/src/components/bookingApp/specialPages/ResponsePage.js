@@ -9,7 +9,7 @@ import './ResponsePage.css';
 const ResponsePage = ({ loginMessage, entityDeleted }) => {
   let message;
   if (entityDeleted) {
-    message = 'Entity successfully deleted!'
+    message = 'Entity successfully deleted!';
   } else if (loginMessage) {
     message = loginMessage;
   } else {
@@ -20,10 +20,10 @@ const ResponsePage = ({ loginMessage, entityDeleted }) => {
       <div className="response-page-box">
         <p className="response-page-box__heading">{(entityDeleted) ? 'SUCCESS' : 'ERROR'}</p>
         <p>{message}</p>
-        <Link className="response-page-box__link"to="/login">▹ Back to Login</Link>
+        <Link className="response-page-box__link" to="/login">▹ Back to Login</Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default ResponsePage;
