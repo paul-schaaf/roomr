@@ -38,8 +38,7 @@ class BookingPage extends React.Component {
     errorType:'',
     isAdmin: (this.props.match.params.isAdmin === 'admin') ? true : false,
     showSettings: false,
-    entityDeleted: false,
-    shouldClearIntervals: true,
+    entityDeleted: false
   };
 
   async componentDidMount() {
@@ -108,6 +107,8 @@ class BookingPage extends React.Component {
     await roomrapi.handledDeleteEntity(this, reqData);
     await roomrapi.handledGetRoomDataOnce(this);
     this.setState({ entityDeleted: true });
+    roomrapi.clearRoomInterval();
+    roomrapi.clearUserInterval();
   }
 
   onMessageButtonClick = () => {
@@ -123,14 +124,6 @@ class BookingPage extends React.Component {
     roomrapi.clearUserInterval();
   }
 
-  componentDidUpdate = () => {
-    if(this.state.entityDeleted && this.state.shouldClearIntervals) {
-      roomrapi.clearRoomInterval();
-      roomrapi.clearUserInterval();
-      this.setState({ shouldClearIntervals: false });
-    }
-  }
-  
   render() { //app is awaiting server response
     if (this.state.getStatus === "pending" && this.state.errorType === '') {
       return <LoadingPage />
