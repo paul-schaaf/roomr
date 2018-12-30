@@ -21,7 +21,9 @@ First go to roomr-demo.herokuapp.com
   - delete yourself if you are the only admin
   - add a user that is already there
   - block a timespan that is already blocked
-  
+
+  You can also create users, log out and log in with their accounts. If you have created one more admin by adding them and then making them admin, you can even delete yourself and see what happens (spoiler: you'll be kicked).
+
   Finally, once you are done, type in your entity name to delete your entity again.
 ## Technologies used
 I have used the airbnb styleguide for linting this project.
