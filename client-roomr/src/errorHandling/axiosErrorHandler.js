@@ -4,11 +4,14 @@ const axiosErrorHandler = async (fn, appState, reqData) => {
   } catch (err) {
     // this error appears when there is an error from the client (e.g. room already exists);
     if (err.response) {
-      appState.setState({ responseMessage: err.response.data.message, errorType: err.response.data.type });
+      appState.setState({
+        responseMessage: err.response.data.message,
+        errorType: err.response.data.type,
+      });
     } else if (err.request) { // this error appears when there is no response from the server
       appState.setState({ getStatus: 'failed', errorType: 'serverError' });
     } else { // this error appears when a custom error is created in roomrapi.js before axios runs
-      appState.setState({ responseMessage: err.message, errorType: 'clientError'});
+      appState.setState({ responseMessage: err.message, errorType: 'clientError' });
     }
   }
 };
