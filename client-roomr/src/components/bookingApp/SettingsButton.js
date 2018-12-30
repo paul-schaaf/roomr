@@ -1,19 +1,19 @@
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import './SettingsButton.css';
 
-class SettingsButton extends React.Component{
-
+class SettingsButton extends React.Component {
   onButtonClick = () => {
     this.props.onSettingsButtonClick();
   };
-    
-  
-  render () {
+
+
+  render() {
     return (
-      <div onClick={this.onButtonClick}className="settings-button">
+      <div role="button" onClick={this.onButtonClick} className="settings-button">
         <p>{`▹ ${(this.props.showSettings === true) ? 'hide' : 'show'} settings`}</p>
       </div>
-    )
+    );
   }
 }
 
