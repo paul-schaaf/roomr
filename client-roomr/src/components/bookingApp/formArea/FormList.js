@@ -1,10 +1,13 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import Form from './Form';
 import './FormList.css';
 
 /**
 * this component renders the forms
-* 
+*
 * Forms can be given the following parameters:
 * className - contains class name for css
 * isDisabled - determines whether Form should be disabled
@@ -17,31 +20,31 @@ import './FormList.css';
 * hasPassword - determines whether form has password input
 * hasEmail - determines whether form has email input
 * hasRoom - determines whether form has room input
-* deleteEntity - determines whether form has deleteEntity input 
+* deleteEntity - determines whether form has deleteEntity input
 */
 
-const FormList = props =>  {
-    return (
-        <div className="forms">
-          <div className="formbox forms--blocking">
-            <Form
-              isDisabled={props.isDisabled}
-              data={props.rooms}
-              formAction={props.onBlockRoomSubmit}
-              buttonValue="▹ reserve room"
-              datalistType="room"
-              datalistName="reserve"
-            />
-            <Form
-              isDisabled={props.isDisabled}
-              data={props.rooms}
-              formAction={props.onUnblockRoomSubmit}
-              buttonValue="▹ unblock room"
-              datalistType="room"
-              datalistName="unblock"
-            />
-          </div>
-          {props.showSettings &&
+const FormList = props => (
+  <div className="forms">
+    <div className="formbox forms--blocking">
+      <Form
+        isDisabled={props.isDisabled}
+        data={props.rooms}
+        formAction={props.onBlockRoomSubmit}
+        buttonValue="▹ reserve room"
+        datalistType="room"
+        datalistName="reserve"
+      />
+      <Form
+        isDisabled={props.isDisabled}
+        data={props.rooms}
+        formAction={props.onUnblockRoomSubmit}
+        buttonValue="▹ unblock room"
+        datalistType="room"
+        datalistName="unblock"
+      />
+    </div>
+    {props.showSettings
+          && (
           <React.Fragment>
             <div className="formbox forms--rooms">
               <Form
@@ -61,10 +64,9 @@ const FormList = props =>  {
                 hasRoom
                 datalistType="room"
                 datalistName="deleteRoom"
-                
               />
             </div>
-            
+
             <div className="formbox forms--users">
               <Form
                 className="form--add-user"
@@ -87,7 +89,7 @@ const FormList = props =>  {
                 datalistType="user"
               />
             </div>
-            
+
             <div className="formbox forms--admins">
               <Form
                 className="form--make-admin"
@@ -120,11 +122,11 @@ const FormList = props =>  {
                 buttonValue="▹ delete entity"
                 adminForm
                 deleteEntity
-                />
+              />
             </div>
-          </React.Fragment>}
-        </div>
-    )
-}
+          </React.Fragment>
+          )}
+  </div>
+);
 
 export default FormList;
