@@ -1,20 +1,21 @@
-#!!CURRENTLY IN MAINTENANCE!!#
-
 # roomr
 a (meeting) room management app
 
 ## Motivation
-I have just learned javascript and made this app for my portfolio because the internet already has too many todo apps. Roomr is a room management app. It lets you add and delete rooms and lets you block (and unblock) desired timespans. This system allows everyone in a building to see which rooms are available at what times.
+Roomr allows everyone in a building (or any kind of entity) to see which rooms are available at what times. It lets users add and delete rooms and reserve rooms for specific times.
 
 ## List of Contents
+- [Using the demo](#Using-the-demo)
 - [Technologies used](#Technologies-used)
 - [Possible Additions](#Possible-Additions)
+### Using the demo
+First go to roomr-demo.herokuapp.com
 ### Technologies used
 I have used the airbnb styleguide for linting this project.
 #### Frontend
-The frontend is built with Html, Css, JS, and React and using the newest JS such as import statements and export default with babel.
+The frontend is built with Html, CSS, JS, and React and using the newest JS such as import statements and export default with babel.
 #### Backend
-The backend is built with JS, node, and express. The data is stored in a MongoDB database and handled with Mongoose. 
+The backend is built with JS, node, and express. The data is stored in a MongoDB database and handled with Mongoose. Authentication is done with passport.js (passport-local) and passwords are hashed/compared with bcrypt.
 ### Possible Additions
 - allow custom time ranges for rooms instead of 09-00 to 17:00
 - add an authorisation system (I already thought of this while writing the app so the database is already structured in a way that allows for such a system)
