@@ -109,12 +109,13 @@ class BookingPage extends React.Component {
   }
 
   onDeleteEntitySubmit = async (reqData) => {
+    roomrapi.clearRoomInterval();
+    roomrapi.clearUserInterval();
     await this.setState({ responseMessage: '', errorType: '' });
     await roomrapi.handledDeleteEntity(this, reqData);
     await roomrapi.handledGetRoomDataOnce(this);
     this.setState({ entityDeleted: true });
-    roomrapi.clearRoomInterval();
-    roomrapi.clearUserInterval();
+    
   }
 
   onMessageButtonClick = () => {
