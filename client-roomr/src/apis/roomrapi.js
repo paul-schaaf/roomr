@@ -114,7 +114,7 @@ const deleteRoom = async (appState, reqData) => {
 };
 
 const blockRoom = async (appState, reqData) => {
-  const { roomName, start, end } = reqData;
+  const { roomName, start, end, day } = reqData;
   if (roomName === '') {
     throw new Error('Please enter a room before submitting!');
   }
@@ -123,13 +123,14 @@ const blockRoom = async (appState, reqData) => {
     roomName,
     start,
     end,
+    day,
   });
   appState.setState({ responseMessage: `Successfully blocked room: ${roomName}` });
 };
 
 
 const unblockRoom = async (appState, reqData) => {
-  const { roomName, start, end } = reqData;
+  const { roomName, start, end, day } = reqData;
   if (roomName === '') {
     throw new Error('Please enter a room before submitting!');
   }
@@ -138,6 +139,7 @@ const unblockRoom = async (appState, reqData) => {
     roomName,
     start,
     end,
+    day,
   });
   appState.setState({ responseMessage: `Successfully unblocked room: ${roomName}` });
 };
