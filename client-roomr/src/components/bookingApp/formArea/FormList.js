@@ -34,6 +34,10 @@ class FormList extends Component {
     this.setState({ weekday: currentDay });
   }
 
+  onButtonClick = event => {
+    this.setState({ weekday: event.target.name });
+  }
+
   render() {
     return (
       <div className="forms">
@@ -58,11 +62,11 @@ class FormList extends Component {
       />
     </div>
     <div className="forms__day-btns-box">
-      <button className="forms__day-btns-box__btn" type="button" >mon</button>
-      <button className="forms__day-btns-box__btn" type="button" >tue</button>
-      <button className="forms__day-btns-box__btn" type="button" >wed</button>
-      <button className="forms__day-btns-box__btn" type="button" >thu</button>
-      <button className="forms__day-btns-box__btn" type="button" >fri</button>
+      <button onClick={this.onButtonClick} name="Monday" className="forms__day-btns-box__btn" type="button" >mon</button>
+      <button onClick={this.onButtonClick} name="Tuesday" className="forms__day-btns-box__btn" type="button" >tue</button>
+      <button onClick={this.onButtonClick} name="Wednesday" className="forms__day-btns-box__btn" type="button" >wed</button>
+      <button onClick={this.onButtonClick} name="Thursday" className="forms__day-btns-box__btn" type="button" >thu</button>
+      <button onClick={this.onButtonClick} name="Friday" className="forms__day-btns-box__btn" type="button" >fri</button>
     </div>
     {this.props.showSettings
           && (
