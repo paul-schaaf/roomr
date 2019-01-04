@@ -1,8 +1,8 @@
 /* eslint-disable react/destructuring-assignment */
-import React from 'react';
+import React, { Component } from 'react';
 import './SettingsButton.css';
 
-class SettingsButton extends React.Component {
+class SettingsButton extends Component {
   onButtonClick = () => {
     this.props.onSettingsButtonClick();
   };

@@ -1,13 +1,13 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
-import React from 'react';
+import React, { Component } from 'react';
 import './ResponseMessage.css';
 
 /*
 * this component renders an error message on the top of the screen. more info in App.js
 */
-class ResponseMessage extends React.Component {
+class ResponseMessage extends Component {
   state = {
     background: '#1E4363',
     buttonBackground: '#1E4363',
