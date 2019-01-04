@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-filename-extension */
-import React from 'react';
+import React, { Fragment } from 'react';
 import Room from './Room';
 
 /*
@@ -11,9 +11,9 @@ import Room from './Room';
 const RoomList = ({ data }) => {
   const renderedRooms = data.map(room => <Room key={room.roomName} roomData={room} />);
   return (
-    <React.Fragment>
+    <Fragment>
       {renderedRooms}
-    </React.Fragment>
+    </Fragment>
   );
 };
 
