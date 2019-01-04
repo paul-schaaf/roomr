@@ -14,7 +14,7 @@
   transform:translateX(1px);
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
   .logout-button{
     position: relative;
     padding-left:30px;

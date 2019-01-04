@@ -43,6 +43,13 @@ const FormList = props => (
         datalistName="unblock"
       />
     </div>
+    <div className="forms__day-btns-box">
+      <button className="forms__day-btns-box__btn" type="button" >mon</button>
+      <button className="forms__day-btns-box__btn" type="button" >tue</button>
+      <button className="forms__day-btns-box__btn" type="button" >wed</button>
+      <button className="forms__day-btns-box__btn" type="button" >thu</button>
+      <button className="forms__day-btns-box__btn" type="button" >fri</button>
+    </div>
     {props.showSettings
           && (
           <Fragment>
@@ -66,7 +73,7 @@ const FormList = props => (
                 datalistName="deleteRoom"
               />
             </div>
-
+            
             <div className="formbox forms--users">
               <Form
                 className="form--add-user"
