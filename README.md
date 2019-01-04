@@ -1,3 +1,5 @@
+Master-dev: currently used to build multiday view and to refactor some code
+
 # roomr
 a (meeting) room management app
 
