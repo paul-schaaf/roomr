@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './LoginMessage.css';
 
-class LoginMessage extends React.Component {
+class LoginMessage extends Component {
   state = {
     message: '',
     background: '',
