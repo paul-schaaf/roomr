@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/jsx-filename-extension */
-import React from 'react';
+import React, { Fragment } from 'react';
 import Form from './Form';
 import './FormList.css';
 
@@ -45,7 +45,7 @@ const FormList = props => (
     </div>
     {props.showSettings
           && (
-          <React.Fragment>
+          <Fragment>
             <div className="formbox forms--rooms">
               <Form
                 isDisabled={props.isDisabled}
@@ -124,7 +124,7 @@ const FormList = props => (
                 deleteEntity
               />
             </div>
-          </React.Fragment>
+          </Fragment>
           )}
   </div>
 );

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/jsx-filename-extension */
-import React from 'react';
+import React, { Fragment } from 'react';
 
 /*
  *  this component renders the select inputs for reserve and unblock room
@@ -62,13 +62,13 @@ const InputTimes = (props) => {
   if (!props.start) {
     const renderedTimes = timeArray.map(time => <option key={`startTime: ${time}`} value={time}>{time}</option>);
     renderedTimes.pop();
-    return <React.Fragment>{renderedTimes}</React.Fragment>;
+    return <Fragment>{renderedTimes}</Fragment>;
   }
   const index = timeArray.indexOf(props.start);
   const endTimeArray = timeArray.slice(index + 1);
   const renderedTimes = endTimeArray.map(time => <option key={`endTime: ${time}`} value={time}>{time}</option>);
 
-  return <React.Fragment>{renderedTimes}</React.Fragment>;
+  return <Fragment>{renderedTimes}</Fragment>;
 };
 
 export default InputTimes;
