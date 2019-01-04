@@ -2,11 +2,11 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable react/no-unused-state */
 /* eslint-disable react/destructuring-assignment */
-import React from 'react';
+import React, { Component } from 'react';
 import './LoginPage.css';
 import LoginMessage from './LoginMessage';
 
-class LoginPage extends React.Component {
+class LoginPage extends Component {
   state = {
     tab: 'login',
     loginColor: '#1E4363',
