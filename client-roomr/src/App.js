@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import BookingApp from './components/bookingApp/BookingApp';
 import LoginPage from './components/loginPage/LoginPage';
+import './App.css';
 
 const App = () => (
   <Router>
