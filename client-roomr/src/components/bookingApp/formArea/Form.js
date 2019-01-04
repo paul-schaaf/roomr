@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
-import React from 'react';
+import React, { Component } from 'react';
 import DataList from './DataList';
 import InputTimes from './InputTimes';
 import './Form.css';
@@ -44,7 +44,7 @@ const timeArray = [
   '17:00',
 ];
 
-class Form extends React.Component {
+class Form extends Component {
   state = {
     start: '09:00',
     end: '09:15',
