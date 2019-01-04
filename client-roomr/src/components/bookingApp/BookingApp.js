@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import FormList from './formArea/FormList';
 import RoomList from './infoArea/RoomList';
 import TimeLine from './infoArea/TimeLine';
@@ -33,7 +33,7 @@ import './BookingApp.css';
 * will only render the FormList component but not
 * the RoomList component
 */
-class BookingPage extends React.Component {
+class BookingPage extends Component {
   state = {
     getStatus: 'pending',
     rooms: [],
@@ -153,7 +153,7 @@ class BookingPage extends React.Component {
     // request was successful
     if (this.state.getStatus === 'successful') {
       return (
-        <React.Fragment>
+        <Fragment>
           {this.state.errorType === 'clientError' && <ResponseMessage clientError responseMessage={this.state.responseMessage} onMessageButtonClick={this.onMessageButtonClick} />}
           {!this.state.errorType && this.state.responseMessage
             && (
@@ -201,7 +201,7 @@ class BookingPage extends React.Component {
             </div>
           </div>
           )}
-        </React.Fragment>
+        </Fragment>
       );
     }
     return <div />;
