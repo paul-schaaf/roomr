@@ -23,8 +23,20 @@ import './FormList.css';
 * deleteEntity - determines whether form has deleteEntity input
 */
 
-const FormList = props => (
-  <div className="forms">
+class FormList extends Component {
+  state = {
+    weekday: ''
+  }
+
+  componentDidMount = () => {
+    const currentDate = new Date(Date.now())
+    const currentDay = new Intl.DateTimeFormat('en-US', {weekday: 'long'}).format(currentDate);
+    this.setState({ weekday: currentDay });
+  }
+
+  render() {
+    return (
+      <div className="forms">
     <div className="formbox forms--blocking">
       <Form
         isDisabled={this.props.isDisabled}
@@ -33,6 +45,7 @@ const FormList = props => (
         buttonValue="▹ reserve room"
         datalistType="room"
         datalistName="reserve"
+        day={this.state.weekday}
       />
       <Form
         isDisabled={this.props.isDisabled}
@@ -41,6 +54,7 @@ const FormList = props => (
         buttonValue="▹ unblock room"
         datalistType="room"
         datalistName="unblock"
+        day={this.state.weekday}
       />
     </div>
     <div className="forms__day-btns-box">
