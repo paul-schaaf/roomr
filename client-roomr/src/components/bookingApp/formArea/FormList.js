@@ -31,7 +31,11 @@ class FormList extends Component {
   componentDidMount = () => {
     const currentDate = new Date(Date.now())
     const currentDay = new Intl.DateTimeFormat('en-US', {weekday: 'long'}).format(currentDate);
-    this.setState({ weekday: currentDay });
+    if (currentDay === ('Saturday' || 'Sunday')) {
+      this.setState({ weekday: 'Monday' });
+    } else {
+      this.setState({ weekday: currentDay });
+    }
   }
 
   onButtonClick = event => {
