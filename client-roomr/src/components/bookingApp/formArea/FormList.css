@@ -42,7 +42,24 @@
   .forms--blocking {
     flex-direction: column;
   }
+}
 
+@media (max-width: 1000px) {
+  .forms--rooms {
+    display:none;
+  }
+
+  .forms--users {
+    display:none;
+  }
+
+  .forms--admins {
+    display:none;
+  }
+
+  .forms--entity {
+    display:none;
+  }
 }
 
 @media (min-width: 1000px) {
