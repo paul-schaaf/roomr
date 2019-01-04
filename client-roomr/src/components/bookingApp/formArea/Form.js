@@ -75,6 +75,7 @@ class Form extends Component {
         roomName: this.state.room,
         start: this.state.start,
         end: this.state.end,
+        day: this.props.day,
       });
     }
     this.setState({ room: '' });
