@@ -60,12 +60,20 @@ module.exports = {
         throw new Error(`There is no entity called:${entityName}`);
       }
       const rooms = entity.rooms.slice();
-      // removes default property and just puts it into times[i].availability if not already done
+      /**
+       * for each room (1st loop)
+       * for each day in each room (2nd loop)
+       * for each time for each day for each room (3rd loop)
+       * edit availability to now have default field,
+       * if not already done
+       */
       for (let i = 0; i < rooms.length; i += 1) {
-        for (let j = 0; j < rooms[i].times.length; j += 1) {
-          rooms[i].times[j].availability = (
-            rooms[i].times[j].availability.default || rooms[i].times[j].availability
-          );
+        for (let j = 0; j < rooms[i].days.length; j += 1) {
+          for (let k = 0; k < rooms[i].days[j].length; k += 1) {
+            rooms[i].days[j][k].availability = (
+              rooms[i].days[j][k].availability.default || rooms[i].days[j][k].availability
+            );
+          }
         }
       }
       res.send(rooms);
