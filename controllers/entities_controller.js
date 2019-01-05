@@ -58,14 +58,6 @@ const daysToIndex = {
   friday: 4,
 }
 
-const indexToDay = {
-  0: 'monday',
-  1: 'tuesday',
-  2: 'wednesday',
-  3: 'thursday',
-  4: 'friday',
-}
-
 module.exports = {
   getRooms: async (req, res, next) => {
     const entityName = req.user.activeEntity;
@@ -85,10 +77,9 @@ module.exports = {
        */
       for (let i = 0; i < rooms.length; i += 1) {
         for (let j = 0; j < rooms[i].days.length; j += 1) {
-          for (let k = 0; k < rooms[i].days[j][indexToDay[j]].default.length; k += 1) {
-            rooms[i].days[j][indexToDay[j]].default[k].availability = (
-              rooms[i].days[j][indexToDay[j]].default[k].availability.default
-              || rooms[i].days[j][indexToDay[j]].default[k].availability
+          for (let k = 0; k < rooms[i].days[j].length; k += 1) {
+            rooms[i].days[j][k].availability = (
+              rooms[i].days[j][k].availability.default || rooms[i].days[j][k].availability
             );
           }
         }
@@ -228,20 +219,19 @@ module.exports = {
       const indexStart = timeArray.indexOf(roomProps.start);
       const indexEnd = timeArray.indexOf(roomProps.end);
       for (let i = indexStart; i < indexEnd; i += 1) {
-        if (room.days[daysToIndex[roomProps.day]][roomProps.day].default[i].availability === false) {
+        if (room.days[daysToIndex[roomProps.day]][i].availability === false) {
           res.locals.type = 'clientError';
           throw new Error('This room is already at least partly reserved for the timespan you selected.');
         }
       }
       
       for (let i = indexStart; i < indexEnd; i += 1) {
-        room.days[daysToIndex[roomProps.day]][roomProps.day].default[i].availability = false;
+        room.days[daysToIndex[roomProps.day]][i].availability = false;
       }
       room.markModified('days');
       await entity.save();
       res.send(`Selected timespan ${roomProps.start}-${roomProps.end} for room ${roomProps.roomName} successfully reserved.`);
     } catch (err) {
-      console.log(err);
       next(err);
     }
   },
@@ -263,7 +253,7 @@ module.exports = {
       const indexStart = timeArray.indexOf(roomProps.start);
       const indexEnd = timeArray.indexOf(roomProps.end);
       for (let i = indexStart; i < indexEnd; i += 1) {
-        room.days[daysToIndex[roomProps.day]][roomProps.day].default[i].availability = true;
+        room.days[daysToIndex[roomProps.day]][i].availability = true;
       }
       room.markModified('days');
       await entity.save();
