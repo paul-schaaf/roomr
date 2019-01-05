@@ -24,26 +24,13 @@ import './FormList.css';
 */
 
 class FormList extends Component {
-  state = {
-    weekday: ''
-  }
-
-  componentDidMount = () => {
-    const currentDate = new Date(Date.now())
-    const currentDay = new Intl.DateTimeFormat('en-US', {weekday: 'long'}).format(currentDate);
-    if (currentDay === ('Saturday' || 'Sunday')) {
-      this.setState({ weekday: 'Monday' });
-    } else {
-      this.setState({ weekday: currentDay });
-    }
-  }
 
   onButtonClick = event => {
-    this.setState({ weekday: event.target.name });
+    this.props.onDayButtonClick(event.target.name);
   }
 
   getTextDecoration = day => {
-    return (day === this.state.weekday) ? {textDecoration: 'overline'} : null;
+    return (day === this.props.day) ? {textDecoration: 'overline'} : null;
   }
 
   render() {
@@ -57,7 +44,7 @@ class FormList extends Component {
         buttonValue="▹ reserve room"
         datalistType="room"
         datalistName="reserve"
-        day={this.state.weekday}
+        day={this.props.day}
       />
       <Form
         isDisabled={this.props.isDisabled}
@@ -66,7 +53,7 @@ class FormList extends Component {
         buttonValue="▹ unblock room"
         datalistType="room"
         datalistName="unblock"
-        day={this.state.weekday}
+        day={this.props.day}
       />
     </div>
     <div className="forms__day-btns-box">

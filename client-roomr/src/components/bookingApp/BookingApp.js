@@ -45,6 +45,7 @@ class BookingPage extends Component {
     isAdmin: (this.props.match.params.isAdmin === 'admin'),
     showSettings: false,
     entityDeleted: false,
+    weekday: '',
   };
 
   async componentDidMount() {
@@ -53,6 +54,14 @@ class BookingPage extends Component {
     if (this.state.isAdmin) {
       await roomrapi.handledGetUserDataOnce(this);
       roomrapi.handledGetUserDataLoop(this);
+    }
+
+    const currentDate = new Date(Date.now())
+    const currentDay = new Intl.DateTimeFormat('en-US', {weekday: 'long'}).format(currentDate);
+    if (currentDay === ('Saturday' || 'Sunday')) {
+      this.setState({ weekday: 'Monday' });
+    } else {
+      this.setState({ weekday: currentDay });
     }
   }
 
@@ -125,6 +134,10 @@ class BookingPage extends Component {
     this.setState(prevState => ({ showSettings: !prevState.showSettings }));
   }
 
+  onDayButtonClick = day => {
+    this.setState({ weekday: day });
+  }
+
   componentWillUnmount = () => {
     roomrapi.clearRoomInterval();
     roomrapi.clearUserInterval();
@@ -179,6 +192,9 @@ class BookingPage extends Component {
               admins={this.state.admins}
               usersWithoutAdmins={this.state.usersWithoutAdmins}
               rooms={this.state.rooms}
+              day={this.state.weekday}
+
+              onDayButtonClick={this.onDayButtonClick}
               onAddRoomSubmit={this.onAddRoomSubmit}
               onDeleteRoomSubmit={this.onDeleteRoomSubmit}
               onBlockRoomSubmit={this.onBlockRoomSubmit}
