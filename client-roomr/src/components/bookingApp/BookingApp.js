@@ -49,6 +49,14 @@ class BookingPage extends Component {
   };
 
   async componentDidMount() {
+    const currentDate = new Date(Date.now())
+    const currentDay = new Intl.DateTimeFormat('en-US', {weekday: 'long'}).format(currentDate).toLowerCase();
+    if (currentDay === ('saturday' || 'sunday')) {
+      this.setState({ weekday: 'monday' });
+    } else {
+      this.setState({ weekday: currentDay });
+    }
+    
     await roomrapi.handledGetRoomDataOnce(this);
     roomrapi.handledGetRoomDataLoop(this);
     if (this.state.isAdmin) {
@@ -56,13 +64,7 @@ class BookingPage extends Component {
       roomrapi.handledGetUserDataLoop(this);
     }
 
-    const currentDate = new Date(Date.now())
-    const currentDay = new Intl.DateTimeFormat('en-US', {weekday: 'long'}).format(currentDate);
-    if (currentDay === ('Saturday' || 'Sunday')) {
-      this.setState({ weekday: 'Monday' });
-    } else {
-      this.setState({ weekday: currentDay });
-    }
+    
   }
 
   onAddRoomSubmit = async (reqData) => {
@@ -213,7 +215,7 @@ class BookingPage extends Component {
           <div className="info-area">
             <TimeLine />
             <div className="room-area">
-              <RoomList data={this.state.rooms} />
+              <RoomList data={this.state.rooms} day={this.state.weekday}/>
             </div>
           </div>
           )}

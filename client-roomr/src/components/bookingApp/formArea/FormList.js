@@ -57,11 +57,11 @@ class FormList extends Component {
       />
     </div>
     <div className="forms__day-btns-box">
-      <button style={this.getTextDecoration('Monday')} onClick={this.onButtonClick} name="Monday" className="forms__day-btns-box__btn" type="button" >mon</button>
-      <button style={this.getTextDecoration('Tuesday')} onClick={this.onButtonClick} name="Tuesday" className="forms__day-btns-box__btn" type="button" >tue</button>
-      <button style={this.getTextDecoration('Wednesday')} onClick={this.onButtonClick} name="Wednesday" className="forms__day-btns-box__btn" type="button" >wed</button>
-      <button style={this.getTextDecoration('Thursday')} onClick={this.onButtonClick} name="Thursday" className="forms__day-btns-box__btn" type="button" >thu</button>
-      <button style={this.getTextDecoration('Friday')} onClick={this.onButtonClick} name="Friday" className="forms__day-btns-box__btn" type="button" >fri</button>
+      <button style={this.getTextDecoration('monday')} onClick={this.onButtonClick} name="monday" className="forms__day-btns-box__btn" type="button" >mon</button>
+      <button style={this.getTextDecoration('tuesday')} onClick={this.onButtonClick} name="tuesday" className="forms__day-btns-box__btn" type="button" >tue</button>
+      <button style={this.getTextDecoration('wednesday')} onClick={this.onButtonClick} name="wednesday" className="forms__day-btns-box__btn" type="button" >wed</button>
+      <button style={this.getTextDecoration('thursday')} onClick={this.onButtonClick} name="thursday" className="forms__day-btns-box__btn" type="button" >thu</button>
+      <button style={this.getTextDecoration('friday')} onClick={this.onButtonClick} name="friday" className="forms__day-btns-box__btn" type="button" >fri</button>
     </div>
     {this.props.showSettings
           && (

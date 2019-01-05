@@ -8,8 +8,8 @@ import Room from './Room';
 * we loop over the array to create and render rooms
 */
 
-const RoomList = ({ data }) => {
-  const renderedRooms = data.map(room => <Room key={room.roomName} roomData={room} />);
+const RoomList = ({ data, day }) => {
+  const renderedRooms = data.map(room => <Room day={day} key={room.roomName} roomData={room} />);
   return (
     <Fragment>
       {renderedRooms}
