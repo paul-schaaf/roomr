@@ -50,6 +50,14 @@ const timeArray = [
   '17:00',
 ];
 
+const daysToIndex = {
+  Monday: 0,
+  Tuesday: 1,
+  Wednesday: 2,
+  Thursday: 3,
+  Friday: 4
+}
+
 module.exports = {
   getRooms: async (req, res, next) => {
     const entityName = req.user.activeEntity;
@@ -211,17 +219,21 @@ module.exports = {
       const indexStart = timeArray.indexOf(roomProps.start);
       const indexEnd = timeArray.indexOf(roomProps.end);
       for (let i = indexStart; i < indexEnd; i += 1) {
-        if (room.times[i].availability === false) {
+        if (room.days[daysToIndex[roomProps.day]][i].availability === false) {
           res.locals.type = 'clientError';
           throw new Error('This room is already at least partly reserved for the timespan you selected.');
         }
       }
+      console.log(room.days[daysToIndex[roomProps.day]]);
       for (let i = indexStart; i < indexEnd; i += 1) {
-        room.times.set(i, { time: { default: timeArray[i] }, availability: false });
+        room.days[daysToIndex[roomProps.day]][i].availability = false;
+        room.days[daysToIndex[roomProps.day]].markModified(room.days[daysToIndex[roomProps.day]]);
       }
+      
       await entity.save();
       res.send(`Selected timespan ${roomProps.start}-${roomProps.end} for room ${roomProps.roomName} successfully reserved.`);
     } catch (err) {
+      console.log(err);
       next(err);
     }
   },
@@ -242,6 +254,7 @@ module.exports = {
       }
       const indexStart = timeArray.indexOf(roomProps.start);
       const indexEnd = timeArray.indexOf(roomProps.end);
+      console.log(room.times);
       for (let i = indexStart; i < indexEnd; i += 1) {
         room.times.set(i, { time: { default: timeArray[i] }, availability: true });
       }
