@@ -15,6 +15,10 @@ const entitySchema = new Schema({
     required: true,
     default: 1,
   },
+  lastUpdated: {
+    type: Date,
+    required: true
+  },
   users: [users],
   rooms: [rooms],
 });
