@@ -1,4 +1,6 @@
 const moment = require('moment');
+const mongoose = require('mongoose');
+const Entity = mongoose.model('entities');
 
 const databaseUpdate = async (req, res, next) => {
   const currentDay = moment.utc().day();
@@ -9,7 +11,6 @@ const databaseUpdate = async (req, res, next) => {
    *     else 
    *       update
    */
-  console.log(req.user.activeEntity);
   const entityName = req.user.activeEntity;
   try {
     const entity = await Entity.findOne({ name: entityName });
@@ -26,14 +27,13 @@ const databaseUpdate = async (req, res, next) => {
      * i.e. reset the database for the new week
      */
     for (let i = 0; i < rooms.length; i++) {
-      for (let k = 0; k < rooms.days.length; k++) {
-        for (let j = 0; j < rooms.days[k].length ; j += 1) {
+      for (let k = 0; k < rooms[i].days.length; k++) {
+        for (let j = 0; j < rooms[i].days[k].length ; j += 1) {
           rooms[i].days[k][j].availability = true;
         }
       }
-      //rooms[i].markModified('days');
     }
-    entity.markModified('rooms');
+    await entity.markModified('rooms');
     await entity.save();
     next();
   } catch (err) {
