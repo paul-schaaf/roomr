@@ -36,8 +36,7 @@ The frontend is built with Html, CSS, JS, and React and using the newest JS such
 #### Backend
 The backend is built with JS, node, and express. The data is stored in a MongoDB database and handled with Mongoose. Authentication is done with passport.js (passport-local), passwords are hashed/compared with bcrypt and emails are validated with email-validator.
 ## Possible Additions
-- add more days to app, currently the app only shows one day, it would be good if you could plan and reserve some days ahead
-- allow custom time ranges for rooms instead of 09-00 to 17:00
+- allow custom time ranges for rooms instead of 09:00 to 17:00
 - night and day mode
 - room ordering according to space available, alphabetic, custom ordering
 - attach tags to rooms that allow for better searches (e.g. find rooms with a coffee machine that are free from 10:15-to 10:30)
