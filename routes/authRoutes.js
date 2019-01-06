@@ -1,8 +1,10 @@
 const passport = require('passport');
+const databaseUpdate = require('../middlewares/databaseUpdate');
 
 module.exports = (app) => {
   app.post('/api/login',
     passport.authenticate('local', { failureRedirect: '/login/loginFail' }),
+    
     (req, res) => {
       if (req.user.isAdminNow) {
         res.redirect(`/app/${req.user.activeEntity}/admin`);
