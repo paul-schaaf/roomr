@@ -4,7 +4,7 @@ const databaseUpdate = require('../middlewares/databaseUpdate');
 module.exports = (app) => {
   app.post('/api/login',
     passport.authenticate('local', { failureRedirect: '/login/loginFail' }),
-    
+    databaseUpdate,
     (req, res) => {
       if (req.user.isAdminNow) {
         res.redirect(`/app/${req.user.activeEntity}/admin`);
@@ -14,6 +14,7 @@ module.exports = (app) => {
     });
 
   app.get('/api/logout', async (req, res) => {
+    res.redirect('/login');
     if (req.user) {
       const user = req.user;
       user.activeEntity = 'none';
@@ -21,6 +22,5 @@ module.exports = (app) => {
       await user.save();
       await req.logout();
     }
-    res.redirect('/login');
   });
 };
