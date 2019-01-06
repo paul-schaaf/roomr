@@ -51,10 +51,10 @@ class BookingPage extends Component {
   async componentDidMount() {
     const currentDate = new Date(Date.now())
     const currentDay = new Intl.DateTimeFormat('en-US', {weekday: 'long'}).format(currentDate).toLowerCase();
-    if (currentDay === ('saturday' || 'sunday')) {
+    if (currentDay === 'saturday' || 'sunday') {
       this.setState({ weekday: 'monday' });
     } else {
-      this.setState({ weekday: currentDay });
+      this.setState({ weekday: currentDay});
     }
     
     await roomrapi.handledGetRoomDataOnce(this);
