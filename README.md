@@ -1,5 +1,3 @@
-//DEMO CURRENTLY IN MAINTENANCE//
-
 # roomr
 a (meeting) room management app
 
@@ -26,9 +24,11 @@ First go to roomr-demo.herokuapp.com
 
   You can also create users, log out and log in with their accounts. If you have created one more admin by adding them and then making them admin, you can even delete yourself and see what happens (spoiler: you'll be kicked).
 
-  Note: the server will always let you unblock rooms even if they are already unblocked.
+  Note1: if you sign up, block rooms, and then sign in a week later, you will see that your blocked rooms are now available again. This is because on login the server checks if it should reset the rooms in your entity for the next week (This is done in the databaseUpdate middleware).
 
-  Finally, once you are done, type in your entity name to delete your entity again.
+  Note2: the server will always let you unblock rooms even if they are already available.
+
+  Finally, once you are done, type in your entity name into the appropriate form to delete your entity again.
 ## Technologies used
 I have used the airbnb styleguide for linting this project.
 #### Frontend
