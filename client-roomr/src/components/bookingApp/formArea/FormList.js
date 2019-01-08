@@ -7,6 +7,7 @@ import './FormList.css';
 
 /**
 * this component renders the forms
+* and the buttons for the weekdays
 *
 * Forms can be given the following parameters:
 * className - contains class name for css
