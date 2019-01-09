@@ -5,9 +5,16 @@ a (meeting) room management app
 Roomr allows everyone in a building (or any kind of entity) to see which rooms are available at what times, so workers don't have to spend valuable time looking for available space. It lets users add and delete rooms and reserve rooms for specific times.
 
 ## List of Contents
+- [How to install locally](#How-to-install-locally)
 - [Using the demo](#Using-the-demo)
 - [Technologies used](#Technologies-used)
 - [Possible Additions](#Possible-Additions)
+## How to install locally
+  1. clone roomr directory
+  2. in the config folder, create a file called dev.js and export an object called 'keys' that holds a key-value-pair of mongoURI: ((your mongo connection uri)) and a key-value-pair of cookieKEY: ((any string that could be a password))
+  3. npm install at terminal of the roomr folder and of the client-roomr folder
+  4. create a 'users' and an 'entities' collection in your mongo database
+  5. node index at roomr folder, npm start at client-roomr folder
 ## Using the demo
 First go to roomr-demo.herokuapp.com
 
