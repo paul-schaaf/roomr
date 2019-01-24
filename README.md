@@ -16,7 +16,7 @@ Roomr allows everyone in a building (or any kind of entity) to see which rooms a
   4. create a 'users' and an 'entities' collection in your mongo database
   5. node index at roomr folder, npm start at client-roomr folder
 ## Using the demo
-First go to roomr-demo.herokuapp.com
+First go to roomr-demo.herokuapp.com. Loading the page can take some time because I am using the heroku free plan.
 
 ### Using the premade account
   You can log into an existing entity with {Ecorp, rick@demo.com, 123 or Ecorp, morty@demo.com, 123}
